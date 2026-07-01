@@ -35,11 +35,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Hebrew/English bidi handling: block-level plaintext, never per-word isolation */
+/* Hebrew/English bidi handling: forced RTL, never per-word isolation.
+   unicode-bidi must stay "normal" (the default) here, NOT "plaintext".
+   plaintext makes the browser detect direction from the first strong
+   character in the block, which flips list items and paragraphs that
+   happen to start with an English term (e.g. "**Claude Opus 4.8**: ...")
+   to LTR, moving bullets to the wrong side. This content is always
+   Hebrew, so direction is forced explicitly instead of auto-detected. */
 p, li, h1, h2, h3, td, th, label, button {
   direction: rtl;
   text-align: right;
-  unicode-bidi: plaintext;
 }
 
 input, textarea {
@@ -111,7 +116,6 @@ pre {
   color: var(--text-secondary);
   text-align: right;
   line-height: 1.75;
-  unicode-bidi: plaintext;
   margin-bottom: 0.35rem;
 }
 
