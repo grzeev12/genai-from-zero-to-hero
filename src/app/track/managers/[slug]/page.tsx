@@ -29,9 +29,11 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
   const currentIndex = allModules.findIndex((m) => m.slug === slug);
   const nextModule = allModules[currentIndex + 1] ?? null;
 
+  const isAdmin = session.user.role === "admin";
   const completedIds = await getCompletedModuleIds(session.user.id, "managers");
   const unlockedIndex = firstIncompleteIndex(allModules, completedIds);
-  if (currentIndex > unlockedIndex) {
+  const isLocked = currentIndex > unlockedIndex;
+  if (isLocked && !isAdmin) {
     redirect(`/track/managers/${allModules[unlockedIndex]?.slug ?? ""}`);
   }
 
@@ -77,7 +79,12 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
           </article>
         </div>
 
-        {mod.questions?.length ? (
+        {isLocked ? (
+          <div className="rounded-3xl p-6 text-right text-sm"
+            style={{ background: "var(--cream)", border: "1.5px dashed var(--border)", color: "var(--text-muted)" }}>
+            צפייה בלבד: מודול זה עדיין נעול עבור לומד רגיל, מוצג לך כמנהל בלי אפשרות להגיש תשובות.
+          </div>
+        ) : mod.questions?.length ? (
           <QuizForm
             moduleId={mod.id}
             track="managers"

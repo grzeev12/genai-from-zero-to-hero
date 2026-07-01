@@ -17,6 +17,7 @@ interface Props {
   percent: number;
   completedCount: number;
   totalModules: number;
+  isAdmin?: boolean;
 }
 
 const LEVELS = [1, 2, 3, 4] as const;
@@ -30,9 +31,10 @@ export default function TrackLevelList({
   percent,
   completedCount,
   totalModules,
+  isAdmin = false,
 }: Props) {
   const firstIncompleteIdx = modules.findIndex((m) => !completedIds.has(m.id));
-  const nextIndex = firstIncompleteIdx === -1 ? modules.length : firstIncompleteIdx;
+  const nextIndex = isAdmin ? modules.length : (firstIncompleteIdx === -1 ? modules.length : firstIncompleteIdx);
 
   return (
     <>

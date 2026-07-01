@@ -51,6 +51,7 @@ export default async function DevOpsTrackPage() {
           percent={p.percent}
           completedCount={p.completedCount}
           totalModules={p.totalModules}
+          isAdmin={session.user.role === "admin"}
         />
       </div>
     </main>
