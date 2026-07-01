@@ -14,7 +14,7 @@ questions:
   - text: "מה שלושת ה-use cases לאגנטים שהכי רלוונטיים לצוות שלך?"
   - text: "מה הסיכון הכי גדול של agent אוטונומי בסביבת ייצור? כיצד מקטינים אותו?"
   - text: "מה ה-Authority Boundary שתגדיר ל-Agent בארגון שלך? מה הוא יכול לעשות לבד ומה לא?"
-  - text: "מה Gartner אומר על Agentic AI ב-2026? (40%?)"
+  - text: "מה שיעור ה-rollback של פריסות Agent בארגונים לפי GSPANN 2026, ולמה זה קורה?"
   - text: "כיצד AI Agents ישנו את תפקיד מנהל הענן בשנתיים הקרובות?"
   - text: "מה השאלות שתשאל ספק שמציע לך 'AI Agent solution'?"
 ---
@@ -34,15 +34,19 @@ Agent יכול:
 - לפעיל כלים (Jira, Slack, AWS, ServiceNow)
 - להריץ קוד
 
-**MCP: Model Context Protocol:**
-הסטנדרט שקבע Anthropic (2024, נאמץ בתעשייה 2025) שמאפשר ל-AI לתקשר עם כלים ארגוניים. חשוב עליו כ-USB עבור AI: כל כלי שיש לו MCP connector: AI יכול להשתמש בו.
+**שני הסטנדרטים שכל מנהל צריך להכיר:**
+- **MCP (Model Context Protocol):** הסטנדרט שקבע Anthropic (2024, נאמץ בתעשייה 2025) שמאפשר ל-AI לתקשר עם כלים ארגוניים. חשוב עליו כ-USB עבור AI: כל כלי שיש לו MCP connector, AI יכול להשתמש בו.
+- **A2A (Agent2Agent Protocol):** הסטנדרט שגוגל הציגה והרחיבה ב-Google Cloud Next 2026 לתקשורת בין agents שונים (גם מספקים שונים). רלוונטי כשיש לך יותר מ-agent אחד בארגון שצריכים לעבוד יחד.
 
 **Human-in-the-Loop (HITL): כלל שאי אפשר להתפשר עליו:**
 - Low stakes + Reversible: Agent פועל לבד (סיכום, ניתוח, טיוטה)
 - Medium stakes: Agent פועל + מודיע למנהל
 - High stakes + Irreversible: Agent מציע, **מנהל מאשר** (מחיקת משאב, שליחת תקשורת לקוח, שינוי ייצור)
 
-**Gartner 2026:** 40% מהאפליקציות הארגוניות יכילו AI Agents עד סוף 2026. זה לא עתיד: זה קורה עכשיו.
+**המספרים העדכניים (יולי 2026):**
+לפי ניתוח GSPANN, השקעה בתוכנת AI Agents צפויה להגיע ל-206.5 מיליארד דולר ב-2026, עלייה של 139% מ-86.4 מיליארד ב-2025. זה הפלח הצומח ביותר בהוצאת תוכנה ארגונית. אבל יש מחיר לחוסר משמעת: **74% מפריסות ה-Agent נסוגות (rolled back)** בגלל בעיות ממשל וניהול סיכונים. Gartner Hype Cycle for Cloud Computing 2026 כבר כולל קטגוריה נפרדת ל-Agentic AI כטכנולוגיה בשלה מספיק להערכה ארגונית רצינית.
+
+**המסקנה למנהל:** הכסף זורם לכיוון הזה מהר. אבל רוב הפריסות נכשלות לא בגלל הטכנולוגיה, אלא בגלל שאין להן Governance (ראה L3-M6 ו-L4-M2). זה בדיוק למה המודולים האלה קיימים.
 
 **שאלות לספק שמציע Agent Solution:**
 1. מה ה-Agent יכול לעשות אוטונומית?
@@ -56,9 +60,10 @@ Agent יכול:
 ## מה לגלות
 
 - [Anthropic: MCP Documentation](https://modelcontextprotocol.io/introduction): מה זה MCP
+- [Google Cloud Next 2026: AI agents, A2A protocol](https://thenextweb.com/news/google-cloud-next-ai-agents-agentic-era): הכרזות טריות על A2A
 - [Google Cloud AI Agent Trends 2026](https://cloud.google.com/resources/content/ai-agent-trends-2026): state of the field
 - [Deloitte: Agentic AI Enterprise 2026](https://www.deloitte.com/us/en/about/press-room/deloitte-launches-google-cloud-agentic-transformation-practice.html): enterprise perspective
-- חפש: `"AI agents enterprise cloud manager 2026 what to know"`
+- חפש: `"AI agent rollback governance failure rate 2026"`: הבן למה 74% נכשלים
 
 ---
 
