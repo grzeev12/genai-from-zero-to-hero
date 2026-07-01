@@ -1,0 +1,4 @@
+{
+  "buildCommand": "doppler run --token=$DOPPLER_TOKEN --project=genai-zero-to-hero --config=prd -- next build",
+  "installCommand": "npm install -g @dopplerhq/cli 2>/dev/null; bun install"
+}
