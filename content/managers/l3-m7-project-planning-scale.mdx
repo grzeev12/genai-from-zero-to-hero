@@ -1,0 +1,72 @@
+---
+id: "l3-m7-project-planning-scale"
+track: "managers"
+level: 3
+title: "תכנון פרויקטים בקנה מידה - AI לתכניות מורכבות"
+order: 36
+badge: "program-planner"
+estimatedTime: "7-9 שעות"
+questions:
+  - text: "מה הפרויקט/Program שתכננת? (multi-team? multi-quarter?)"
+  - text: "מה ה-WBS שה-AI בנה? מה הוסיף שלא חשבת עליו?"
+  - text: "מה ה-Dependencies שה-AI זיהה? כמה מהן היו חבויות?"
+  - text: "מה ה-Risk Register שנוצר? Top 5 risks עם probability ו-mitigation."
+  - text: "כיצד שילבת FinOps (L2-M2) ו-Budget Forecast (L2-M6) לתכנית הפיננסית?"
+  - text: "מה ה-Scenario Planning שעשית? (Optimistic / Realistic / Worst Case)"
+  - text: "כיצד הRegret Avoidance שה-AI זיהה שינה את ה-Risk Priorities?"
+  - text: "מה ה-Steering Committee Deck שיצרת? מה 3 השקופיות החשובות?"
+  - text: "מה שאלות ה-Steering Committee? כמה היית מוכן עליהן?"
+  - text: "מה ה-Playbook שבנית לניהול שוטף של הפרויקט עם AI?"
+---
+
+## המסגרת
+
+L2-M7 תכנן ישיבה. L3-M7 תכנן Program. ההבדל: complexity, dependencies, stakeholders מרובים, timeline ארוך. AI עוזר בממדים שבאופן ידני היו נמצאים ב-blindspot.
+
+**מה שונה בתכנון Program (לעומת פרויקט):**
+- עשרות dependencies בין workstreams
+- מספר צוותים עם מנהלים שונים
+- תקציב שמחולק על כמה מרכזי עלות
+- Steering Committee שדורש reporting שונה מה-team
+- Timeline של 6-18 חודשים עם unknowns גבוהים
+
+**Prompt לתכנון Program:**
+> "אתה PMO Senior Consultant. [Context ארגוני]. אני מתכנן: [תאר את ה-Program].
+> חשוב שלב אחר שלב:
+> (1) בנה WBS ל-Level 2 (לא יותר עמוק - ניתן להוסיף)
+> (2) זהה 10 dependencies קריטיות שעלולות לגרום לעיכוב
+> (3) בנה Risk Register: Top 5 risks עם probability (H/M/L) ו-mitigation לכל
+> (4) מה השאלות שחייבות תשובה לפני Kickoff?
+> (5) מה ה-Early Warning Signs שאדע שה-Program בבעיה?"
+
+**Scenario Planning לאי-ודאות:**
+> "בנה שלושה תרחישים ל-[Program]:
+> Optimistic: מה קורה אם הכל לפי תכנית + team velocity גבוה
+> Realistic: מה קורה עם עיכוב ממוצע של 20% בכל שלב
+> Worst Case: מה קורה עם כשל ב-dependency קריטי + budget cut
+> לכל תרחיש: impact על timeline, עלות, ו-mitigations."
+
+**AI כ-Devil's Advocate:**
+> "מה הנחות ה-תכנית שיש סיכוי גבוה שיתבדו? תהיה אכזרי."
+
+---
+
+## מה לגלות
+
+- [PMI - AI in Program Management 2025](https://www.pmi.org/) - state of the field
+- [AWS Well-Architected - Migration Lens](https://docs.aws.amazon.com/wellarchitected/latest/migration-lens/migration-lens.html) - לפרויקטי cloud
+- חפש: `"AI program planning risk management enterprise 2025"`
+
+---
+
+## מה לעשות
+
+קח פרויקט גדול שנמצא בתכנון או בתחילתו (migration, platform rollout, org change, vendor change).
+
+**שלב 1:** בנה WBS עם AI. חזור על זה עד שאתה מרוצה.
+**שלב 2:** הרץ Dependency Analysis. שאל: "מה ה-critical path?"
+**שלב 3:** בנה Risk Register. אתגר כל risk: "עד כמה אתה בטוח?"
+**שלב 4:** Scenario Planning - שלושה תרחישים.
+**שלב 5:** בנה Steering Committee Deck (3-5 שקופיות). הצג.
+
+**הפלט שנשאר:** Playbook AI לניהול שוטף - checkpoint שבועי, Early Warning Checklist, Communication Templates.

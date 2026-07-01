@@ -1,0 +1,99 @@
+---
+id: "l4-m2-governing-agents"
+track: "managers"
+level: 4
+title: "ממשל Agentic Systems - לנהל AI שפועל לבד"
+order: 41
+badge: "agent-governor"
+estimatedTime: "18-22 שעות"
+questions:
+  - text: "מה ה-Agent Authority Framework שבנית? תאר את שלוש הרמות."
+  - text: "מה ה-Audit Trail Requirements שהגדרת? מה מתועד ואיפה?"
+  - text: "מה Incident Response Plan שבנית ל-Agent Failure? תאר את השלבים."
+  - text: "כיצד בנית את ה-Cost Attribution לאגנטים? (מ-L2-M8 + חדש)"
+  - text: "מה ה-Agent Use Case שהערכת לפיילוט? מה ה-authority boundaries שלו?"
+  - text: "כיצד MCP (מ-L3-M1) משנה את ה-Governance Requirements?"
+  - text: "מה ה-Vendor Evaluation Framework שבנית לרכישת Agent Solution?"
+  - text: "מה הסיכון הגדול ביותר של multi-agent orchestration בסביבת הייצור שלך?"
+  - text: "כיצד Traceability דרישות משתנות כשיש Agent שמפעיל agents אחרים?"
+  - text: "מה ה-Policy שונה בין Agent ל-LLM רגיל מבחינת governance?"
+---
+
+## המסגרת
+
+ב-L3-M1 למדת מה זה Agent. ב-L4-M2 אתה אחראי לממשל שלהם ברמה ארגונית.
+
+**למה Agent Governance שונה מ-LLM Governance:**
+- LLM: אדם שולח prompt, AI עונה. Human-in-the-loop מובנה.
+- Agent: Agent מתכנן, Agent מחליט, Agent פועל. Human עלול לא לדעת שמשהו קרה.
+
+**Agent Authority Framework - שלוש רמות:**
+
+**Tier 1 - Fully Autonomous:**
+Agent פועל לבד. מתאים כשהפעולה:
+- Reversible (אפשר לבטל)
+- Low stakes (לא ישפיע על לקוחות, כספים, אבטחה)
+- Well-defined (ברור מה ה-success ו-failure)
+דוגמה: סיכום דוח, קטלוג מסמכים, ניתוח log
+
+**Tier 2 - Notify-then-Act:**
+Agent פועל ומיד מיידע מנהל.
+דוגמה: Agent שמזהה anomaly בעלויות ופותח ticket
+
+**Tier 3 - Propose-Wait-for-Approval:**
+Agent מציע, מנהל אנושי מאשר לפני ביצוע.
+דורש: כל פעולה שמשנה ייצור, שולחת תקשורת חיצונית, משפיעה על כסף.
+
+**Audit Trail - מה חובה לתעד:**
+- איזה Agent? איזה מודל? גרסה?
+- מה ה-Goal שניתן לו?
+- מה ה-Actions שנקט? (כולל calls ל-APIs)
+- מה ה-Decisions שקיבל?
+- מה ה-Output?
+- מי (או מה) אישר?
+- Timestamp לכל שלב
+
+**Multi-Agent Orchestration Risks:**
+כשיש Agent שמפעיל Agents אחרים:
+- Cascading Failures: שגיאה ב-Agent אחד מפיצה לשאר
+- Accountability Gap: "איזה Agent החליט את זה?"
+- Cost Explosion: כל sub-agent מוסיף tokens וזמן
+- Audit Complexity: Trace חייב לעבור את כל ה-chain
+
+**Vendor Evaluation - 10 שאלות חובה:**
+1. מה ה-audit log format?
+2. מה ה-authority boundaries built-in?
+3. איך Agent מטפל ב-uncertainty?
+4. מה ה-fallback כש-Action נכשלת?
+5. מה ה-cost model per-action?
+
+---
+
+## מה לגלות
+
+- [Anthropic - Agent Guidelines](https://docs.anthropic.com/en/docs/build-with-claude/agentic-and-tool-use/best-practices-for-agentic-and-tool-use) - best practices
+- [NIST AI RMF - Agentic Systems](https://www.nist.gov/artificial-intelligence) - governance
+- חפש: `"AI agent governance enterprise 2026 audit trail requirements"`
+- חפש: `"multi-agent orchestration risks enterprise 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1 - Authority Framework:**
+כתוב Agent Authority Policy לארגון שלך. מה Tier 1/2/3 בהקשר שלך?
+
+**שלב 2 - Audit Requirements:**
+הגדר מה חייב להיות מתועד. מי אחראי על ה-audit log?
+
+**שלב 3 - Pilot Evaluation:**
+בחר Agent use case אחד לפיילוט. הגדר:
+- מה ה-Authority Boundaries?
+- מה ה-Success Criteria?
+- מה ה-Exit Criteria (מתי עוצרים)?
+
+**שלב 4 - Vendor RFP:**
+אם בוחן ספק - כתוב RFP sections ספציפיים ל-Agent governance.
+
+**שלב 5 - Incident Drill:**
+סמלץ: "Agent שלח תקשורת ללקוח בלי אישור." מה עושים? מי מיידע? מה ה-remediation?

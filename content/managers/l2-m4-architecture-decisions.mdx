@@ -2,44 +2,67 @@
 id: "l2-m4-architecture-decisions"
 track: "managers"
 level: 2
-title: "החלטות ארכיטקטורה עם AI - להיות שותף לדיון"
+title: "החלטות ארכיטקטורה - להיות שותף בדיון הטכני"
 order: 23
 badge: "architecture-partner"
-estimatedTime: "50-70 דקות"
+estimatedTime: "4-5 שעות"
 questions:
-  - text: "מה ההחלטה הארכיטקטונית שבחרת לנתח? מה הרקע?"
-  - text: "מה ה-AI זיהה כ-trade-offs המרכזיים שהצוות הטכני לא הדגיש?"
-  - text: "מה השאלות שה-AI הציע לשאול את הצוות הטכני? איזו שאלה הפתיעה אותך?"
-  - text: "מה ה-AI הציע לגבי עלות ה-migration או ה-refactor? האם זה נראה ריאלי?"
-  - text: "כיצד הכנת את ה-context כדי שה-AI יבין את הסביבה שלך?"
-  - text: "מה ה-AI לא ידע על האילוצים הארגוניים שמשפיעים על ההחלטה?"
-  - text: "מה שאלת בעקבות הניתוח בפגישה הטכנית הבאה?"
-  - text: "האם ה-AI שינה את דעתך על אחד מהאפשרויות? מה?"
-  - text: "מה הסיכון שה-AI זיהה שלא חשבת עליו קודם?"
-  - text: "כיצד תשתמש ב-AI בהמשך בדיונים ארכיטקטוניים? מה תשנה בגישה?"
+  - text: "מה ההחלטה הארכיטקטונית שניתחת? מה רמת הסיכון שלה?"
+  - text: "מה Trade-offs שה-AI זיהה שהצוות הטכני לא הדגיש בהצגה?"
+  - text: "מה 5 השאלות שהכנסת לפגישה? מה גרמה כל שאלה?"
+  - text: "מה ה-Well-Architected Framework? הסבר את 5 העמודות בשפתך."
+  - text: "כיצד ה-AI עזר לך להבין trade-off שהצוות הציג בז'רגון טכני?"
+  - text: "מה ה-Risk שה-AI זיהה שהיה מוחמץ לגמרי?"
+  - text: "מה שינה ה-AI בהבנתך של ההחלטה לפני ואחרי הניתוח?"
+  - text: "מה ה-AI לא יכל לנתח בלי ידע ספציפי על הסביבה שלך?"
+  - text: "מה שאלת בפגישה שגרמה לצוות הטכני לחשוב שוב?"
+  - text: "מה ה-framework שתשתמש בו מעכשיו לכל החלטת ארכיטקטורה חדשה?"
 ---
 
-## למה שווה לך 50 דקות על זה
+## המסגרת
 
-מנהלים שמגיעים לדיון ארכיטקטוני עם שאלות מוכנות נתפסים כשותפים אסטרטגיים - לא כמאשרים. מחקר של Harvard Business Review מ-2025 מצא שמנהלים שמשתמשים ב-AI לתחקיר טכני מקבלים החלטות בטוחות יותר ב-40% ומקצרים את זמן הוועדה הארכיטקטונית ב-30%.
+מנהל שמגיע לדיון ארכיטקטוני עם שאלות מוכנות הוא שותף. מנהל שמגיע בלי הכנה הוא מאשר. ה-AI לא הופך אותך למהנדס - הוא נותן לך את ה-vocabulary ואת השאלות.
+
+**AWS Well-Architected Framework - 5 עמודות שכל מנהל חייב לדעת:**
+
+1. **Operational Excellence** - האם ניתן להפעיל, לנטר ולשפר?
+2. **Security** - האם הנתונים מוגנים? מה attack surface?
+3. **Reliability** - מה ה-SLA? מה קורה כשמשהו נופל?
+4. **Performance Efficiency** - האם ה-resources נכונים לעומס?
+5. **Cost Optimization** - האם אנחנו משלמים על מה שאנחנו משתמשים?
+
+**Prompt לניתוח ארכיטקטוני:**
+> "אתה Solutions Architect בכיר עם ניסיון ב-enterprise. [Context ארגוני].
+> הצוות הציע: [תאר את ההצעה הטכנית].
+> חשוב שלב אחר שלב:
+> (1) מה ה-trade-offs המרכזיים שאני כמנהל צריך להבין?
+> (2) מה השאלות שיחשפו הנחות שאולי לא נבדקו?
+> (3) מה הסיכונים שרוב הצוותים מפספסים בהחלטה כזו?
+> (4) מה ה-benchmark בתעשייה לפתרונות דומים?
+> הסבר בשפה עסקית."
+
+**שאלות שכדאי להכין לכל דיון ארכיטקטוני:**
+- "מה קורה ב-worst case ומה זמן ה-recovery?"
+- "איזה חלוב שאנחנו לא רואים כרגע?"
+- "מה עלות ה-migration אם נחליט לשנות בעוד שנתיים?"
+- "איזה ספק ייכנס ב-lock-in ומה ה-exit strategy?"
 
 ---
 
 ## מה לגלות
 
-- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) - עקרונות ההחלטה הסטנדרטיים
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/) - תבניות ו-decision guides
-- חפש: `"how to evaluate cloud architecture proposal as a manager 2025"`
-- חפש: `"AI tools for architecture review non-technical manager"` - 2025
+- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) - קרא את ה-Overview, לא את הכל
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/) - Decision guides
+- חפש: `"how to evaluate architecture proposal non-technical manager questions 2025"`
 
 ---
 
 ## מה לעשות
 
-קח החלטה ארכיטקטונית שנמצאת על השולחן: migration, בחירת שירות, refactor, multi-cloud vs single. לא חייב להיות סגור.
+קח החלטת ארכיטקטורה שנמצאת על השולחן (migration, בחירת שירות, refactor, multi-cloud).
 
-בקש מ-Claude:
-
-> "אתה architect עם 15 שנה ניסיון. אני מנהל ענן ב-enterprise. הצוות שלי מציע [תאר את ההחלטה בפרטים]. אני רוצה: (1) מה ה-trade-offs שאני צריך להבין, (2) מה השאלות שאני צריך לשאול את הצוות הטכני, (3) אילו סיכונים בדרך כלל מוחמצים בהחלטות כאלה, (4) מה בנצ'מרק בתעשייה לגבי ההחלטה הזאת. הסבר בשפה עסקית."
-
-אחרי שקיבלת - הכנס לפגישה הטכנית הבאה עם לפחות 3 שאלות שנולדו מהניתוח.
+**שלב 1:** בקש מהצוות הטכני מסמך הסבר קצר (1-2 עמודים).
+**שלב 2:** העלה לפרויקט הראשי שלך (L2-M1) + Prompt ניתוח ארכיטקטוני.
+**שלב 3:** CoT - "הסבר שלב אחר שלב למה Trade-off X הוא הנכון לנו."
+**שלב 4:** הכן 5 שאלות לפגישה הטכנית.
+**שלב 5:** לאחר הפגישה - האם השאלות שינו משהו?

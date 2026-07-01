@@ -1,0 +1,76 @@
+---
+id: "l3-m1-agentic-ai"
+track: "managers"
+level: 3
+title: "Agentic AI - הדבר הכי גדול שקורה ב-2026"
+order: 30
+badge: "agent-aware"
+estimatedTime: "7-9 שעות"
+questions:
+  - text: "מה ההבדל בין LLM (שלמדת ב-L1) לבין AI Agent? הסבר בשפתך."
+  - text: "מה MCP (Model Context Protocol)? למה זה משנה למנהל ענן?"
+  - text: "מה ה-Agent שחקרת? מה הוא עשה שLLM רגיל לא יכול לעשות?"
+  - text: "מה 'human-in-the-loop' ומתי זה חובה לעומת אופציונלי? תן דוגמה מהסביבה שלך."
+  - text: "מה שלושת ה-use cases לאגנטים שהכי רלוונטיים לצוות שלך?"
+  - text: "מה הסיכון הכי גדול של agent אוטונומי בסביבת ייצור? כיצד מקטינים אותו?"
+  - text: "מה ה-Authority Boundary שתגדיר ל-Agent בארגון שלך? מה הוא יכול לעשות לבד ומה לא?"
+  - text: "מה Gartner אומר על Agentic AI ב-2026? (40%?)"
+  - text: "כיצד AI Agents ישנו את תפקיד מנהל הענן בשנתיים הקרובות?"
+  - text: "מה השאלות שתשאל ספק שמציע לך 'AI Agent solution'?"
+---
+
+## המסגרת
+
+עד כה למדת לדבר עם AI. זה שינוי פרדיגמה: **AI שפועל לבד.**
+
+**מה זה AI Agent:**
+LLM רגיל: שאלה → תשובה. Agent: מטרה → תכנון → פעולות → בדיקה → תוצאה.
+
+Agent יכול:
+- לחפש מידע ב-web
+- לקרוא ולכתוב קבצים
+- לשלוח emails
+- לקרוא ל-APIs
+- לפעיל כלים (Jira, Slack, AWS, ServiceNow)
+- להריץ קוד
+
+**MCP - Model Context Protocol:**
+הסטנדרט שקבע Anthropic (2024, נאמץ בתעשייה 2025) שמאפשר ל-AI לתקשר עם כלים ארגוניים. חשוב עליו כ-USB עבור AI: כל כלי שיש לו MCP connector - AI יכול להשתמש בו.
+
+**Human-in-the-Loop (HITL) - כלל שאי אפשר להתפשר עליו:**
+- Low stakes + Reversible: Agent פועל לבד (סיכום, ניתוח, טיוטה)
+- Medium stakes: Agent פועל + מודיע למנהל
+- High stakes + Irreversible: Agent מציע, **מנהל מאשר** (מחיקת משאב, שליחת תקשורת לקוח, שינוי ייצור)
+
+**Gartner 2026:** 40% מהאפליקציות הארגוניות יכילו AI Agents עד סוף 2026. זה לא עתיד - זה קורה עכשיו.
+
+**שאלות לספק שמציע Agent Solution:**
+1. מה ה-Agent יכול לעשות אוטונומית?
+2. מה מחייב אישור אנושי?
+3. איפה ה-audit trail?
+4. מה קורה כשה-Agent טועה?
+5. מה ה-cost model? (per-action? per-token?)
+
+---
+
+## מה לגלות
+
+- [Anthropic - MCP Documentation](https://modelcontextprotocol.io/introduction) - מה זה MCP
+- [Google Cloud AI Agent Trends 2026](https://cloud.google.com/resources/content/ai-agent-trends-2026) - state of the field
+- [Deloitte - Agentic AI Enterprise 2026](https://www.deloitte.com/us/en/about/press-room/deloitte-launches-google-cloud-agentic-transformation-practice.html) - enterprise perspective
+- חפש: `"AI agents enterprise cloud manager 2026 what to know"`
+
+---
+
+## מה לעשות
+
+שלושה תרגילים לבנות הבנה אמיתית:
+
+**תרגיל 1 - Agent בפעולה:**
+פתח [Claude.ai](https://claude.ai) עם Model שתומך ב-tools. בקש: "חפש ב-web מה ה-3 major cloud outages שהיו בחודש האחרון ובנה לי Timeline." שים לב לתהליך - לא רק לתשובה.
+
+**תרגיל 2 - Authority Boundaries:**
+כתוב מסמך של עמוד אחד: "מה AI Agent מורשה לעשות בצוות שלי בלי אישור, מה עם אישור, ומה לעולם לא." זה ה-Agent Policy הראשון שלך.
+
+**תרגיל 3 - Use Case Mapping:**
+רשום 5 משימות חוזרות בשבוע שלך. לכל אחת: האם Agent יכול לבצע? מה רמת ה-HITL הנדרשת?

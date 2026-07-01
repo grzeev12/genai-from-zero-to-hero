@@ -1,0 +1,79 @@
+---
+id: "l3-m2-rag-knowledge"
+track: "managers"
+level: 3
+title: "RAG וידע ארגוני - AI שמכיר את החברה שלך"
+order: 31
+badge: "knowledge-architect"
+estimatedTime: "7-9 שעות"
+questions:
+  - text: "מה זה RAG? הסבר את המנגנון בשפתך - לא הגדרה, הבנה."
+  - text: "מה ההבדל בין Context System (L2-M1) לבין RAG מלא? מתי כל אחד נכון?"
+  - text: "מה ה-Knowledge Base שבנית? אילו מסמכים כללת?"
+  - text: "מה שאלת את ה-Knowledge Base? מה התשובה שקיבלת?"
+  - text: "כיצד אימתת שה-AI ענה מהמסמכים ולא מ'ידע כללי' (hallucination)?"
+  - text: "מה סוג המסמכים שה-RAG לא עזר עליהם? למה?"
+  - text: "מה ה-use case ה-ROI הגבוה ביותר ל-RAG בארגון שלך?"
+  - text: "מה ההבדל בין NotebookLM ל-Claude Projects כ-RAG solution?"
+  - text: "מה שאלת ספק AI שמציע RAG solution? מה ענה?"
+  - text: "כיצד RAG ישנה את אופן הכנסת עובד חדש לצוות?"
+---
+
+## המסגרת
+
+**מה זה RAG - Retrieval Augmented Generation:**
+LLM רגיל יודע רק מה היה ב-training data. RAG מוסיף שלב: לפני שה-AI עונה, הוא **מחפש** במאגר מסמכים שלך, מביא חתיכות רלוונטיות, ואז עונה **על בסיסם**.
+
+תוצאה: AI שמכיר את הנהלים הפנימיים שלך, חוזי הספקים שלך, ה-runbooks שלך, ההיסטוריה של ההחלטות שלך.
+
+**ההבדל מ-Context Systems (L2-M1):**
+- Context System: אתה בוחר מה להכניס לכל שיחה (עד ~200 עמודים)
+- RAG: מאגר של אלפי מסמכים, AI מוצא בעצמו מה רלוונטי
+
+**כלים ברמת מנהל (בלי קוד):**
+
+**NotebookLM (Google):**
+העלה מסמכים, שאל שאלות, מקבל תשובות עם ציטוטים מהמסמכים. מצוין ל: Knowledge Base, Due Diligence, ניתוח מסמכים מרובים.
+
+**Claude.ai Projects:**
+עד ~20 מסמכים, שמירת context. מצוין ל: Vendor Project, FinOps Project (מ-L2).
+
+**Microsoft Copilot + SharePoint:**
+אם הארגון על M365 - Copilot יכול לחפש ב-SharePoint, Teams, Emails. RAG מובנה.
+
+**מה להכניס ל-Knowledge Base:**
+- Runbooks ו-Playbooks
+- SOWs ו-SLAs עם ספקים עיקריים
+- Architecture Decision Records
+- Post-Mortems
+- נהלים פנימיים
+- היסטוריית ישיבות steering
+
+**מה לא להכניס:**
+- מידע PII
+- נתוני אבטחה רגישים
+- מידע pre-disclosure פיננסי
+
+---
+
+## מה לגלות
+
+- [NotebookLM](https://notebooklm.google.com) - פתח ונסה
+- [Anthropic - Claude Projects](https://docs.anthropic.com/en/docs/claude-projects) - docs
+- חפש: `"RAG enterprise knowledge management non-technical 2025"`
+- חפש: `"NotebookLM enterprise use cases 2025"`
+
+---
+
+## מה לעשות
+
+**שלב 1 - NotebookLM:**
+פתח NotebookLM. העלה 5-10 מסמכים ארגוניים (Runbooks, SOWs, נהלים). שאל שאלה שדורשת מידע מכמה מסמכים.
+
+**שלב 2 - שאלות מבחן:**
+שאל 3 שאלות שאתה יודע את התשובה הנכונה. האם ה-AI ענה נכון? מהמסמכים או מ"ידע" שלו?
+
+**שלב 3 - Use Case ROI:**
+זהה תהליך אחד בצוות שעכשיו דורש חיפוש ידני במסמכים (onboarding, תמיכה בשאלות נפוצות, תכנון). כמה זמן ייחסך אם AI יכול לענות על השאלות האלה?
+
+**שלב 4:** כתוב הצעה של עמוד אחד: "מה ה-RAG Solution שאני ממליץ לבנות לצוות ומה ה-ROI."

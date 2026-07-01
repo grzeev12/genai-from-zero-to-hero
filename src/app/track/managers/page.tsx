@@ -2,10 +2,10 @@ import Link from "next/link";
 import { getModulesByLevel } from "@/lib/modules";
 
 const LEVEL_LABELS: Record<number, { name: string; desc: string; hours: string }> = {
-  1: { name: "AI Aware", desc: "מתחיל ב-AI", hours: "20-30 שעות" },
-  2: { name: "AI Practitioner", desc: "משתמש בקיא", hours: "40-50 שעות" },
-  3: { name: "AI Builder", desc: "בונה AI", hours: "60-80 שעות" },
-  4: { name: "AI Specialist", desc: "מומחה AI", hours: "100+ שעות" },
+  1: { name: "AI Aware", desc: "מסגרת מושגית + כלים", hours: "~20 שעות" },
+  2: { name: "AI Practitioner", desc: "AI בשגרת העבודה", hours: "~40 שעות" },
+  3: { name: "AI Builder", desc: "הובלת AI לצוות", hours: "~60 שעות" },
+  4: { name: "AI Specialist", desc: "אסטרטגיה וטרנספורמציה", hours: "~100 שעות" },
 };
 
 export default function ManagersTrackPage() {

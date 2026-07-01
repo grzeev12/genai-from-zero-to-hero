@@ -1,0 +1,72 @@
+---
+id: "l2-m6-budget-forecast"
+track: "managers"
+level: 2
+title: "Budget וForecast - לדבר כסף עם AI"
+order: 25
+badge: "budget-analyst"
+estimatedTime: "4-5 שעות"
+questions:
+  - text: "מה ה-Budget exercise שביצעת? (תכנון שנתי / תחזית רבעונית / business case)"
+  - text: "מה 3 ה-Scenarios שה-AI בנה? (optimistic / realistic / conservative)"
+  - text: "כיצד השתמשת ב-FinOps Project (מ-L2-M2) כנקודת מוצא לתחזית?"
+  - text: "מה ה-Business Case שיצרת? מה ה-ROI שהוצג?"
+  - text: "מה ה-AI לא ידע שהיה קריטי לתחזית? (עלויות פנימיות, הסכמים קיימים)"
+  - text: "מה CoT הוסיף כשביקשת מ-AI להסביר את ההנחות שלו?"
+  - text: "מה הסיכון המספרי שה-AI זיהה ש-sensitivity analysis גילה?"
+  - text: "כיצד הצגת את ה-Forecast ל-CFO/VP? מה הרכיבים שכללת?"
+  - text: "מה שאלת ה-'what if' שה-AI עזר לך לענות עליה?"
+  - text: "כמה זמן לקח לבנות תחזית ידנית לעומת עם AI? מה ההבדל בעומק?"
+---
+
+## המסגרת
+
+Budget עם AI הוא שכבה שלישית: FinOps (L2-M2) נתן נתוני עבר. Architecture (L2-M4) נתן הבנת עלויות עתידיות. עכשיו: תחזית ו-business case.
+
+**שלושה סוגי עבודה:**
+
+**1. Scenario Planning (תכנון תרחישים)**
+> "בנה שלושה תרחישי עלויות ענן ל-12 חודשים:
+> (A) Conservative: גדילה של 10% בשימוש
+> (B) Realistic: גדילה של 25% + פרויקט X
+> (C) Aggressive: גדילה של 50% + כניסה לשוק חדש
+> בסיס: Cost Report הנוכחי [הוסף]. הנח: [אילוצים ידועים].
+> חשוב שלב אחר שלב כל תרחיש."
+
+**2. Business Case**
+> "בנה Business Case לרכישת [X]:
+> (A) עלות שנתית של הפתרון הנוכחי (חשב שעות x עלות + עלויות ישירות)
+> (B) עלות הפתרון המוצע (רישוי + הטמעה + אימון)
+> (C) זמן להחזר השקעה
+> (D) Risk factors שיכולים לשנות את ה-ROI
+> הצג בפורמט של טבלה + Executive Summary."
+
+**3. Sensitivity Analysis**
+> "מה קורה ל-Forecast אם: (1) עלויות EC2 יעלו 20%, (2) הפרויקט יתעכב 3 חודשים, (3) נוסיף 5 אנשים לצוות? מה הנקודה הכי רגישה ב-forecast?"
+
+**מה AI לא יכול:**
+- לדעת את הסכמי ה-Reserved Instances שלך
+- לדעת עלויות פנימיות (שכר, overhead)
+- לדעת commitment ל-ספקים
+
+**אלה חייבים להיות ב-context לפני שמתחילים.**
+
+---
+
+## מה לגלות
+
+- [AWS Pricing Calculator](https://calculator.aws/) - כלי לחישוב עלויות עתידיות
+- [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/) - Azure
+- חפש: `"AI business case template cloud investment ROI 2025"`
+
+---
+
+## מה לעשות
+
+בחר אחד: תכנון תקציב שנתי, תחזית רבעונית, או Business Case לפרויקט.
+
+**שלב 1:** ייצא נתוני עבר (Cost Reports מ-L2-M2) + הכנס ל-FinOps Project.
+**שלב 2:** הגדר הנחות בפירוט: גדילה צפויה, פרויקטים מתוכננים, שינויים בצוות.
+**שלב 3:** הרץ Scenario Planning בשלושה תרחישים.
+**שלב 4:** Sensitivity Analysis - מה הנקודות הכי רגישות?
+**שלב 5:** כתוב Executive Summary שניתן להציג ל-CFO מחר.

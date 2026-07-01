@@ -2,45 +2,70 @@
 id: "l2-m2-finops-ai"
 track: "managers"
 level: 2
-title: "FinOps עם AI - למצוא כסף שהולך לאיבוד"
+title: "FinOps עם AI - לנתח עלויות ענן כמו מומחה"
 order: 21
 badge: "finops-analyst"
-estimatedTime: "50-70 דקות"
+estimatedTime: "4-5 שעות"
 questions:
-  - text: "מאיזה כלי הורדת את ה-Cost Report שניתחת? מה הטווח שבחרת?"
-  - text: "מה שלושת ה-anomalies הגדולות ביותר שה-AI זיהה בדוח? תאר כל אחת."
-  - text: "מה ה-AI הציע שניתן לחסוך? האם זה נראה ריאלי? למה?"
-  - text: "מה ה-AI לא הצליח לנתח ולמה? (דרש context שלא היה לו)"
-  - text: "הכן את ה-Prompt שהשתמשת בו לניתוח. מה היה חשוב לכלול?"
-  - text: "מה ה-insight שמצאת שלא ידעת עליו לפני הניתוח?"
-  - text: "כיצד תציג את הממצאים לצוות? מה תשמיט ומה תדגיש?"
-  - text: "מה ה-quick win שניתן לממש בשבועיים על בסיס הניתוח?"
-  - text: "מה הסיכון בלהסתמך על המלצת ה-AI לחיסכון בעלויות מבלי לאמת?"
-  - text: "כמה זמן לקח לך לנתח את ה-Cost Report עם AI לעומת ידנית? מה ההבדל?"
+  - text: "מאיזה כלי ייצאת את ה-Cost Report? מה הטווח ומה גודל הקובץ?"
+  - text: "מה ה-System Prompt שהשתמשת בו? (השתמשת ב-Project מ-L2-M1?)"
+  - text: "מה 3 ה-anomalies שה-AI זיהה? תאר כל אחת עם המספרים."
+  - text: "מה ה-AI הציע לחסוך? האם ביצעת את ה-Chain of Thought לאמת את ההיגיון?"
+  - text: "מה ה-AI לא הצליח לנתח? (דרש context על הארכיטקטורה שלא היה לו)"
+  - text: "כיצד השתמשת ב-Few-Shot מ-L1-M5 לפורמט הדוח? מה הדוגמה שנתת?"
+  - text: "מה ה-Executive Summary ל-CFO שיצרת? 3 משפטים."
+  - text: "מה ה-quick win שניתן לממש בשבועיים? כמה חיסכון?"
+  - text: "מה הסיכון בלהסתמך על המלצה של AI לשינוי ארכיטקטורה לחיסכון עלויות?"
+  - text: "כמה זמן לקח ניתוח ידני קודם לעומת עם AI? מה עשית עם הזמן שנחסך?"
 ---
 
-## למה שווה לך 50 דקות על זה
+## המסגרת
 
-ארגונים מבזבזים בממוצע **30-35% מתקציב הענן** על משאבים לא יעילים (FinOps Foundation, 2025). מנהל ענן שמנתח Cost Report ב-AWS/Azure ידנית מבלה 2-4 שעות. עם AI - 20 דקות. החיסכון שמוצאים? בדרך כלל 5-20% מהחשבון החודשי.
+FinOps עם AI הוא שכבה על גבי מה שלמדת: Context Systems (L2-M1) + CoT + verification (L1-M2). ה-AI לא מחליף FinOps engineer - הוא מאפשר למנהל לנהל שיחה מושכלת עם הנתונים לפני שהוא מביא ספציפליסט.
+
+**שלוש שאלות שכל ניתוח FinOps חייב לענות:**
+
+1. **Anomalies** - מה גדל באופן חריג ולמה?
+2. **Waste** - מה רץ ולא בשימוש?
+3. **Optimization** - מה ניתן לשנות עם סיכון מינימלי?
+
+**מבנה ה-Prompt לניתוח Cost Report:**
+
+> "אתה FinOps analyst ב-enterprise. הנה Cost Report של [X חודשים] מ-[AWS/Azure]. הארגון: [תאר]. חשוב שלב אחר שלב:
+> (1) זהה שלושה שינויים חריגים ביחס לחודש קודם עם הסבר אפשרי לכל אחד
+> (2) זהה שירותים שנראים כ-waste (idle, over-provisioned, orphaned)
+> (3) הצע 3 הזדמנויות חיסכון לפי ROI/מאמץ, עם הערכת גודל
+> (4) מה מצריך בדיקת הנדסה לפני שניתן להחליט?
+> הצג בטבלה, ולאחריה Executive Summary של 3 משפטים."
+
+**מה להוסיף ל-FinOps Project (מ-L2-M1):**
+- Cost Report CSV/Excel של 3 חודשים
+- רשימת שירותים עיקריים שבשימוש
+- ה-tagging strategy שלכם (כדי שה-AI יבין מה business unit מה)
+
+**אימות (מ-L1-M2):**
+כל המלצת חיסכון שמציע AI - ביקש CoT לפני שמיישמים. "הסבר מדוע זה חסכוני וכו."
 
 ---
 
 ## מה לגלות
 
-- [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/) - ייצא CSV
-- [Azure Cost Management](https://azure.microsoft.com/en-us/products/cost-management/) - ייצא Excel
-- [FinOps Foundation - State of FinOps 2025](https://data.finops.org/) - benchmark מול התעשייה
-- [CAST AI Blog](https://cast.ai/blog/) - חפש "AI cost optimization 2025"
-- חפש: `"ChatGPT analyze AWS cost report prompt"` - ראה איך אחרים עושים את זה
+- [AWS Cost Explorer Export](https://docs.aws.amazon.com/cost-management/latest/userguide/ce-exploring-data.html) - כיצד לייצא
+- [Azure Cost Management Export](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data) - Azure
+- [FinOps Foundation - Cloud Cost Optimization 2025](https://www.finops.org/wg/cloud-cost-optimization/) - benchmark
 
 ---
 
 ## מה לעשות
 
-1. ייצא Cost Report מ-AWS/Azure של 3 חודשים אחרונים (CSV או Excel)
-2. פתח Claude או ChatGPT, העלה את הקובץ
-3. בקש ניתוח עם הפרומפט הזה כנקודת התחלה - ושפר אותו:
+ייצא Cost Report של 3 חודשים אחרונים. פתח את ה-FinOps Project שבנית (L2-M1) או צור אחד.
 
-> "אתה FinOps analyst. הנה דוח עלויות ענן שלנו ל-3 חודשים. אנחנו [תאר: סוג ארגון, ספק ענן]. זהה: (1) עלויות שגדלו באופן חריג ולמה, (2) שירותים שנראים לא יעילים, (3) 3 הזדמנויות החיסכון הגדולות ביותר עם הערכת גודל. הצג בשפה עסקית - לא טכנית."
+**ניתוח בשלושה סיבובים:**
+1. העלה את הקובץ, שלח את ה-Prompt המובנה
+2. שאל שאלות follow-up על 2 ממצאים שלא הבנת
+3. בקש: "אני רוצה להציג זאת ל-CFO - מה הפורמט הנכון ומה לשמיט?"
 
-4. בקש המלצה שניתן להציג ל-steering committee
+**פלט שתביא:**
+- Executive Summary ל-CFO (3 משפטים)
+- Top 3 המלצות עם הערכת חיסכון
+- 2 שאלות שצריך לשאול את הצוות הטכני לפני יישום

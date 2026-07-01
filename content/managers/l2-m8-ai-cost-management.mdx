@@ -1,0 +1,73 @@
+---
+id: "l2-m8-ai-cost-management"
+track: "managers"
+level: 2
+title: "עלויות AI - כמה עולה הכלים ומה ה-ROI"
+order: 27
+badge: "ai-roi-analyst"
+estimatedTime: "4-5 שעות"
+questions:
+  - text: "מה עלות הכלים שצוות שלך משתמש בהם כרגע (רישוי + זמן)? הצג חישוב."
+  - text: "מה ה-ROI שחישבת? כמה שעות נחסכות x עלות שעה = X?"
+  - text: "מה ה-Token economics? מה עולה 1,000 calls ל-Claude API לעומת ChatGPT?"
+  - text: "מה ה-Build vs Subscribe decision שהגעת אליה עבור use case אחד?"
+  - text: "כיצד השתמשת ב-Context System (L2-M1) לאסוף את נתוני העלות?"
+  - text: "מה ה-use case עם ROI הכי גבוה שזיהית? ומה ה-use case עם ROI נמוך?"
+  - text: "מה ה-hidden costs של AI שלא חשבת עליהם בהתחלה?"
+  - text: "מה ה-Business Case שבנית לרכישת כלי AI נוסף לצוות?"
+  - text: "מה ה-benchmark לחיסכון זמן שמצאת בתעשייה? האם הארגון שלך מגיע לשם?"
+  - text: "מה ה-framework שתשתמש בו להמשיך ולמדוד ROI כשה-שימוש גדל?"
+---
+
+## המסגרת
+
+L2 מסתיים בשאלה שכל מנהל חייב לדעת לענות: "כמה ה-AI עולה לנו ומה אנחנו מקבלים בתמורה?" זו לא שאלה טכנית - זו שאלה ניהולית.
+
+**עלויות ישירות:**
+
+| כלי | עלות חודשית | Per user |
+|-----|------------|---------|
+| Claude Pro | $20 | Per user |
+| ChatGPT Plus | $20 | Per user |
+| Microsoft Copilot M365 | $30 | Per user |
+| Claude API (pay-per-use) | $3-15 per M tokens | Per usage |
+
+**עלויות נסתרות:**
+- זמן הטמעה ואימון (~20 שעות per user בהתחלה)
+- עלות Integration אם בונים מעל API
+- עלות Data Preparation (להכין context, מסמכים)
+- עלות Governance (לכתוב policy, לנהל)
+
+**ROI Calculation Framework:**
+> שעות שנחסכות בשבוע x עלות שעה x 52 = ערך שנתי
+> ערך שנתי / עלות שנתית = ROI
+
+**דוגמה:** מנהל חוסך 5 שעות/שבוע. עלות שעה (loaded): ₪150. 
+5 x 150 x 52 = ₪39,000 ערך. עלות Claude Pro: ₪900/שנה. ROI: 43x.
+
+**Build vs Subscribe Decision:**
+- Subscribe (SaaS): מתחת ל-100 users, use case ברור, אין data privacy issue
+- Build on API: מעל 100 users, use case ייחודי, נתונים רגישים, רוצים שליטה
+
+**Prompt לניתוח ROI:**
+> "אני מנהל X אנשים. כל אחד חוסך Y שעות בשבוע עם AI. עלות שעה Z. עלות הכלים: [פרט]. חשב ROI שנתי ל-3 תרחישים: adoption של 25%/50%/100% בצוות."
+
+---
+
+## מה לגלות
+
+- [Anthropic API Pricing](https://www.anthropic.com/pricing) - מחירים עדכניים
+- [OpenAI Pricing](https://openai.com/pricing) - השוואה
+- חפש: `"AI ROI measurement enterprise productivity 2025 report"`
+
+---
+
+## מה לעשות
+
+בנה ROI Analysis לצוות שלך:
+
+**שלב 1:** רשום את כל הכלים הנוכחיים + עלותם.
+**שלב 2:** בקש מ-2-3 אנשים בצוות להעריך כמה שעות הם חוסכים בשבוע.
+**שלב 3:** חשב ROI עם ה-framework + AI לבדיקת המספרים.
+**שלב 4:** זהה use case אחד שה-ROI שלו נמוך - מדוע? מה לשנות?
+**שלב 5:** בנה Business Case לתוספת כלי או הרחבת רישוי. הצג לCFO.

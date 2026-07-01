@@ -1,0 +1,70 @@
+---
+id: "l1-m3-tool-landscape"
+track: "managers"
+level: 1
+title: "מפת הכלים - מה בטוח, מה מותר, מה נכון"
+order: 12
+badge: "tool-navigator"
+estimatedTime: "2-3 שעות"
+questions:
+  - text: "מה ההבדל בין ChatGPT Free, Plus ו-Enterprise מבחינת מה קורה לנתונים שלך?"
+  - text: "מה מדיניות ה-AI של הארגון שלך? אם לא יודע - איך ברר?"
+  - text: "אילו שלושה סוגי מידע לעולם לא תכניס לכלי AI ציבורי? מדוע כל אחד?"
+  - text: "מה ההבדל בין Claude.ai לבין Claude ב-AWS Bedrock מבחינת אבטחה?"
+  - text: "מתי תשתמש ב-Microsoft Copilot לעומת Claude? מה הקריטריון?"
+  - text: "מה זה data residency ולמה זה רלוונטי למנהל ענן ב-enterprise ישראלי?"
+  - text: "מה הכלי שבחרת כ-primary שלך ולמה? מה החולשה העיקרית שלו?"
+  - text: "כיצד אתה מוודא שכלי AI שאתה משתמש בו לא מאמן על הנתונים שלך?"
+  - text: "מה ה-use case שבו כל כלי מנצח: Claude, ChatGPT, Gemini, Copilot?"
+  - text: "אם מנהל בצוות שלך שואל 'איזה כלי להוריד?' - מה תאמר לו?"
+---
+
+## המסגרת
+
+**ארבעת השחקנים הרלוונטיים:**
+
+| כלי | חוזק | חולשה | Privacy ב-Free |
+|-----|------|--------|----------------|
+| Claude (Anthropic) | מסמכים ארוכים, הוראות מדויקות | אין web browsing | מאמן על שיחות (ניתן לבטל) |
+| ChatGPT (OpenAI) | רוחב ידע, web, vision | יקר, context קצר יותר | מאמן על שיחות |
+| Gemini (Google) | שילוב Google Workspace, multimodal | פחות עקבי | ממוין ל-Google |
+| Microsoft Copilot | שילוב M365, Teams, SharePoint | דורש רישוי | תלוי ברישוי הארגוני |
+
+**כלל ה-Data:**
+- Free tier כמעט תמיד: **נתונים שלך = training data**
+- Enterprise tier: בדרך כלל zero data retention
+- מה לא להכניס לאף כלי ציבורי: נתוני לקוחות, IP קנייני, סיסמאות, מידע PII, מידע לפני הודעה לבורסה
+
+**לארגון ישראלי עם ענן:**
+- AWS Bedrock + Claude: נתונים נשארים ב-AWS region שלך
+- Azure OpenAI: נתונים נשארים ב-Azure tenant שלך
+- אלה הפתרונות הבטוחים לנתונים רגישים
+
+**שאלות שצריך לשאול כשמישהו מציע כלי AI:**
+1. איפה הנתונים מאוחסנים?
+2. האם הנתונים משמשים לאימון?
+3. מה ה-data retention policy?
+4. האם יש BAA / DPA?
+
+---
+
+## מה לגלות
+
+- [Anthropic Privacy Policy](https://www.anthropic.com/privacy) - קרא את סעיף Training
+- [OpenAI Enterprise Privacy](https://openai.com/enterprise-privacy) - ההבדל מהגרסה החינמית
+- [Microsoft Copilot for M365](https://www.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot) - מה כולל
+- חפש: `"enterprise AI tool policy template 2025"` - ראה מה ארגונים אחרים קבעו
+
+---
+
+## מה לעשות
+
+שני דברים שאחד מהם עשוי להיות מפתיע:
+
+**1. בדוק את מדיניות הארגון שלך:**
+האם יש מדיניות AI רשמית? שאל את ה-CISO או IT Security. אם לא קיימת - זו ממצא שחשוב לדעת.
+
+**2. בדוק את ההגדרות שלך:**
+כנס לכל כלי שאתה משתמש בו (Claude, ChatGPT וכו'). מצא את הגדרות ה-Privacy. האם Training על שיחות מופעל? כבה אותו אם כן.
+
+תעד: מה מצאת? מה שינית? מה תמליץ לצוות?
