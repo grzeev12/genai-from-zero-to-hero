@@ -133,6 +133,7 @@ export async function initUsersTable() {
 // before any admin exists to create users through the UI. No-op once at
 // least one user row exists.
 export async function ensureBootstrapAdmin() {
+  await initUsersTable();
   const sql = getDb();
   const existing = await sql`SELECT id FROM users LIMIT 1`;
   if (existing.length > 0) return;
