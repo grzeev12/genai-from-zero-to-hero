@@ -108,7 +108,7 @@ export default function QuizForm({ moduleId, track, moduleTitle, questions, next
         <div className="flex gap-2 flex-row-reverse flex-wrap">
           {questions.map((_, i) => (
             <button key={i} type="button" onClick={() => setCurrent(i)}
-              className="w-8 h-8 rounded-full text-xs font-bold transition-all"
+              className="w-8 h-8 rounded-full text-xs font-bold transition-all flex items-center justify-center"
               style={{
                 background: answers[i]?.trim()
                   ? "var(--mocha)"
