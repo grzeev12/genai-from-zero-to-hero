@@ -11,19 +11,18 @@ interface Props {
 
 export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
   const [text, setText] = useState("");
-  const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!text.trim() || !name.trim()) return;
+    if (!text.trim()) return;
     setLoading(true);
     try {
       await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ moduleId, track, name, deliverable: text }),
+        body: JSON.stringify({ moduleId, track, deliverable: text }),
       });
       markModuleComplete(track, moduleId);
       setSubmitted(true);
@@ -77,20 +76,6 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          dir="auto"
-          placeholder="השם שלך"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full rounded-2xl px-4 py-3 text-right transition-all outline-none"
-          style={{
-            background: "var(--cream)",
-            border: "1.5px solid var(--border)",
-            color: "var(--text-primary)",
-          }}
-          required
-        />
         <textarea
           dir="auto"
           placeholder="כתוב את המטלה שלך כאן, בשפה שלך, ללא פורמט מחייב"
@@ -110,7 +95,7 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
         />
         <button
           type="submit"
-          disabled={loading || !text.trim() || !name.trim()}
+          disabled={loading || !text.trim()}
           className="px-7 py-3 rounded-2xl font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0"
           style={{
             background: "var(--mocha)",

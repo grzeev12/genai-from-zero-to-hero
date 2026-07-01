@@ -1,9 +1,14 @@
 import Link from "next/link";
+import UserMenu from "@/components/auth/UserMenu";
 
 export default function HomePage() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6 py-16"
       style={{ background: "var(--cream)" }}>
+
+      <div className="w-full max-w-2xl flex justify-start mb-6">
+        <UserMenu />
+      </div>
 
       {/* Header */}
       <div className="w-full max-w-2xl text-center mb-16">
@@ -64,14 +69,6 @@ export default function HomePage() {
         </Link>
       </div>
 
-      {/* Admin link */}
-      <div className="mt-16">
-        <Link href="/admin"
-          className="text-sm transition-colors"
-          style={{ color: "var(--text-muted)" }}>
-          ← כניסת מנהל מערכת
-        </Link>
-      </div>
     </main>
   );
 }

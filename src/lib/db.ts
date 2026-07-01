@@ -1,4 +1,5 @@
 import { neon } from "@neondatabase/serverless";
+import bcrypt from "bcryptjs";
 
 function getDb() {
   if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is not set");
@@ -27,12 +28,13 @@ export async function saveSubmission(data: {
   moduleId: string;
   track: string;
   name: string;
+  userId: string;
   deliverable: string;
 }) {
   const sql = getDb();
   await sql`
-    INSERT INTO submissions (id, module_id, track, name, deliverable)
-    VALUES (${data.id}, ${data.moduleId}, ${data.track}, ${data.name}, ${data.deliverable})
+    INSERT INTO submissions (id, module_id, track, name, user_id, deliverable)
+    VALUES (${data.id}, ${data.moduleId}, ${data.track}, ${data.name}, ${data.userId}, ${data.deliverable})
   `;
 }
 
@@ -89,4 +91,108 @@ export async function upsertThreshold(
     ON CONFLICT (module_id, track, criterion)
     DO UPDATE SET min_score = ${minScore}
   `;
+}
+
+// ── Users / Auth ────────────────────────────────────────────────────────────
+
+export type UserRole = "admin" | "employee";
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  password_hash: string;
+  role: UserRole;
+  created_at: string;
+}
+
+export async function initUsersTable() {
+  const sql = getDb();
+  await sql`
+    CREATE TABLE IF NOT EXISTS users (
+      id            TEXT PRIMARY KEY,
+      email         TEXT UNIQUE NOT NULL,
+      name          TEXT NOT NULL,
+      password_hash TEXT NOT NULL,
+      role          TEXT NOT NULL DEFAULT 'employee',
+      created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `;
+  await sql`ALTER TABLE submissions ADD COLUMN IF NOT EXISTS user_id TEXT`;
+}
+
+// Bootstraps the first admin account from env vars, so there's a way in
+// before any admin exists to create users through the UI. No-op once at
+// least one user row exists.
+export async function ensureBootstrapAdmin() {
+  const sql = getDb();
+  const existing = await sql`SELECT id FROM users LIMIT 1`;
+  if (existing.length > 0) return;
+
+  const email = process.env.BOOTSTRAP_ADMIN_EMAIL;
+  const password = process.env.BOOTSTRAP_ADMIN_PASSWORD;
+  if (!email || !password) return;
+
+  const passwordHash = await bcrypt.hash(password, 10);
+  await sql`
+    INSERT INTO users (id, email, name, password_hash, role)
+    VALUES (${crypto.randomUUID()}, ${email}, ${"מנהל מערכת"}, ${passwordHash}, 'admin')
+    ON CONFLICT (email) DO NOTHING
+  `;
+}
+
+export async function getUserByEmail(email: string): Promise<User | null> {
+  const sql = getDb();
+  const rows = await sql`SELECT * FROM users WHERE email = ${email}`;
+  return (rows[0] as User) ?? null;
+}
+
+export async function getUserById(id: string): Promise<User | null> {
+  const sql = getDb();
+  const rows = await sql`SELECT * FROM users WHERE id = ${id}`;
+  return (rows[0] as User) ?? null;
+}
+
+export async function listUsers(): Promise<Omit<User, "password_hash">[]> {
+  const sql = getDb();
+  const rows = await sql`
+    SELECT id, email, name, role, created_at FROM users ORDER BY created_at ASC
+  `;
+  return rows as Omit<User, "password_hash">[];
+}
+
+export async function createUser(data: {
+  email: string;
+  name: string;
+  password: string;
+  role: UserRole;
+}) {
+  const sql = getDb();
+  const passwordHash = await bcrypt.hash(data.password, 10);
+  const id = crypto.randomUUID();
+  await sql`
+    INSERT INTO users (id, email, name, password_hash, role)
+    VALUES (${id}, ${data.email}, ${data.name}, ${passwordHash}, ${data.role})
+  `;
+  return id;
+}
+
+export async function deleteUser(id: string) {
+  const sql = getDb();
+  await sql`DELETE FROM users WHERE id = ${id}`;
+}
+
+export async function updateUserRole(id: string, role: UserRole) {
+  const sql = getDb();
+  await sql`UPDATE users SET role = ${role} WHERE id = ${id}`;
+}
+
+export async function updateUserPassword(id: string, password: string) {
+  const sql = getDb();
+  const passwordHash = await bcrypt.hash(password, 10);
+  await sql`UPDATE users SET password_hash = ${passwordHash} WHERE id = ${id}`;
+}
+
+export async function verifyPassword(password: string, hash: string): Promise<boolean> {
+  return bcrypt.compare(password, hash);
 }

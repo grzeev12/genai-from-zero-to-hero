@@ -8,6 +8,7 @@
 - **Scoring:** Azure OpenAI gpt-4o (lazy client init, never at module level)
 - **Secrets:** Doppler project `genai-zero-to-hero` config `prd`
 - **Hosting:** Vercel (auto-deploy on git push)
+- **Auth:** NextAuth v5 (Auth.js), Credentials provider, JWT session, bcryptjs password hashing
 
 ## Directory Structure
 ```
@@ -20,6 +21,10 @@ src/lib/scorer.ts              ← Azure OpenAI scoring (lazy init)
 src/lib/modules.ts             ← MDX file reader
 src/components/ui/MdxTable.*   ← custom MDX table components
 src/components/ui/ScoringTable.* ← admin score breakdown
+src/auth.ts                    ← NextAuth v5 config (Credentials provider, JWT callbacks)
+src/proxy.ts                   ← Next.js 16 middleware (route guard, was middleware.ts pre-16)
+src/app/login/                 ← login page
+src/app/api/users/              ← admin-only user management API
 ```
 
 ## Token & Cache Rules
@@ -44,6 +49,8 @@ src/components/ui/ScoringTable.* ← admin score breakdown
 - **RTL:** `dir="rtl" lang="he"` on `<html>`, `direction: rtl` on content blocks (p/li/h1-h3). NEVER `unicode-bidi: plaintext` on those: it overrides `direction` and flips blocks starting with a Latin character to LTR, breaking bullet position. `plaintext` is only correct on `input`/`textarea` paired with `dir="auto"`. code/pre stay `dir="ltr"`
 - **Admin page:** must have `export const dynamic = "force-dynamic"`
 - **Scoring:** async fire-and-forget: learner gets badge immediately, score arrives in background
+- **Auth/routing:** `src/proxy.ts` (Next.js 16 renamed `middleware.ts` to `proxy.ts`; always runs Node.js runtime, no `runtime` config field allowed) gates `/track/*`, `/admin/*`, `/api/submit`, `/api/users/*`, `/api/threshold`: unauthenticated → redirect to `/login`; non-admin on admin-only paths → redirect to `/`. Submitter identity comes from the session (`auth()` in the route handler), never from client-supplied `name`/`email` fields — `QuizForm`/`DeliverableForm` have no name input.
+- **First admin account:** no self-registration; `ensureBootstrapAdmin()` in `src/lib/db.ts` creates one admin from `BOOTSTRAP_ADMIN_EMAIL`/`BOOTSTRAP_ADMIN_PASSWORD` env vars the first time any login is attempted while the `users` table is empty. Must be set in Doppler for the first login to work. `AUTH_SECRET` is also required (NextAuth v5).
 
 ## Content Convention (MDX frontmatter, current quiz-based model)
 ```yaml

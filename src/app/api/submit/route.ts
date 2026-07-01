@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
 import { getModule } from "@/lib/modules";
 import { scoreSubmission, scoreQuiz } from "@/lib/scorer";
 import { initDb, saveSubmission, updateScore } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { moduleId, track, name, deliverable, quizAnswers } = body;
+  const session = await auth();
+  if (!session?.user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-  if (!moduleId || !track || !name) {
+  const body = await req.json();
+  const { moduleId, track, deliverable, quizAnswers } = body;
+
+  if (!moduleId || !track) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
@@ -18,7 +24,14 @@ export async function POST(req: NextRequest) {
     ? JSON.stringify(quizAnswers)
     : deliverable ?? "";
 
-  await saveSubmission({ id, moduleId, track, name, deliverable: submissionText });
+  await saveSubmission({
+    id,
+    moduleId,
+    track,
+    name: session.user.name ?? session.user.email ?? "לומד",
+    userId: session.user.id,
+    deliverable: submissionText,
+  });
 
   const mod = getModule(track as "managers" | "devops", moduleId);
 

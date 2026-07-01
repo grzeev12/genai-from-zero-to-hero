@@ -13,7 +13,6 @@ interface Props {
 }
 
 export default function QuizForm({ moduleId, track, moduleTitle, questions, nextSlug }: Props) {
-  const [name, setName] = useState("");
   const [answers, setAnswers] = useState<string[]>(Array(questions.length).fill(""));
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -25,7 +24,7 @@ export default function QuizForm({ moduleId, track, moduleTitle, questions, next
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || answers.some((a) => !a.trim())) return;
+    if (answers.some((a) => !a.trim())) return;
     setLoading(true);
     try {
       const quizAnswers = questions.map((q, i) => ({
@@ -35,7 +34,7 @@ export default function QuizForm({ moduleId, track, moduleTitle, questions, next
       await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ moduleId, track, name, quizAnswers }),
+        body: JSON.stringify({ moduleId, track, quizAnswers }),
       });
       markModuleComplete(track, moduleId);
       setSubmitted(true);
@@ -94,17 +93,6 @@ export default function QuizForm({ moduleId, track, moduleTitle, questions, next
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        <input
-          type="text"
-          dir="auto"
-          placeholder="השם שלך"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full rounded-2xl px-4 py-3 text-right outline-none"
-          style={{ background: "var(--cream)", border: "1.5px solid var(--border)", color: "var(--text-primary)" }}
-          required
-        />
-
         <div className="flex gap-2 flex-row-reverse flex-wrap">
           {questions.map((_, i) => (
             <button key={i} type="button" onClick={() => setCurrent(i)}
@@ -160,7 +148,7 @@ export default function QuizForm({ moduleId, track, moduleTitle, questions, next
 
         <button
           type="submit"
-          disabled={loading || !name.trim() || answered < questions.length}
+          disabled={loading || answered < questions.length}
           className="px-7 py-3 rounded-2xl font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed"
           style={{ background: "var(--mocha)", color: "white" }}>
           {loading ? "שולח..." : `הגש ${answered < questions.length ? `(${answered}/10 הושלמו)` : "וקבל Badge"}`}
