@@ -62,41 +62,38 @@ export async function getCompletedModuleIds(userId: string, track: string): Prom
   return new Set((rows as { module_id: string }[]).map((r) => r.module_id));
 }
 
-// ── Thresholds ──────────────────────────────────────────────────────────────
+// ── Module passing score (quiz model: one score 0-100 per module, default 70) ─
 
-export async function initThresholdsTable() {
+const DEFAULT_PASSING_SCORE = 70;
+
+export async function initModuleThresholdsTable() {
   const sql = getDb();
   await sql`
-    CREATE TABLE IF NOT EXISTS thresholds (
-      module_id  TEXT NOT NULL,
-      track      TEXT NOT NULL,
-      criterion  TEXT NOT NULL,
-      min_score  INTEGER NOT NULL DEFAULT 60,
-      PRIMARY KEY (module_id, track, criterion)
+    CREATE TABLE IF NOT EXISTS module_thresholds (
+      module_id TEXT NOT NULL,
+      track     TEXT NOT NULL,
+      min_score INTEGER NOT NULL DEFAULT ${DEFAULT_PASSING_SCORE},
+      PRIMARY KEY (module_id, track)
     )
   `;
 }
 
-export async function getThresholds(moduleId: string, track: string) {
+export async function getModuleThresholds(track: string): Promise<Record<string, number>> {
   const sql = getDb();
-  return sql`
-    SELECT criterion, min_score
-    FROM thresholds
-    WHERE module_id = ${moduleId} AND track = ${track}
+  const rows = await sql`
+    SELECT module_id, min_score FROM module_thresholds WHERE track = ${track}
   `;
+  return Object.fromEntries(
+    (rows as { module_id: string; min_score: number }[]).map((r) => [r.module_id, r.min_score])
+  );
 }
 
-export async function upsertThreshold(
-  moduleId: string,
-  track: string,
-  criterion: string,
-  minScore: number
-) {
+export async function upsertModuleThreshold(moduleId: string, track: string, minScore: number) {
   const sql = getDb();
   await sql`
-    INSERT INTO thresholds (module_id, track, criterion, min_score)
-    VALUES (${moduleId}, ${track}, ${criterion}, ${minScore})
-    ON CONFLICT (module_id, track, criterion)
+    INSERT INTO module_thresholds (module_id, track, min_score)
+    VALUES (${moduleId}, ${track}, ${minScore})
+    ON CONFLICT (module_id, track)
     DO UPDATE SET min_score = ${minScore}
   `;
 }
@@ -105,12 +102,15 @@ export async function upsertThreshold(
 
 export type UserRole = "admin" | "employee";
 
+export type UserTrack = "managers" | "devops" | null;
+
 export interface User {
   id: string;
   email: string;
   name: string;
   password_hash: string;
   role: UserRole;
+  track: UserTrack;
   created_at: string;
 }
 
@@ -126,6 +126,7 @@ export async function initUsersTable() {
       created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `;
+  await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS track TEXT`;
   await sql`ALTER TABLE submissions ADD COLUMN IF NOT EXISTS user_id TEXT`;
 }
 
@@ -165,7 +166,7 @@ export async function getUserById(id: string): Promise<User | null> {
 export async function listUsers(): Promise<Omit<User, "password_hash">[]> {
   const sql = getDb();
   const rows = await sql`
-    SELECT id, email, name, role, created_at FROM users ORDER BY created_at ASC
+    SELECT id, email, name, role, track, created_at FROM users ORDER BY created_at ASC
   `;
   return rows as Omit<User, "password_hash">[];
 }
@@ -175,13 +176,14 @@ export async function createUser(data: {
   name: string;
   password: string;
   role: UserRole;
+  track: UserTrack;
 }) {
   const sql = getDb();
   const passwordHash = await bcrypt.hash(data.password, 10);
   const id = crypto.randomUUID();
   await sql`
-    INSERT INTO users (id, email, name, password_hash, role)
-    VALUES (${id}, ${data.email}, ${data.name}, ${passwordHash}, ${data.role})
+    INSERT INTO users (id, email, name, password_hash, role, track)
+    VALUES (${id}, ${data.email}, ${data.name}, ${passwordHash}, ${data.role}, ${data.track})
   `;
   return id;
 }
@@ -194,6 +196,11 @@ export async function deleteUser(id: string) {
 export async function updateUserRole(id: string, role: UserRole) {
   const sql = getDb();
   await sql`UPDATE users SET role = ${role} WHERE id = ${id}`;
+}
+
+export async function updateUserTrack(id: string, track: UserTrack) {
+  const sql = getDb();
+  await sql`UPDATE users SET track = ${track} WHERE id = ${id}`;
 }
 
 export async function updateUserPassword(id: string, password: string) {

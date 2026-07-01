@@ -26,7 +26,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const valid = await verifyPassword(password, user.password_hash);
         if (!valid) return null;
 
-        return { id: user.id, email: user.email, name: user.name, role: user.role };
+        return { id: user.id, email: user.email, name: user.name, role: user.role, track: user.track };
       },
     }),
   ],
@@ -35,6 +35,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (user) {
         token.id = user.id;
         token.role = user.role;
+        token.track = user.track;
       }
       return token;
     },
@@ -42,6 +43,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (session.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as "admin" | "employee";
+        session.user.track = token.track as "managers" | "devops" | null;
       }
       return session;
     },

@@ -3,18 +3,20 @@ export const dynamic = "force-dynamic";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import ScoringTable from "@/components/ui/ScoringTable";
-import ThresholdEditor from "@/components/ui/ThresholdEditor";
+import ModuleThresholdEditor from "@/components/ui/ModuleThresholdEditor";
 import UserManagement from "@/components/ui/UserManagement";
 import UserMenu from "@/components/auth/UserMenu";
 import {
   initDb,
   getAllSubmissions,
-  initThresholdsTable,
-  getThresholds,
+  initModuleThresholdsTable,
+  getModuleThresholds,
   initUsersTable,
   listUsers,
 } from "@/lib/db";
 import { getModules } from "@/lib/modules";
+
+const DEFAULT_PASSING_SCORE = 70;
 
 interface BreakdownItem {
   criterion: string;
@@ -42,7 +44,7 @@ export default async function AdminPage() {
   }
 
   await initDb();
-  await initThresholdsTable();
+  await initModuleThresholdsTable();
   await initUsersTable();
   const rows = await getAllSubmissions();
   const submissions = rows as unknown as Submission[];
@@ -53,24 +55,14 @@ export default async function AdminPage() {
     devops: getModules("devops").length,
   };
 
-  // Load all manager modules and their current thresholds
-  const managerModules = getModules("managers");
-  const moduleThresholds = await Promise.all(
-    managerModules.map(async (mod) => {
-      const saved = await getThresholds(mod.id, "managers");
-      const savedMap = Object.fromEntries(
-        (saved as { criterion: string; min_score: number }[]).map((r) => [r.criterion, r.min_score])
-      );
-      return {
-        module: mod,
-        items: (mod.rubric ?? []).map((r) => ({
-          criterion: r.criterion,
-          weight: r.weight,
-          minScore: savedMap[r.criterion] ?? 60,
-        })),
-      };
-    })
-  );
+  const thresholdsByTrack: Record<string, Record<string, number>> = {
+    managers: await getModuleThresholds("managers"),
+    devops: await getModuleThresholds("devops"),
+  };
+
+  function passingScore(track: string, moduleId: string): number {
+    return thresholdsByTrack[track]?.[moduleId] ?? DEFAULT_PASSING_SCORE;
+  }
 
   const byPerson = submissions.reduce<Record<string, Submission[]>>((acc, s) => {
     if (!acc[s.name]) acc[s.name] = [];
@@ -126,21 +118,23 @@ export default async function AdminPage() {
         {/* Threshold settings */}
         <div className="space-y-4">
           <div className="text-right">
-            <h2 className="text-xl font-bold" style={{ color: "var(--mocha-dark)" }}>ספי ציון מינימום</h2>
+            <h2 className="text-xl font-bold" style={{ color: "var(--mocha-dark)" }}>ציוני מעבר למודולים</h2>
             <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
-              הגדר את הציון המינימלי הנדרש לכל קריטריון בכל מודול
+              הגדר את הציון המינימלי (0-100) הנדרש כדי לעבור כל מודול. ברירת מחדל לכולם: {DEFAULT_PASSING_SCORE}
             </p>
           </div>
-          {moduleThresholds.map(({ module, items }) => (
-            <div key={module.id} className="rounded-3xl p-5 space-y-3"
-              style={{ background: "var(--surface)", border: "1.5px solid var(--border)" }}>
-              <div className="text-right">
-                <p className="text-xs font-medium mb-0.5" style={{ color: "var(--mocha-light)" }} dir="ltr">{module.id}</p>
-                <p className="font-semibold" style={{ color: "var(--mocha-dark)" }}>{module.title}</p>
-              </div>
-              <ThresholdEditor moduleId={module.id} track="managers" items={items} />
-            </div>
-          ))}
+          <ModuleThresholdEditor
+            track="managers"
+            modules={getModules("managers").map((m) => ({ id: m.id, title: m.title, level: m.level }))}
+            savedThresholds={thresholdsByTrack.managers}
+            defaultScore={DEFAULT_PASSING_SCORE}
+          />
+          <ModuleThresholdEditor
+            track="devops"
+            modules={getModules("devops").map((m) => ({ id: m.id, title: m.title, level: m.level }))}
+            savedThresholds={thresholdsByTrack.devops}
+            defaultScore={DEFAULT_PASSING_SCORE}
+          />
         </div>
 
         <div className="h-px" style={{ background: "var(--border)" }} />
@@ -213,7 +207,7 @@ export default async function AdminPage() {
                                 <span className="font-bold" style={{ color: "#4a8f4a" }}>{s.score}/100</span>
                                 <span className="h-1.5 w-16 rounded-full overflow-hidden" style={{ background: "var(--cream-dark)" }}>
                                   <span className="block h-full rounded-full"
-                                    style={{ width: `${s.score}%`, background: s.score >= 60 ? "#5ea15e" : "#c97b5a" }} />
+                                    style={{ width: `${s.score}%`, background: s.score >= passingScore(s.track, s.module_id) ? "#5ea15e" : "#c97b5a" }} />
                                 </span>
                               </span>
                             ) : (

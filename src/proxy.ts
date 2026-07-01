@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 
-const ADMIN_PREFIXES = ["/admin", "/api/users", "/api/threshold"];
+const ADMIN_PREFIXES = ["/admin", "/api/users", "/api/module-threshold"];
 
 export default auth((req) => {
   const isLoggedIn = !!req.auth;
@@ -22,6 +22,16 @@ export default auth((req) => {
     }
     return NextResponse.redirect(new URL("/", req.nextUrl.origin));
   }
+
+  // Employees assigned to a track are fully blocked from the other track.
+  const role = req.auth?.user?.role;
+  const userTrack = req.auth?.user?.track;
+  if (role !== "admin" && userTrack) {
+    const otherTrack = userTrack === "managers" ? "devops" : "managers";
+    if (req.nextUrl.pathname.startsWith(`/track/${otherTrack}`)) {
+      return NextResponse.redirect(new URL("/", req.nextUrl.origin));
+    }
+  }
 });
 
 export const config = {
@@ -31,6 +41,6 @@ export const config = {
     "/admin/:path*",
     "/api/submit",
     "/api/users/:path*",
-    "/api/threshold",
+    "/api/module-threshold",
   ],
 };

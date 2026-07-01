@@ -17,7 +17,11 @@ export default async function HomePage() {
   const session = await auth();
   if (!session?.user) redirect("/login");
 
-  const progress = await Promise.all(TRACKS.map((t) => getTrackProgress(session.user.id, t.track)));
+  const visibleTracks = session.user.role === "admin" || !session.user.track
+    ? TRACKS
+    : TRACKS.filter((t) => t.track === session.user.track);
+
+  const progress = await Promise.all(visibleTracks.map((t) => getTrackProgress(session.user.id, t.track)));
 
   return (
     <main className="min-h-screen flex flex-col items-center px-6 py-16"
@@ -47,7 +51,7 @@ export default async function HomePage() {
 
       {/* Tracks dashboard */}
       <div className="w-full max-w-2xl space-y-6">
-        {TRACKS.map((t, i) => {
+        {visibleTracks.map((t, i) => {
           const p = progress[i];
           const continueHref = p.nextSlug
             ? `/track/${t.track}/${p.nextSlug}`

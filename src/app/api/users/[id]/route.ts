@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { deleteUser, updateUserRole, updateUserPassword } from "@/lib/db";
+import { deleteUser, updateUserRole, updateUserPassword, updateUserTrack } from "@/lib/db";
 
 async function requireAdmin() {
   const session = await auth();
@@ -14,7 +14,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
 
   const { id } = await params;
-  const { role, password } = await req.json();
+  const { role, password, track } = await req.json();
 
   if (role) {
     if (role !== "admin" && role !== "employee") {
@@ -24,6 +24,13 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       return NextResponse.json({ error: "לא ניתן להסיר הרשאת מנהל מעצמך" }, { status: 400 });
     }
     await updateUserRole(id, role);
+  }
+
+  if (track) {
+    if (track !== "managers" && track !== "devops") {
+      return NextResponse.json({ error: "Invalid track" }, { status: 400 });
+    }
+    await updateUserTrack(id, track);
   }
 
   if (password) {
