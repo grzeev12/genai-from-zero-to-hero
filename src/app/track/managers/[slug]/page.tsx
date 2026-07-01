@@ -1,8 +1,13 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { getModule, getModules } from "@/lib/modules";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { auth } from "@/auth";
+import { getCompletedModuleIds } from "@/lib/db";
+import { firstIncompleteIndex } from "@/lib/track-progress";
 import DeliverableForm from "@/components/modules/DeliverableForm";
 import QuizForm from "@/components/modules/QuizForm";
 import { Table, Thead, Th, Tbody, Tr, Td } from "@/components/ui/MdxTable";
@@ -17,9 +22,18 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
   const mod = getModule("managers", slug);
   if (!mod) notFound();
 
+  const session = await auth();
+  if (!session?.user) redirect("/login");
+
   const allModules = getModules("managers");
   const currentIndex = allModules.findIndex((m) => m.slug === slug);
   const nextModule = allModules[currentIndex + 1] ?? null;
+
+  const completedIds = await getCompletedModuleIds(session.user.id, "managers");
+  const unlockedIndex = firstIncompleteIndex(allModules, completedIds);
+  if (currentIndex > unlockedIndex) {
+    redirect(`/track/managers/${allModules[unlockedIndex]?.slug ?? ""}`);
+  }
 
   return (
     <main className="min-h-screen px-6 py-16" style={{ background: "var(--cream)" }}>

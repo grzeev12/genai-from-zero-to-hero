@@ -2,8 +2,10 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { ensureBootstrapAdmin, getUserByEmail, verifyPassword } from "@/lib/db";
 
+const IDLE_TIMEOUT_SECONDS = 15 * 60;
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  session: { strategy: "jwt" },
+  session: { strategy: "jwt", maxAge: IDLE_TIMEOUT_SECONDS, updateAge: 60 },
   pages: { signIn: "/login" },
   providers: [
     Credentials({

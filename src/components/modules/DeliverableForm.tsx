@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { markModuleComplete } from "@/lib/progress";
+import { useRouter } from "next/navigation";
 
 interface Props {
   moduleId: string;
@@ -10,6 +10,7 @@ interface Props {
 }
 
 export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
+  const router = useRouter();
   const [text, setText] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,8 +25,8 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ moduleId, track, deliverable: text }),
       });
-      markModuleComplete(track, moduleId);
       setSubmitted(true);
+      router.refresh();
     } finally {
       setLoading(false);
     }

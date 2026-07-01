@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { markModuleComplete } from "@/lib/progress";
+import { useRouter } from "next/navigation";
 import type { QuizQuestion } from "@/lib/modules";
 
 interface Props {
@@ -13,6 +13,7 @@ interface Props {
 }
 
 export default function QuizForm({ moduleId, track, moduleTitle, questions, nextSlug }: Props) {
+  const router = useRouter();
   const [answers, setAnswers] = useState<string[]>(Array(questions.length).fill(""));
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -36,8 +37,8 @@ export default function QuizForm({ moduleId, track, moduleTitle, questions, next
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ moduleId, track, quizAnswers }),
       });
-      markModuleComplete(track, moduleId);
       setSubmitted(true);
+      router.refresh();
     } finally {
       setLoading(false);
     }

@@ -1,17 +1,24 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
-import { getModulesByLevel } from "@/lib/modules";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 import TrackLevelList from "@/components/track/TrackLevelList";
 import UserMenu from "@/components/auth/UserMenu";
+import { getTrackProgress } from "@/lib/track-progress";
 
-const LEVEL_LABELS: Record<number, { name: string; desc: string; hours: string }> = {
-  1: { name: "AI Aware", desc: "מסגרת מושגית + כלים", hours: "~20 שעות" },
-  2: { name: "AI Practitioner", desc: "AI בשגרת העבודה", hours: "~40 שעות" },
-  3: { name: "AI Builder", desc: "הובלת AI לצוות", hours: "~60 שעות" },
-  4: { name: "AI Specialist", desc: "אסטרטגיה וטרנספורמציה", hours: "~100 שעות" },
+const LEVEL_LABELS: Record<number, { desc: string; hours: string }> = {
+  1: { desc: "מסגרת מושגית + כלים", hours: "~20 שעות" },
+  2: { desc: "AI בשגרת העבודה", hours: "~40 שעות" },
+  3: { desc: "הובלת AI לצוות", hours: "~60 שעות" },
+  4: { desc: "אסטרטגיה וטרנספורמציה", hours: "~100 שעות" },
 };
 
-export default function ManagersTrackPage() {
-  const byLevel = getModulesByLevel("managers");
+export default async function ManagersTrackPage() {
+  const session = await auth();
+  if (!session?.user) redirect("/login");
+
+  const p = await getTrackProgress(session.user.id, "managers");
 
   return (
     <main className="min-h-screen px-6 py-16" style={{ background: "var(--cream)" }}>
@@ -35,7 +42,16 @@ export default function ManagersTrackPage() {
           <div className="mt-5 h-px" style={{ background: "var(--border)" }} />
         </div>
 
-        <TrackLevelList track="managers" byLevel={byLevel} levelLabels={LEVEL_LABELS} />
+        <TrackLevelList
+          track="managers"
+          modules={p.modules}
+          completedIds={p.completedIds}
+          byLevel={p.byLevel}
+          levelLabels={LEVEL_LABELS}
+          percent={p.percent}
+          completedCount={p.completedCount}
+          totalModules={p.totalModules}
+        />
       </div>
     </main>
   );

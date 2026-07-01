@@ -26,6 +26,7 @@ export default auth((req) => {
 
 export const config = {
   matcher: [
+    "/",
     "/track/:path*",
     "/admin/:path*",
     "/api/submit",

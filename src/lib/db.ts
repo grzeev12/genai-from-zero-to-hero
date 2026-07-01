@@ -54,6 +54,14 @@ export async function getAllSubmissions() {
   return sql`SELECT * FROM submissions ORDER BY submitted_at DESC`;
 }
 
+export async function getCompletedModuleIds(userId: string, track: string): Promise<Set<string>> {
+  const sql = getDb();
+  const rows = await sql`
+    SELECT DISTINCT module_id FROM submissions WHERE user_id = ${userId} AND track = ${track}
+  `;
+  return new Set((rows as { module_id: string }[]).map((r) => r.module_id));
+}
+
 // ── Thresholds ──────────────────────────────────────────────────────────────
 
 export async function initThresholdsTable() {
