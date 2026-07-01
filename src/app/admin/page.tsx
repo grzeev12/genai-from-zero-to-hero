@@ -1,7 +1,9 @@
 export const dynamic = "force-dynamic";
 
 import ScoringTable from "@/components/ui/ScoringTable";
-import { initDb, getAllSubmissions } from "@/lib/db";
+import ThresholdEditor from "@/components/ui/ThresholdEditor";
+import { initDb, getAllSubmissions, initThresholdsTable, getThresholds } from "@/lib/db";
+import { getModules } from "@/lib/modules";
 
 interface BreakdownItem {
   criterion: string;
@@ -24,8 +26,28 @@ interface Submission {
 
 export default async function AdminPage() {
   await initDb();
+  await initThresholdsTable();
   const rows = await getAllSubmissions();
   const submissions = rows as unknown as Submission[];
+
+  // Load all manager modules and their current thresholds
+  const managerModules = getModules("managers");
+  const moduleThresholds = await Promise.all(
+    managerModules.map(async (mod) => {
+      const saved = await getThresholds(mod.id, "managers");
+      const savedMap = Object.fromEntries(
+        (saved as { criterion: string; min_score: number }[]).map((r) => [r.criterion, r.min_score])
+      );
+      return {
+        module: mod,
+        items: mod.rubric.map((r) => ({
+          criterion: r.criterion,
+          weight: r.weight,
+          minScore: savedMap[r.criterion] ?? 60,
+        })),
+      };
+    })
+  );
 
   const byPerson = submissions.reduce<Record<string, Submission[]>>((acc, s) => {
     if (!acc[s.name]) acc[s.name] = [];
@@ -56,6 +78,28 @@ export default async function AdminPage() {
           </div>
           <div className="mt-5 h-px" style={{ background: "var(--border)" }} />
         </div>
+
+        {/* Threshold settings */}
+        <div className="space-y-4">
+          <div className="text-right">
+            <h2 className="text-xl font-bold" style={{ color: "var(--mocha-dark)" }}>ספי ציון מינימום</h2>
+            <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
+              הגדר את הציון המינימלי הנדרש לכל קריטריון בכל מודול
+            </p>
+          </div>
+          {moduleThresholds.map(({ module, items }) => (
+            <div key={module.id} className="rounded-3xl p-5 space-y-3"
+              style={{ background: "var(--surface)", border: "1.5px solid var(--border)" }}>
+              <div className="text-right">
+                <p className="text-xs font-medium mb-0.5" style={{ color: "var(--mocha-light)" }} dir="ltr">{module.id}</p>
+                <p className="font-semibold" style={{ color: "var(--mocha-dark)" }}>{module.title}</p>
+              </div>
+              <ThresholdEditor moduleId={module.id} track="managers" items={items} />
+            </div>
+          ))}
+        </div>
+
+        <div className="h-px" style={{ background: "var(--border)" }} />
 
         {/* Learners */}
         <div className="space-y-5">
