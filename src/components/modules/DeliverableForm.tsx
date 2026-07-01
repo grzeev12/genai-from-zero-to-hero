@@ -18,7 +18,6 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!text.trim() || !name.trim()) return;
-
     setLoading(true);
     try {
       await fetch("/api/submit", {
@@ -35,20 +34,28 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-green-800 bg-green-950 p-6 space-y-4 text-right">
-        <div className="flex items-center gap-3 flex-row-reverse justify-end">
+      <div className="rounded-3xl p-8 text-right"
+        style={{
+          background: "#f0f7f0",
+          border: "1.5px solid #b8dab8",
+          boxShadow: "0 4px 20px rgba(80,140,80,0.08)"
+        }}>
+        <div className="flex items-center gap-4 flex-row-reverse justify-end mb-5">
           <div>
-            <h3 className="font-bold text-green-300">!Badge הושג</h3>
-            <p className="text-green-500 text-sm">סיימת את המודול הזה בהצלחה</p>
+            <h3 className="font-bold text-lg" style={{ color: "#2d6a2d" }}>Badge הושג! 🎉</h3>
+            <p className="text-sm mt-1" style={{ color: "#4a8f4a" }}>סיימת את המודול הזה בהצלחה</p>
           </div>
-          <span className="text-3xl">🏅</span>
+          <span className="text-4xl">🏅</span>
         </div>
         {nextSlug && (
-          <a
-            href={`/track/${track}/${nextSlug}`}
-            className="inline-block mt-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors"
-          >
-            ← מודול הבא
+          <a href={`/track/${track}/${nextSlug}`}
+            className="inline-block px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5"
+            style={{
+              background: "var(--mocha)",
+              color: "white",
+              boxShadow: "0 2px 8px rgba(124,92,62,0.3)"
+            }}>
+            ← המודול הבא
           </a>
         )}
       </div>
@@ -56,31 +63,58 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 border-t border-gray-800 pt-8 text-right">
-      <h3 className="text-lg font-semibold">הגשת Deliverable</h3>
-      <input
-        type="text"
-        placeholder="השם שלך"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors text-right"
-        required
-      />
-      <textarea
-        placeholder="כתוב את ה-deliverable שלך כאן..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        rows={8}
-        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors resize-none text-right"
-        required
-      />
-      <button
-        type="submit"
-        disabled={loading || !text.trim() || !name.trim()}
-        className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-medium transition-colors"
-      >
-        {loading ? "שולח..." : "הגש וקבל Badge"}
-      </button>
-    </form>
+    <div className="rounded-3xl p-8 text-right"
+      style={{
+        background: "var(--surface)",
+        border: "1.5px solid var(--border)",
+        boxShadow: "0 4px 24px rgba(124,92,62,0.07)"
+      }}>
+      <h3 className="text-xl font-bold mb-1" style={{ color: "var(--mocha-dark)" }}>
+        הגשת מטלה
+      </h3>
+      <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>
+        לאחר ההגשה תקבל Badge עבור מודול זה
+      </p>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          placeholder="השם שלך"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full rounded-2xl px-4 py-3 text-right transition-all outline-none"
+          style={{
+            background: "var(--cream)",
+            border: "1.5px solid var(--border)",
+            color: "var(--text-primary)",
+          }}
+          required
+        />
+        <textarea
+          placeholder="כתוב את המטלה שלך כאן — בשפה שלך, ללא פורמט מחייב..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          rows={8}
+          className="w-full rounded-2xl px-4 py-3 text-right resize-none transition-all outline-none"
+          style={{
+            background: "var(--cream)",
+            border: "1.5px solid var(--border)",
+            color: "var(--text-primary)",
+          }}
+          required
+        />
+        <button
+          type="submit"
+          disabled={loading || !text.trim() || !name.trim()}
+          className="px-7 py-3 rounded-2xl font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0"
+          style={{
+            background: "var(--mocha)",
+            color: "white",
+            boxShadow: "0 2px 8px rgba(124,92,62,0.3)"
+          }}>
+          {loading ? "שולח..." : "הגש וקבל Badge"}
+        </button>
+      </form>
+    </div>
   );
 }

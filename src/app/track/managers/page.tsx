@@ -5,31 +5,60 @@ export default function ManagersTrackPage() {
   const modules = getModules("managers");
 
   return (
-    <main className="min-h-screen bg-gray-950 text-white px-6 py-16">
+    <main className="min-h-screen px-6 py-16" style={{ background: "var(--cream)" }}>
       <div className="max-w-2xl mx-auto space-y-10">
-        <div className="space-y-2">
-          <Link href="/" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">
-            חזרה →
+
+        {/* Header */}
+        <div className="text-right">
+          <Link href="/" className="text-sm transition-colors"
+            style={{ color: "var(--text-muted)" }}>
+            חזרה לדף הבית ←
           </Link>
-          <h1 className="text-3xl font-bold mt-4">מסלול מנהלים</h1>
-          <p className="text-gray-400" dir="ltr" style={{textAlign: "right"}}>Cloud Managers · AWARE Level · {modules.length} מודולים</p>
+          <div className="mt-6">
+            <span className="text-xs font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full"
+              style={{ background: "var(--cream-dark)", color: "var(--mocha)" }}>
+              AWARE Level
+            </span>
+          </div>
+          <h1 className="text-4xl font-bold mt-3" style={{ color: "var(--mocha-dark)" }}>
+            מסלול מנהלים
+          </h1>
+          <p className="mt-2 text-sm" style={{ color: "var(--text-muted)" }}>
+            {modules.length} מודולים · Cloud Managers
+          </p>
+          <div className="mt-5 h-px" style={{ background: "var(--border)" }} />
         </div>
 
-        <div className="space-y-4">
+        {/* Module list */}
+        <div className="space-y-3">
           {modules.map((mod, index) => (
             <Link
               key={mod.id}
               href={`/track/managers/${mod.slug}`}
-              className="group flex items-center gap-5 p-5 rounded-2xl border border-gray-800 hover:border-blue-500 bg-gray-900 hover:bg-gray-800 transition-all"
+              className="group flex items-center gap-5 p-5 rounded-2xl transition-all duration-200 hover:-translate-y-0.5"
+              style={{
+                background: "var(--surface)",
+                border: "1.5px solid var(--border)",
+                boxShadow: "0 1px 6px rgba(124,92,62,0.05)"
+              }}
             >
-              <div className="text-gray-600 group-hover:text-blue-400 transition-colors">←</div>
+              {/* Arrow */}
+              <div className="text-lg transition-colors" style={{ color: "var(--border-dark)" }}>←</div>
+
+              {/* Content */}
               <div className="flex-1 text-right">
-                <h2 className="font-semibold text-white group-hover:text-blue-300 transition-colors">
+                <h2 className="font-semibold transition-colors"
+                  style={{ color: "var(--mocha-dark)" }}>
                   {mod.title}
                 </h2>
-                <p className="text-gray-500 text-sm mt-0.5">{mod.estimatedTime}</p>
+                <p className="text-sm mt-0.5" style={{ color: "var(--text-muted)" }}>
+                  {mod.estimatedTime}
+                </p>
               </div>
-              <div className="w-10 h-10 rounded-full bg-gray-800 group-hover:bg-blue-900 flex items-center justify-center text-sm font-bold text-gray-400 group-hover:text-blue-300 transition-all shrink-0">
+
+              {/* Number badge */}
+              <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
+                style={{ background: "var(--cream-dark)", color: "var(--mocha)" }}>
                 {index}
               </div>
             </Link>

@@ -1,28 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream:        #faf7f2;
+  --cream-dark:   #f2ece0;
+  --mocha:        #7c5c3e;
+  --mocha-light:  #a07850;
+  --mocha-dark:   #4a3728;
+  --text-primary: #2c1f14;
+  --text-secondary: #6b5240;
+  --text-muted:   #a08878;
+  --border:       #e0d4c4;
+  --border-dark:  #c8b8a2;
+  --accent:       #7c5c3e;
+  --accent-hover: #4a3728;
+  --surface:      #ffffff;
+  --surface-alt:  #fdf9f4;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--cream);
+  --color-foreground: var(--text-primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--text-primary);
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Hebrew/English bidi handling */
@@ -30,11 +40,11 @@ p, li, td, th, label, input, textarea, button {
   unicode-bidi: plaintext;
 }
 
-/* English technical terms stay LTR inline */
 code, pre, .ltr {
   direction: ltr;
   unicode-bidi: embed;
   display: inline-block;
+  font-family: "Fira Code", "Courier New", monospace;
 }
 
 pre {
@@ -42,24 +52,112 @@ pre {
   text-align: left;
 }
 
-/* Prose RTL overrides */
+/* Prose RTL */
 .prose {
   direction: rtl;
   text-align: right;
+  color: var(--text-primary);
+}
+
+.prose h2 {
+  color: var(--mocha-dark);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  text-align: right;
+}
+
+.prose p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  text-align: right;
+}
+
+.prose li {
+  color: var(--text-secondary);
+  text-align: right;
+  line-height: 1.75;
+}
+
+.prose a {
+  color: var(--mocha);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  color: var(--mocha-dark);
+}
+
+.prose strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.prose blockquote {
+  border-right: 3px solid var(--mocha-light);
+  border-left: none;
+  padding-right: 1.25rem;
+  padding-left: 0;
+  margin-right: 0;
+  background: var(--cream-dark);
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: var(--text-secondary);
+  font-style: normal;
 }
 
 .prose pre {
   direction: ltr;
   text-align: left;
+  background: var(--mocha-dark);
+  color: #f0e6d6;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  font-size: 0.875rem;
+  overflow-x: auto;
+}
+
+.prose code:not(pre code) {
+  background: var(--cream-dark);
+  color: var(--mocha-dark);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 0.875em;
 }
 
 .prose table {
   direction: rtl;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
 }
 
-.prose blockquote {
-  border-right: 4px solid;
-  border-left: none;
-  padding-right: 1rem;
-  padding-left: 0;
+.prose th {
+  background: var(--cream-dark);
+  color: var(--mocha-dark);
+  font-weight: 700;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  text-align: right;
+}
+
+.prose td {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.prose tr:nth-child(even) td {
+  background: var(--surface-alt);
+}
+
+.prose em {
+  color: var(--mocha);
+  font-style: italic;
 }
