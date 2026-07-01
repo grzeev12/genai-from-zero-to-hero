@@ -7,7 +7,7 @@ const SKIP_TAGS = new Set(["code", "pre", "a"]);
 export default function rehypeBidiIsolate() {
   return (tree: Root) => {
     visit(tree, "text", (node: Text, index, parent) => {
-      if (index === null || !parent) return;
+      if (typeof index !== "number" || !parent) return;
       if (parent.type === "element" && SKIP_TAGS.has((parent as Element).tagName)) return;
 
       const value = node.value;
