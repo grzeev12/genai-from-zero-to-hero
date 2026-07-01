@@ -53,6 +53,13 @@ code, pre, .ltr {
   font-family: "Fira Code", "Courier New", monospace;
 }
 
+/* Short English terms/acronyms inline in a Hebrew sentence (not code) */
+.ltr-token {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
 pre {
   display: block;
   text-align: left;
