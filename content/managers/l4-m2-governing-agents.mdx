@@ -27,24 +27,24 @@ questions:
 - LLM: אדם שולח prompt, AI עונה. Human-in-the-loop מובנה.
 - Agent: Agent מתכנן, Agent מחליט, Agent פועל. Human עלול לא לדעת שמשהו קרה.
 
-**Agent Authority Framework - שלוש רמות:**
+**Agent Authority Framework: שלוש רמות:**
 
-**Tier 1 - Fully Autonomous:**
+**Tier 1: Fully Autonomous:**
 Agent פועל לבד. מתאים כשהפעולה:
 - Reversible (אפשר לבטל)
 - Low stakes (לא ישפיע על לקוחות, כספים, אבטחה)
 - Well-defined (ברור מה ה-success ו-failure)
 דוגמה: סיכום דוח, קטלוג מסמכים, ניתוח log
 
-**Tier 2 - Notify-then-Act:**
+**Tier 2: Notify-then-Act:**
 Agent פועל ומיד מיידע מנהל.
 דוגמה: Agent שמזהה anomaly בעלויות ופותח ticket
 
-**Tier 3 - Propose-Wait-for-Approval:**
+**Tier 3: Propose-Wait-for-Approval:**
 Agent מציע, מנהל אנושי מאשר לפני ביצוע.
 דורש: כל פעולה שמשנה ייצור, שולחת תקשורת חיצונית, משפיעה על כסף.
 
-**Audit Trail - מה חובה לתעד:**
+**Audit Trail: מה חובה לתעד:**
 - איזה Agent? איזה מודל? גרסה?
 - מה ה-Goal שניתן לו?
 - מה ה-Actions שנקט? (כולל calls ל-APIs)
@@ -60,7 +60,7 @@ Agent מציע, מנהל אנושי מאשר לפני ביצוע.
 - Cost Explosion: כל sub-agent מוסיף tokens וזמן
 - Audit Complexity: Trace חייב לעבור את כל ה-chain
 
-**Vendor Evaluation - 10 שאלות חובה:**
+**Vendor Evaluation: 10 שאלות חובה:**
 1. מה ה-audit log format?
 2. מה ה-authority boundaries built-in?
 3. איך Agent מטפל ב-uncertainty?
@@ -71,8 +71,8 @@ Agent מציע, מנהל אנושי מאשר לפני ביצוע.
 
 ## מה לגלות
 
-- [Anthropic - Agent Guidelines](https://docs.anthropic.com/en/docs/build-with-claude/agentic-and-tool-use/best-practices-for-agentic-and-tool-use) - best practices
-- [NIST AI RMF - Agentic Systems](https://www.nist.gov/artificial-intelligence) - governance
+- [Anthropic: Agent Guidelines](https://docs.anthropic.com/en/docs/build-with-claude/agentic-and-tool-use/best-practices-for-agentic-and-tool-use): best practices
+- [NIST AI RMF: Agentic Systems](https://www.nist.gov/artificial-intelligence): governance
 - חפש: `"AI agent governance enterprise 2026 audit trail requirements"`
 - חפש: `"multi-agent orchestration risks enterprise 2026"`
 
@@ -80,20 +80,20 @@ Agent מציע, מנהל אנושי מאשר לפני ביצוע.
 
 ## מה לעשות
 
-**שלב 1 - Authority Framework:**
+**שלב 1: Authority Framework:**
 כתוב Agent Authority Policy לארגון שלך. מה Tier 1/2/3 בהקשר שלך?
 
-**שלב 2 - Audit Requirements:**
+**שלב 2: Audit Requirements:**
 הגדר מה חייב להיות מתועד. מי אחראי על ה-audit log?
 
-**שלב 3 - Pilot Evaluation:**
+**שלב 3: Pilot Evaluation:**
 בחר Agent use case אחד לפיילוט. הגדר:
 - מה ה-Authority Boundaries?
 - מה ה-Success Criteria?
 - מה ה-Exit Criteria (מתי עוצרים)?
 
-**שלב 4 - Vendor RFP:**
-אם בוחן ספק - כתוב RFP sections ספציפיים ל-Agent governance.
+**שלב 4: Vendor RFP:**
+אם בוחן ספק: כתוב RFP sections ספציפיים ל-Agent governance.
 
-**שלב 5 - Incident Drill:**
+**שלב 5: Incident Drill:**
 סמלץ: "Agent שלח תקשורת ללקוח בלי אישור." מה עושים? מי מיידע? מה ה-remediation?

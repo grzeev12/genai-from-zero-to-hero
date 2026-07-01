@@ -37,11 +37,11 @@ Incident ב-production הוא הסיטואציה שבה הזמן היקר ביו
 
 **3. Post-Mortem (אחרי)**
 > "בנה Post-Mortem מ-5 חלקים:
-> (1) Timeline - מה קרה ומתי
-> (2) Root Cause - מה גרם
-> (3) Impact - מה הייתה ההשפעה העסקית
-> (4) What Went Well - מה עבד
-> (5) Action Items - מה משנים ומי אחראי"
+> (1) Timeline: מה קרה ומתי
+> (2) Root Cause: מה גרם
+> (3) Impact: מה הייתה ההשפעה העסקית
+> (4) What Went Well: מה עבד
+> (5) Action Items: מה משנים ומי אחראי"
 
 **ה-Runbook המוכן מראש:**
 בנה ב-FinOps/Ops Project (L2-M1) טמפלטים מוכנים לסיטואציות נפוצות:
@@ -49,7 +49,7 @@ Incident ב-production הוא הסיטואציה שבה הזמן היקר ביו
 - High latency
 - Security breach
 - Vendor outage
-כשה-Incident קורה - אתה מכניס רק את הפרטים, לא מתחיל מאפס.
+כשה-Incident קורה: אתה מכניס רק את הפרטים, לא מתחיל מאפס.
 
 **מה לא לעשות:**
 לא לשלוח תקשורת ל-client ישירות מה-AI בלי לקרוא. ה-AI לא יודע מה ה-SLA החוזי שלך.
@@ -58,8 +58,8 @@ Incident ב-production הוא הסיטואציה שבה הזמן היקר ביו
 
 ## מה לגלות
 
-- [AWS Incident Management](https://docs.aws.amazon.com/systems-manager/latest/userguide/incident-manager.html) - תהליך סטנדרטי
-- [PagerDuty Post-Mortem Guide](https://postmortems.pagerduty.com/) - template מהתעשייה
+- [AWS Incident Management](https://docs.aws.amazon.com/systems-manager/latest/userguide/incident-manager.html): תהליך סטנדרטי
+- [PagerDuty Post-Mortem Guide](https://postmortems.pagerduty.com/): template מהתעשייה
 - חפש: `"AI incident communication template cloud 2025"`
 
 ---
@@ -68,13 +68,13 @@ Incident ב-production הוא הסיטואציה שבה הזמן היקר ביו
 
 בחר Incident או Escalation (אמיתי שעבר, או תרחיש שעלול לקרות):
 
-**תרגיל 1 - Timeline:**
+**תרגיל 1: Timeline:**
 הדבק כל מידע שיש לך (emails, logs, chat) ובקש Timeline מסודרת.
 
-**תרגיל 2 - Multi-Audience:**
+**תרגיל 2: Multi-Audience:**
 כתוב תקשורת ב-3 גרסאות לסיטואציה שתארת.
 
-**תרגיל 3 - Post-Mortem:**
+**תרגיל 3: Post-Mortem:**
 בנה Post-Mortem מלא על Incident שקרה. אתגר את ה-RCA: "בקש טיעון נגד ה-Root Cause שזיהית."
 
 **פלט קבוע:** בנה Runbook template לארגון שלך. זה יהיה חלק מה-Ops Project שלך לנצח.
