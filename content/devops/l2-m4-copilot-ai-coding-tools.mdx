@@ -1,0 +1,58 @@
+---
+id: "l2-m4-copilot-ai-coding-tools"
+track: "devops"
+level: 2
+title: "GitHub Copilot, Claude Code, Codex ו-Cursor בעבודת הדבופס"
+order: 204
+badge: "coding-assistant-pro"
+estimatedTime: "5 שעות"
+questions:
+  - text: "מה ההגדרות שביצעת ל-Copilot/Claude Code/Codex/Cursor ב-IDE ובטרמינל?"
+  - text: "מה ה-Inline Suggestions שקיבלת? מה שינית מהצעת ברירת המחדל?"
+  - text: "מה הטסטים האוטומטיים שכתבת עם AI (Terratest/PyTest) לקוד תשתית?"
+  - text: "מה ה-Refactoring שביצעת לקוד CI/CD קיים בעזרת סוכן פיתוח?"
+  - text: "מה 3 סקריפטי האוטומציה עם בדיקות יחידה שכתבת עם Copilot?"
+  - text: "מה המודול התשתיתי שיצרת עם Claude Code או Codex בטרמינל?"
+  - text: "מה ה-Code Review process שבנית לקוד תשתית שנוצר על ידי AI?"
+  - text: "מה סיכון הרישוי (Licensing) שגילית בקוד שהוצע על ידי סוכן הפיתוח?"
+  - text: "כיצד ה-Chat המובנה ב-IDE (או ב-Cursor) עזר לך יותר מ-Inline Suggestions?"
+  - text: "מה ההבדל שגילית בין Copilot לבין Claude Code/Codex/Cursor בעבודה מעשית?"
+---
+
+## המסגרת
+
+Copilot, Claude Code, Codex ו-Cursor עובדים ישירות ב-IDE ובטרמינל, לא רק בצ'אט חיצוני. זה משנה את קצב העבודה.
+
+**התקנה והגדרה:** כל הכלים דורשים auth דרך הארגון או חשבון אישי. ב-VS Code/IDE: extension + login (Copilot, Cursor). בטרמינל: Claude Code ו-Codex מספקים chat ישיר עם context מלא של הפרויקט, כולל הרשאה להריץ פקודות ולערוך קבצים בעצמם.
+
+**Inline Suggestions:** הצעות אוטומטיות תוך כדי כתיבה. שימושי לפונקציות שגרתיות, אבל תמיד לבדוק שההצעה מתאימה להקשר הספציפי, לא רק "עובד".
+
+**Chat מובנה / סוכן טרמינל:** שאלות מורכבות יותר ("איך לכתוב טסט לפונקציה הזאת?", "תקן את הבאג הזה בכל הפרויקט") עדיפות ב-Chat או בסוכן טרמינל (Claude Code/Codex), לא ב-Inline.
+
+**כתיבת טסטים אוטומטיים:** Terratest ל-Terraform, PyTest ל-Python. AI מצוין ביצירת structure ראשוני, אתה מוודא כיסוי של מקרי קצה.
+
+**Refactoring קוד CI/CD קיים:** סוכני הפיתוח מצוינים בזיהוי קוד מיושן או לא יעיל בפייפליינים קיימים, ויכולים לבצע שינויים רב-קבציים בעצמם.
+
+**סיכון רישוי:** קוד שנוצר על ידי AI עלול "לזכור" קטעים מפרויקטי open-source עם רישיון מגביל. ל-repos ארגוניים, בדוק מדיניות רישוי.
+
+---
+
+## מקורות להעמקה
+
+- [GitHub Copilot Docs](https://docs.github.com/en/copilot)
+- [Claude Code Docs](https://docs.claude.com/en/docs/claude-code)
+- [OpenAI Codex](https://openai.com/codex/)
+- [Cursor](https://cursor.com/)
+- חפש: `"GitHub Copilot vs Claude Code vs Cursor DevOps 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** התקן והגדר לפחות שני כלים (למשל Copilot + Claude Code, או Cursor) ב-IDE ובטרמינל.
+
+**שלב 2:** כתוב 3 סקריפטי אוטומציה מורכבים עם בדיקות יחידה, בעזרת Copilot Chat.
+
+**שלב 3:** בנה מודול תשתיתי שלם באמצעות Claude Code או Codex בטרמינל.
+
+השווה: מה כל כלי טוב בו? באיזה תרחיש תשתמש בכל אחד?
