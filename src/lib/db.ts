@@ -64,15 +64,13 @@ export async function getCompletedModuleIds(userId: string, track: string): Prom
 
 // ── Module passing score (quiz model: one score 0-100 per module, default 70) ─
 
-const DEFAULT_PASSING_SCORE = 70;
-
 export async function initModuleThresholdsTable() {
   const sql = getDb();
   await sql`
     CREATE TABLE IF NOT EXISTS module_thresholds (
       module_id TEXT NOT NULL,
       track     TEXT NOT NULL,
-      min_score INTEGER NOT NULL DEFAULT ${DEFAULT_PASSING_SCORE},
+      min_score INTEGER NOT NULL DEFAULT 70,
       PRIMARY KEY (module_id, track)
     )
   `;
