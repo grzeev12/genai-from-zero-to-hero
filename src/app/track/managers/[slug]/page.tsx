@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getModule, getModules } from "@/lib/modules";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { notFound } from "next/navigation";
 import DeliverableForm from "@/components/modules/DeliverableForm";
 import { Table, Thead, Th, Tbody, Tr, Td } from "@/components/ui/MdxTable";
@@ -57,6 +58,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
           <article className="prose max-w-none">
             <MDXRemote
               source={mod.content}
+              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
               components={{ table: Table, thead: Thead, th: Th, tbody: Tbody, tr: Tr, td: Td }}
             />
           </article>
