@@ -35,8 +35,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Hebrew/English bidi handling */
-p, li, td, th, label, input, textarea, button {
+/* Hebrew/English bidi handling: block-level plaintext, never per-word isolation */
+p, li, h1, h2, h3, td, th, label, button {
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: plaintext;
+}
+
+input, textarea {
   unicode-bidi: plaintext;
 }
 
@@ -100,13 +106,6 @@ pre {
   line-height: 1.75;
   unicode-bidi: plaintext;
   margin-bottom: 0.35rem;
-}
-
-/* English fragments inside Hebrew prose stay isolated */
-.prose li > a,
-.prose li > strong,
-.prose li > em {
-  unicode-bidi: isolate;
 }
 
 .prose a {
