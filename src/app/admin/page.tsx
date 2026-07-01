@@ -29,22 +29,22 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-gray-950 text-white px-6 py-16">
       <div className="max-w-4xl mx-auto space-y-10">
-        <div>
+        <div className="text-right">
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          <p className="text-gray-400 mt-1">{submissions.length} הגשות סה"כ · {Object.keys(byPerson).length} לומדים</p>
+          <p className="text-gray-400 mt-1">{submissions.length} הגשות סה&quot;כ · {Object.keys(byPerson).length} לומדים</p>
         </div>
 
         <div className="space-y-6">
           {Object.entries(byPerson).map(([name, subs]) => (
-            <div key={name} className="rounded-2xl border border-gray-800 bg-gray-900 p-6 space-y-4">
-              <div className="flex items-center justify-between">
+            <div key={name} className="rounded-2xl border border-gray-800 bg-gray-900 p-6 space-y-4 text-right">
+              <div className="flex items-center justify-between flex-row-reverse">
                 <h2 className="font-semibold text-lg">{name}</h2>
                 <span className="text-sm text-gray-400">{subs.length} מודולים הושלמו</span>
               </div>
 
-              <div className="flex gap-2 flex-wrap">
+              <div className="flex gap-2 flex-wrap flex-row-reverse">
                 {subs.map((s) => (
-                  <span key={s.id} className="text-xs bg-blue-900 text-blue-300 px-3 py-1 rounded-full">
+                  <span key={s.id} className="text-xs bg-blue-900 text-blue-300 px-3 py-1 rounded-full" dir="ltr">
                     {s.moduleId}
                   </span>
                 ))}
@@ -53,14 +53,16 @@ export default function AdminPage() {
               <div className="space-y-3">
                 {subs.map((s) => (
                   <details key={s.id} className="group">
-                    <summary className="cursor-pointer text-sm text-gray-400 hover:text-white transition-colors list-none flex items-center gap-2">
-                      <span className="group-open:rotate-90 transition-transform">▶</span>
-                      {s.moduleId} — {new Date(s.submittedAt).toLocaleDateString("he-IL")}
+                    <summary className="cursor-pointer text-sm text-gray-400 hover:text-white transition-colors list-none flex items-center gap-2 flex-row-reverse">
+                      <span className="group-open:rotate-90 transition-transform">◀</span>
+                      <span dir="ltr">{s.moduleId}</span>
+                      <span>—</span>
+                      <span>{new Date(s.submittedAt).toLocaleDateString("he-IL")}</span>
                       {s.score !== null && (
-                        <span className="ml-auto text-green-400 font-medium">{s.score}/100</span>
+                        <span className="mr-auto text-green-400 font-medium">{s.score}/100</span>
                       )}
                     </summary>
-                    <div className="mt-3 pl-5 text-gray-300 text-sm whitespace-pre-wrap border-l border-gray-700">
+                    <div className="mt-3 pr-5 text-gray-300 text-sm whitespace-pre-wrap border-r border-gray-700">
                       {s.deliverable}
                     </div>
                   </details>

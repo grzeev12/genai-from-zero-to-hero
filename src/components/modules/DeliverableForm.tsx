@@ -35,20 +35,20 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-green-800 bg-green-950 p-6 space-y-4">
-        <div className="flex items-center gap-3">
-          <span className="text-3xl">🏅</span>
+      <div className="rounded-2xl border border-green-800 bg-green-950 p-6 space-y-4 text-right">
+        <div className="flex items-center gap-3 flex-row-reverse justify-end">
           <div>
-            <h3 className="font-bold text-green-300">Badge הושג!</h3>
+            <h3 className="font-bold text-green-300">!Badge הושג</h3>
             <p className="text-green-500 text-sm">סיימת את המודול הזה בהצלחה</p>
           </div>
+          <span className="text-3xl">🏅</span>
         </div>
         {nextSlug && (
           <a
             href={`/track/${track}/${nextSlug}`}
             className="inline-block mt-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors"
           >
-            מודול הבא →
+            ← מודול הבא
           </a>
         )}
       </div>
@@ -56,14 +56,14 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 border-t border-gray-800 pt-8">
+    <form onSubmit={handleSubmit} className="space-y-4 border-t border-gray-800 pt-8 text-right">
       <h3 className="text-lg font-semibold">הגשת Deliverable</h3>
       <input
         type="text"
         placeholder="השם שלך"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors text-right"
         required
       />
       <textarea
@@ -71,7 +71,7 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
         value={text}
         onChange={(e) => setText(e.target.value)}
         rows={8}
-        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors resize-none text-right"
         required
       />
       <button

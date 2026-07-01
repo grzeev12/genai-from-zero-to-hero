@@ -21,11 +21,11 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
   return (
     <main className="min-h-screen bg-gray-950 text-white px-6 py-16">
       <div className="max-w-2xl mx-auto space-y-10">
-        <div className="space-y-1">
+        <div className="space-y-1 text-right">
           <Link href="/track/managers" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">
-            ← מסלול מנהלים
+            מסלול מנהלים →
           </Link>
-          <div className="flex items-center gap-3 mt-4">
+          <div className="flex items-center gap-3 mt-4 flex-row-reverse justify-end">
             <span className="text-xs font-medium bg-blue-900 text-blue-300 px-3 py-1 rounded-full">
               מודול {mod.order}
             </span>
@@ -35,14 +35,14 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
         </div>
 
         <article className="prose prose-invert prose-blue max-w-none
-          prose-headings:font-bold prose-headings:text-white
+          prose-headings:font-bold prose-headings:text-white prose-headings:text-right
           prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-b prose-h2:border-gray-800 prose-h2:pb-2
-          prose-p:text-gray-300 prose-p:leading-relaxed
-          prose-li:text-gray-300
+          prose-p:text-gray-300 prose-p:leading-relaxed prose-p:text-right
+          prose-li:text-gray-300 prose-li:text-right
           prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
           prose-strong:text-white
           prose-table:text-sm prose-th:text-gray-300 prose-td:text-gray-400
-          prose-blockquote:border-blue-500 prose-blockquote:text-gray-400">
+          prose-blockquote:text-gray-400">
           <MDXRemote source={mod.content} />
         </article>
 

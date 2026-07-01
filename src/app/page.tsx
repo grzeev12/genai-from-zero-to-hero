@@ -19,22 +19,22 @@ export default function HomePage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
           <Link
             href="/track/managers"
-            className="group p-6 rounded-2xl border border-gray-800 hover:border-blue-500 bg-gray-900 hover:bg-gray-800 transition-all text-left"
+            className="group p-6 rounded-2xl border border-gray-800 hover:border-blue-500 bg-gray-900 hover:bg-gray-800 transition-all text-right"
           >
             <div className="text-2xl mb-3">👔</div>
             <h2 className="font-semibold text-white group-hover:text-blue-400 transition-colors">
               מנהלים
             </h2>
-            <p className="text-gray-500 text-sm mt-1">Cloud Managers</p>
+            <p className="text-gray-500 text-sm mt-1" dir="ltr">Cloud Managers</p>
           </Link>
 
-          <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900 opacity-40 cursor-not-allowed text-left">
+          <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900 opacity-40 cursor-not-allowed text-right">
             <div className="text-2xl mb-3">⚙️</div>
             <h2 className="font-semibold text-gray-400">DevOps</h2>
             <p className="text-gray-600 text-sm mt-1">בקרוב</p>
           </div>
 
-          <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900 opacity-40 cursor-not-allowed text-left">
+          <div className="p-6 rounded-2xl border border-gray-800 bg-gray-900 opacity-40 cursor-not-allowed text-right">
             <div className="text-2xl mb-3">📋</div>
             <h2 className="font-semibold text-gray-400">מנהלי פרויקטים</h2>
             <p className="text-gray-600 text-sm mt-1">בקרוב</p>
@@ -46,7 +46,7 @@ export default function HomePage() {
             href="/admin"
             className="text-gray-600 hover:text-gray-400 text-sm transition-colors"
           >
-            כניסת מנהל →
+            ← כניסת מנהל
           </Link>
         </div>
       </div>

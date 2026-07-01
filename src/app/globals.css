@@ -24,3 +24,42 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Hebrew/English bidi handling */
+p, li, td, th, label, input, textarea, button {
+  unicode-bidi: plaintext;
+}
+
+/* English technical terms stay LTR inline */
+code, pre, .ltr {
+  direction: ltr;
+  unicode-bidi: embed;
+  display: inline-block;
+}
+
+pre {
+  display: block;
+  text-align: left;
+}
+
+/* Prose RTL overrides */
+.prose {
+  direction: rtl;
+  text-align: right;
+}
+
+.prose pre {
+  direction: ltr;
+  text-align: left;
+}
+
+.prose table {
+  direction: rtl;
+}
+
+.prose blockquote {
+  border-right: 4px solid;
+  border-left: none;
+  padding-right: 1rem;
+  padding-left: 0;
+}
