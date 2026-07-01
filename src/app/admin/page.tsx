@@ -1,5 +1,13 @@
 import fs from "fs";
 import path from "path";
+import ScoringTable from "@/components/ui/ScoringTable";
+
+interface BreakdownItem {
+  criterion: string;
+  score: number;
+  weight: number;
+  feedback: string;
+}
 
 interface Submission {
   id: string;
@@ -9,6 +17,8 @@ interface Submission {
   deliverable: string;
   submittedAt: string;
   score: number | null;
+  scoreBreakdown: BreakdownItem[] | null;
+  scoreSummary: string | null;
 }
 
 function getSubmissions(): Submission[] {
@@ -93,13 +103,27 @@ export default function AdminPage() {
                         <span className="mr-auto font-bold" style={{ color: "#4a8f4a" }}>{s.score}/100</span>
                       )}
                     </summary>
-                    <div className="mt-3 pr-5 text-sm whitespace-pre-wrap leading-relaxed rounded-xl p-4"
-                      style={{
-                        borderRight: "3px solid var(--border-dark)",
-                        background: "var(--cream)",
-                        color: "var(--text-secondary)"
-                      }}>
-                      {s.deliverable}
+                    <div className="mt-3 space-y-3">
+                      <div className="pr-5 text-sm whitespace-pre-wrap leading-relaxed rounded-xl p-4"
+                        style={{
+                          borderRight: "3px solid var(--border-dark)",
+                          background: "var(--cream)",
+                          color: "var(--text-secondary)"
+                        }}>
+                        {s.deliverable}
+                      </div>
+                      {s.scoreBreakdown && s.score !== null && s.scoreSummary && (
+                        <ScoringTable
+                          breakdown={s.scoreBreakdown}
+                          total={s.score}
+                          summary={s.scoreSummary}
+                        />
+                      )}
+                      {s.score === null && (
+                        <p className="text-xs text-right" style={{ color: "var(--text-muted)" }}>
+                          ⏳ בהמתנה לציון אוטומטי...
+                        </p>
+                      )}
                     </div>
                   </details>
                 ))}

@@ -4,6 +4,12 @@ import matter from "gray-matter";
 
 export type Track = "managers" | "devops" | "cloud-pm";
 
+export interface RubricItem {
+  criterion: string;
+  description: string;
+  weight: number;
+}
+
 export interface ModuleMeta {
   id: string;
   track: Track;
@@ -11,6 +17,7 @@ export interface ModuleMeta {
   order: number;
   badge: string;
   estimatedTime: string;
+  rubric: RubricItem[];
 }
 
 export interface Module extends ModuleMeta {

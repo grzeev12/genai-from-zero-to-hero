@@ -3,6 +3,7 @@ import { getModule, getModules } from "@/lib/modules";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import DeliverableForm from "@/components/modules/DeliverableForm";
+import { Table, Thead, Th, Tbody, Tr, Td } from "@/components/ui/MdxTable";
 
 export async function generateStaticParams() {
   const modules = getModules("managers");
@@ -54,7 +55,10 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
             boxShadow: "0 4px 24px rgba(124,92,62,0.07)"
           }}>
           <article className="prose max-w-none">
-            <MDXRemote source={mod.content} />
+            <MDXRemote
+              source={mod.content}
+              components={{ table: Table, thead: Thead, th: Th, tbody: Tbody, tr: Tr, td: Td }}
+            />
           </article>
         </div>
 
