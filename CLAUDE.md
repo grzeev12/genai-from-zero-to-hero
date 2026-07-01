@@ -11,7 +11,7 @@
 
 ## Directory Structure
 ```
-content/<track>/<module>.mdx   ← course content (WHAT/RESOURCES/TOOLS/DELIVERABLE/SCORING)
+content/<track>/<module>.mdx   ← course content (## המסגרת / ## מקורות להעמקה / ## מה לעשות, quiz-based)
 src/app/track/<track>/         ← learner-facing pages
 src/app/admin/                 ← admin dashboard (force-dynamic)
 src/app/api/submit/            ← submission + async scoring
@@ -41,23 +41,24 @@ src/components/ui/ScoringTable.* ← admin score breakdown
 ## Critical Patterns
 - **Lazy init:** `neon()` and `AzureOpenAI()` must be inside functions, never at module level (breaks Vercel build)
 - **MDX tables:** require `remarkGfm` plugin in `MDXRemote options.mdxOptions.remarkPlugins`
-- **RTL:** `dir="rtl" lang="he"` on `<html>`, `unicode-bidi: plaintext` on text elements, code/pre stay `dir="ltr"`
+- **RTL:** `dir="rtl" lang="he"` on `<html>`, `direction: rtl` on content blocks (p/li/h1-h3). NEVER `unicode-bidi: plaintext` on those: it overrides `direction` and flips blocks starting with a Latin character to LTR, breaking bullet position. `plaintext` is only correct on `input`/`textarea` paired with `dir="auto"`. code/pre stay `dir="ltr"`
 - **Admin page:** must have `export const dynamic = "force-dynamic"`
 - **Scoring:** async fire-and-forget: learner gets badge immediately, score arrives in background
 
-## Content Convention (MDX frontmatter)
+## Content Convention (MDX frontmatter, current quiz-based model)
 ```yaml
-id: "module-N"
+id: "l1-m1-slug"
 track: "managers" | "devops"
+level: 1
 title: "כותרת בעברית"
 order: N
 badge: "badge-slug"
-estimatedTime: "X-Y דקות"
-rubric:
-  - criterion: "שם"
-    description: "תיאור"
-    weight: 40
+estimatedTime: "X שעות"
+questions:
+  - text: "שאלה שדורשת ביצוע המשימה בפועל כדי לענות"
+  # exactly 10 questions, always
 ```
+No `rubric`/deliverable field on new content: replaced by the 10-question quiz model, scored via `scoreQuiz()`. `Track` type is narrowed to `"managers" | "devops"` (cloud-pm track removed).
 
 ## Naming
 - `camelCase` for TS variables/functions
