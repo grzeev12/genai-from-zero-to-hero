@@ -1,0 +1,77 @@
+---
+id: "d1-ai-monitoring"
+track: "devops"
+level: 1
+title: "AI לניתוח Logs ו-Alerts"
+order: 12
+badge: "log-analyst"
+estimatedTime: "30-40 דקות"
+rubric:
+  - criterion: "ניתוח Log אמיתי"
+    description: "הלומד הכניס Log stack trace ל-AI וקיבל Root Cause Analysis"
+    weight: 40
+  - criterion: "Alert Noise"
+    description: "הלומד מסביר כיצד AI יכול לעזור בהפחתת Alert fatigue"
+    weight: 30
+  - criterion: "מגבלות"
+    description: "מה ה-AI לא יכול לזהות מ-Logs בלי context ארגוני?"
+    weight: 30
+---
+
+## מה תלמד
+
+בסוף המודול הזה אתה מסוגל:
+- להשתמש ב-AI לניתוח Stack Traces ו-Logs בשניות
+- להבין כיצד AI-powered monitoring מפחית Alert fatigue
+- לדעת מה ה-AI מחמיץ בניתוח Logs ולמה
+
+---
+
+## מקורות לימוד
+
+> **הבעיה ב-2025:** SRE מקבל 2,000 Alerts ביום. AI Alerting עוזר לסנן signal מ-noise - אבל לא מחליף הבנה של הסביבה.
+
+**על AI Monitoring:**
+- [Datadog - AI-Powered Monitoring](https://www.datadoghq.com/solutions/ai-powered-monitoring/) - כיצד Datadog משתמש ב-AI
+- [Dynatrace - Davis AI](https://www.dynatrace.com/platform/davis-ai/) - AI Root Cause Analysis
+- [Grafana - AI Features](https://grafana.com/blog/2025/) - חפש posts על AI ב-Grafana 2025
+- חפש: `"AI log analysis kubernetes 2025"` - כלים ספציפיים ל-K8s
+
+**על Alert Fatigue:**
+- חפש: `"alert fatigue AI solution 2025"` - כיצד AI עוזר בניהול Alerts
+- חפש: `"PagerDuty AI AIOps 2025"` - AI ב-Incident Management
+
+---
+
+## כלים לחקור
+
+> **תרגיל:** הדבק Stack Trace ל-ChatGPT. ראה כמה מהיר הוא מגיע ל-Root Cause.
+
+**ניתוח Logs:**
+- **Claude / ChatGPT** - "הנה Stack Trace מ-Kubernetes Pod שנכשל: [הדבק]. מה Root Cause? מה הצעדים לתיקון? מה לבדוק קודם?"
+- **ChatGPT** - "הנה רשימת Alerts מהשבוע האחרון: [הדבק]. מה ה-Patterns? אילו Alerts הם Noise שניתן לעצור?"
+- **Perplexity** - "מה הכלים הטובים ביותר ל-AI-powered log analysis ב-2025 לסביבות Kubernetes?"
+
+**AIOps:**
+- **Datadog / Dynatrace** - אם יש לך גישה: בחן את ה-AI features הקיימים בפלטפורמה שלך
+
+---
+
+## מטלת הגשה
+
+**ניתוח Log. חצי עמוד.**
+
+1. **Log שניתחת:** תאר Stack Trace או Error Log שהכנסת (לא להדביק - לתאר). מה שאלת?
+2. **תוצאה:** מה ה-AI מצא? כמה זמן לקח? האם היה נכון?
+3. **Alert Fatigue:** כיצד AI יכול לעזור ב-Alerting שלך? מה תצטרך לשנות?
+4. **עיוור נקודה:** מה ה-AI לא יודע על הסביבה שלך שמשפיע על הניתוח?
+
+---
+
+## קריטריוני הערכה
+
+| קריטריון | מה מחפשים | משקל |
+|----------|-----------|-------|
+| ניתוח Log אמיתי | Log אמיתי, ניתוח ספציפי | 40% |
+| Alert Noise | הצעה ריאלית - לא "AI יסנן הכל" | 30% |
+| מגבלות | הבנה של context gap | 30% |

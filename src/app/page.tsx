@@ -44,25 +44,43 @@ export default function HomePage() {
           </div>
         </Link>
 
-        <div className="p-7 rounded-3xl text-right opacity-40 cursor-not-allowed"
+        <Link href="/track/devops"
+          className="group p-7 rounded-3xl text-right transition-all duration-200 hover:-translate-y-1"
           style={{
             background: "var(--surface)",
-            border: "1.5px solid var(--border)"
+            border: "1.5px solid var(--border)",
+            boxShadow: "0 2px 12px rgba(124,92,62,0.06)"
           }}>
-          <div className="text-3xl mb-4">⚙️</div>
-          <h2 className="font-bold text-lg mb-1" style={{ color: "var(--text-secondary)" }}>DevOps</h2>
-          <p className="text-sm" style={{ color: "var(--text-muted)" }}>בקרוב</p>
-        </div>
+          <div className="text-3xl mb-4">&#9881;&#65039;</div>
+          <h2 className="font-bold text-lg mb-1 transition-colors"
+            style={{ color: "var(--mocha-dark)" }}>
+            DevOps
+          </h2>
+          <p className="text-sm" style={{ color: "var(--text-muted)" }}>DevOps Engineers</p>
+          <div className="mt-5 text-xs font-semibold px-3 py-1.5 rounded-full inline-block"
+            style={{ background: "var(--cream-dark)", color: "var(--mocha)" }}>
+            8 מודולים
+          </div>
+        </Link>
 
-        <div className="p-7 rounded-3xl text-right opacity-40 cursor-not-allowed"
+        <Link href="/track/cloud-pm"
+          className="group p-7 rounded-3xl text-right transition-all duration-200 hover:-translate-y-1"
           style={{
             background: "var(--surface)",
-            border: "1.5px solid var(--border)"
+            border: "1.5px solid var(--border)",
+            boxShadow: "0 2px 12px rgba(124,92,62,0.06)"
           }}>
-          <div className="text-3xl mb-4">📋</div>
-          <h2 className="font-bold text-lg mb-1" style={{ color: "var(--text-secondary)" }}>מנהלי פרויקטים</h2>
-          <p className="text-sm" style={{ color: "var(--text-muted)" }}>בקרוב</p>
-        </div>
+          <div className="text-3xl mb-4">&#128203;</div>
+          <h2 className="font-bold text-lg mb-1 transition-colors"
+            style={{ color: "var(--mocha-dark)" }}>
+            מנהלי פרויקטים
+          </h2>
+          <p className="text-sm" style={{ color: "var(--text-muted)" }}>Cloud Project Managers</p>
+          <div className="mt-5 text-xs font-semibold px-3 py-1.5 rounded-full inline-block"
+            style={{ background: "var(--cream-dark)", color: "var(--mocha)" }}>
+            9 מודולים
+          </div>
+        </Link>
       </div>
 
       {/* Admin link */}

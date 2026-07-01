@@ -1,0 +1,76 @@
+---
+id: "m2-cloud-costs-ai"
+track: "managers"
+level: 2
+title: "AI לניתוח עלויות ענן"
+order: 24
+badge: "cost-optimizer"
+estimatedTime: "35-45 דקות"
+rubric:
+  - criterion: "ניתוח נתונים"
+    description: "הלומד הביא נתוני עלות אמיתיים (FinOps report, AWS Cost Explorer) ושאל שאלות חכמות"
+    weight: 40
+  - criterion: "המלצה ניהולית"
+    description: "הלומד הפיק המלצה בשפה עסקית - לא טכנית - שניתן להציג להנהלה"
+    weight: 35
+  - criterion: "מגבלות AI בנתונים"
+    description: "הלומד מזהה מה AI לא יכול לראות בנתוני העלות"
+    weight: 25
+---
+
+## מה תלמד
+
+בסוף המודול הזה אתה מסוגל:
+- להכניס נתוני FinOps ל-AI ולחלץ insight שלא ראית
+- לתרגם ניתוח עלות טכני להמלצה עסקית להנהלה
+- לדעת מה AI לא רואה בנתוני העלות ולמה זה חשוב
+
+---
+
+## מקורות לימוד
+
+> **הבעיה:** מנהל ענן מקבל cost report של 50 שורות ו-30 דקות לפני ה-steering committee. AI יכול לעזור.
+
+**על FinOps ו-AI:**
+- [FinOps Foundation](https://www.finops.org/) - מסגרת לניהול עלויות ענן
+- [AWS Cost Explorer + Bedrock](https://aws.amazon.com/aws-cost-management/) - AI על גבי נתוני עלות AWS
+- חפש: `"AI cloud cost optimization analysis 2025"` - ארגונים שמשתמשים ב-AI לFinOps
+- חפש: `"FinOps AI ChatGPT cost report analysis 2026"` - מקרי שימוש מעשיים
+
+**כלים:**
+- [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/) - ייצא CSV
+- [Azure Cost Management](https://azure.microsoft.com/en-us/products/cost-management/) - ייצא Excel
+
+---
+
+## כלים לחקור
+
+> **תרגיל:** ייצא cost report מ-AWS/Azure. הכנס ל-AI. שאל שאלות שלא שאלת קודם.
+
+**ניתוח עלויות עם AI:**
+- **Claude / ChatGPT עם קובץ** - "אתה FinOps analyst. הנה Cost Explorer report שלנו לרבעון האחרון [CSV]. זהה: (1) שירותים עם גידול חריג, (2) עלויות שקיים להן חלופה זולה, (3) בזבוזים ברורים (idle resources). הצג בשפה עסקית."
+- **ChatGPT** - "הפוך את הניתוח הזה להמלצת הנהלה של 5 bullet points עם ROI משוער לכל אחת."
+
+**הצלבה:**
+- **Perplexity** - "מה הממוצע בתעשייה להוצאת ענן כ-% מהכנסות עבור [סוג ארגון]? האם אנחנו ב-range סביר?"
+
+---
+
+## מטלת הגשה
+
+**ניתוח עלות. עמוד אחד.**
+
+1. **הנתונים:** תאר את הנתונים שהכנסת (לא להעתיק - לתאר: קטגוריות, טווח תאריכים, סדר גודל)
+2. **שאלות:** מה שאלת את ה-AI? מה מצא שלא ראית לפני?
+3. **המלצה עסקית:** כתוב פסקת המלצה קצרה ל-steering committee
+4. **עיוור נקודה:** מה ה-AI לא ראה ולא יכול לראות בנתונים?
+
+---
+
+## קריטריוני הערכה
+
+| קריטריון | מה מחפשים | משקל |
+|----------|-----------|-------|
+| ניתוח נתונים | נתונים אמיתיים, שאלות ספציפיות | 40% |
+| המלצה ניהולית | ברורה, עסקית, לא טכנית | 35% |
+| מגבלות AI | הבנה של blind spots (context עסקי, תכנוני) | 25% |

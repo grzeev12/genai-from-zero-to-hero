@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 
 export type Track = "managers" | "devops" | "cloud-pm";
+export type Level = 1 | 2 | 3 | 4;
 
 export interface RubricItem {
   criterion: string;
@@ -13,6 +14,7 @@ export interface RubricItem {
 export interface ModuleMeta {
   id: string;
   track: Track;
+  level: Level;
   title: string;
   order: number;
   badge: string;
@@ -27,13 +29,13 @@ export interface Module extends ModuleMeta {
 
 const contentDir = path.join(process.cwd(), "content");
 
-export function getModules(track: Track): Module[] {
+export function getModules(track: Track, level?: Level): Module[] {
   const trackDir = path.join(contentDir, track);
   if (!fs.existsSync(trackDir)) return [];
 
   const files = fs.readdirSync(trackDir).filter((f) => f.endsWith(".mdx"));
 
-  return files
+  const modules = files
     .map((file) => {
       const raw = fs.readFileSync(path.join(trackDir, file), "utf-8");
       const { data, content } = matter(raw);
@@ -43,7 +45,23 @@ export function getModules(track: Track): Module[] {
         slug: file.replace(".mdx", ""),
       };
     })
-    .sort((a, b) => a.order - b.order);
+    .filter((m) => (level ? m.level === level : true))
+    .sort((a, b) => {
+      if (a.level !== b.level) return a.level - b.level;
+      return a.order - b.order;
+    });
+
+  return modules;
+}
+
+export function getModulesByLevel(track: Track): Record<Level, Module[]> {
+  const all = getModules(track);
+  const result: Record<Level, Module[]> = { 1: [], 2: [], 3: [], 4: [] };
+  for (const mod of all) {
+    const lv = mod.level ?? 1;
+    result[lv as Level].push(mod);
+  }
+  return result;
 }
 
 export function getModule(track: Track, slug: string): Module | null {

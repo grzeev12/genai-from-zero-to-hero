@@ -1,0 +1,78 @@
+---
+id: "d3-platform-engineering"
+track: "devops"
+level: 3
+title: "Platform Engineering עם AI"
+order: 31
+badge: "platform-engineer"
+estimatedTime: "60-80 דקות"
+rubric:
+  - criterion: "Internal Developer Portal"
+    description: "הלומד מעצב IDP (Internal Developer Portal) שכולל AI capabilities"
+    weight: 35
+  - criterion: "Self-Service Template"
+    description: "הלומד בנה Template אחד ל-self-service שמשתמשים ב-AI ל-scaffolding"
+    weight: 40
+  - criterion: "Developer Experience"
+    description: "הלומד מתאר כיצד ה-Platform מפחית Cognitive Load מהמפתחים"
+    weight: 25
+---
+
+## מה תלמד
+
+בסוף המודול הזה אתה מסוגל:
+- להבין את Platform Engineering ואיך AI משתלב בו
+- לבנות Golden Path Template שמשלב AI-assisted scaffolding
+- לתכנן IDP שנותן ל-developers AI capabilities בצורה מאובטחת
+
+---
+
+## מקורות לימוד
+
+> **Platform Engineering ב-2025:** Platform Team = Internal Product Team. הם בונים Developer Portal שמאפשר ל-developers לעשות יותר בלי לדעת הכל.
+
+**על Platform Engineering:**
+- [Backstage - Spotify IDP](https://backstage.io/) - Open Source Developer Portal
+- [Port - Developer Platform](https://www.getport.io/) - IDP עם AI features
+- חפש: `"platform engineering AI 2025"` - מגמות ב-Platform Engineering
+- [Team Topologies](https://teamtopologies.com/) - מסגרת ארגונית ל-Platform Teams
+
+**AI ב-IDP:**
+- חפש: `"AI internal developer portal 2026"` - כיצד IDP משתמשים ב-AI
+- חפש: `"GitHub Copilot enterprise platform team 2025"` - AI ב-Platform Engineering
+
+---
+
+## כלים לחקור
+
+> **תרגיל:** עצב IDP מינימלי שפותר בעיה אחת ספציפית לצוות שלך.
+
+**עיצוב IDP:**
+- **Claude** - "אתה Platform Engineer. אני צריך IDP ל-[תאר: 20 developers, AWS, Kubernetes, GitHub]. הבעיות העיקריות: [onboarding ארוך, Pipeline setup ידני, Environment provisioning איטי]. מה ה-MVP IDP שפותר את אלה? מה Stack? מה Golden Paths?"
+
+**Golden Path Template:**
+- **Claude** - "כתוב Backstage Software Template לDeployment חדש של Microservice ב-AWS EKS. כלול: GitHub repo creation, Dockerfile template, GitHub Actions Pipeline, Helm chart skeleton, Terraform module reference."
+
+**AI ב-Platform:**
+- **Claude** - "כיצד מוסיפים AI Chatbot ל-IDP שמסייע ל-developers לבחור את הTemplate הנכון ולענות על שאלות תשתית?"
+
+---
+
+## מטלת הגשה
+
+**IDP Design. עמוד וחצי.**
+
+1. **הבעיה:** מה כאב ה-Developer Experience שאתה רוצה לפתור?
+2. **IDP MVP:** מה ה-capabilities של ה-IDP שתבנה? (3-4 features ספציפיים)
+3. **Golden Path:** תאר Template אחד מלא. מה הוא מייצר? כמה זמן חוסך?
+4. **AI Integration:** כיצד AI משולב ב-IDP? מה הוא עושה? מה הוא לא עושה?
+
+---
+
+## קריטריוני הערכה
+
+| קריטריון | מה מחפשים | משקל |
+|----------|-----------|-------|
+| IDP Design | ספציפי לצוות שלך, לא גנרי | 35% |
+| Golden Path Template | Template שניתן לממש בפועל | 40% |
+| Developer Experience | מדד של Cognitive Load reduction | 25% |

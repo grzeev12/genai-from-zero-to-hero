@@ -8,8 +8,8 @@ const LEVEL_LABELS: Record<number, { name: string; desc: string; hours: string }
   4: { name: "AI Specialist", desc: "מומחה AI", hours: "100+ שעות" },
 };
 
-export default function ManagersTrackPage() {
-  const byLevel = getModulesByLevel("managers");
+export default function DevOpsTrackPage() {
+  const byLevel = getModulesByLevel("devops");
 
   return (
     <main className="min-h-screen px-6 py-16" style={{ background: "var(--cream)" }}>
@@ -21,10 +21,10 @@ export default function ManagersTrackPage() {
             חזרה לדף הבית -&gt;
           </Link>
           <h1 className="text-4xl font-bold mt-5" style={{ color: "var(--mocha-dark)" }}>
-            מסלול מנהלים
+            מסלול DevOps
           </h1>
           <p className="mt-2 text-sm" style={{ color: "var(--text-muted)" }}>
-            4 רמות - Cloud Managers
+            4 רמות - DevOps Engineers
           </p>
           <div className="mt-5 h-px" style={{ background: "var(--border)" }} />
         </div>
@@ -61,7 +61,7 @@ export default function ManagersTrackPage() {
                   {mods.map((mod, index) => (
                     <Link
                       key={mod.id}
-                      href={`/track/managers/${mod.slug}`}
+                      href={`/track/devops/${mod.slug}`}
                       className="group flex items-center gap-4 p-4 rounded-2xl transition-all duration-200 hover:-translate-y-0.5"
                       style={{
                         background: "var(--surface)",

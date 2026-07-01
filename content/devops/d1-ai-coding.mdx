@@ -1,0 +1,78 @@
+---
+id: "d1-ai-coding"
+track: "devops"
+level: 1
+title: "AI Coding Assistant - IaC ו-Scripts"
+order: 11
+badge: "ai-coder"
+estimatedTime: "35-50 דקות"
+rubric:
+  - criterion: "Terraform / YAML"
+    description: "הלומד יצר קטע Terraform או YAML עם עזרת AI ומסביר מה שינה ידנית ולמה"
+    weight: 40
+  - criterion: "Code Review עם AI"
+    description: "הלומד העביר קוד קיים ל-AI לסקירה ומציין מה ה-AI מצא"
+    weight: 35
+  - criterion: "מה לא לעשות"
+    description: "הלומד מזהה מה לא לתת ל-AI לכתוב ב-production code"
+    weight: 25
+---
+
+## מה תלמד
+
+בסוף המודול הזה אתה מסוגל:
+- להשתמש ב-AI לכתיבת Terraform, Helm Charts, ו-Shell scripts בצורה בטוחה
+- לבצע AI-assisted Code Review על IaC קיים
+- לדעת מה לבדוק בקוד שה-AI מייצר לפני שמריצים ב-production
+
+---
+
+## מקורות לימוד
+
+> **הכלל:** AI כותב קוד מהיר. אתה אחראי על הקוד שהוא כתב.
+
+**על AI לכתיבת קוד:**
+- [GitHub Copilot - Terraform](https://docs.github.com/en/copilot) - כיצד Copilot עובד עם IaC
+- [AWS - Amazon Q Developer](https://aws.amazon.com/q/developer/) - AI מוטמע ב-AWS Console
+- [HashiCorp - AI for Terraform](https://developer.hashicorp.com/terraform) - כלי AI של HashiCorp
+- חפש: `"AI terraform generation best practices 2025"` - מה עובד ומה לא
+
+**אבטחה:**
+- חפש: `"AI generated code security vulnerabilities 2025"` - הסיכונים בקוד שנכתב על ידי AI
+- חפש: `"code review AI security IaC 2025"` - כלים לסריקת קוד AI-generated
+
+---
+
+## כלים לחקור
+
+> **תרגיל:** בקש מ-AI לכתוב Terraform Resource. בדוק אותו. מה חסר?
+
+**כתיבת IaC:**
+- **Claude / ChatGPT** - "כתוב Terraform לDeploy EKS cluster ב-AWS עם: node group של 3 nodes, private subnets, IAM role מינימלי. כלול locals, outputs ו-variables."
+- **GitHub Copilot** - פתח קובץ `.tf` ריק. כתוב comment `# Create S3 bucket with versioning and encryption`. ראה מה Copilot מציע.
+- **Amazon Q** - ב-AWS Console: שאל "Show me the Terraform for creating an RDS PostgreSQL with automated backups"
+
+**Code Review:**
+- **Claude** - "בצע Security Review על ה-Terraform הזה: [הדבק]. מה הסיכונים? מה הפגיעויות?"
+- **ChatGPT** - "מה Best Practices שחסרים בקוד הזה?"
+
+---
+
+## מטלת הגשה
+
+**קוד ורפלקציה. חצי עמוד.**
+
+1. **הקוד:** הצג קטע Terraform/YAML/Shell שכתבת עם AI. מה ביקשת? מה קיבלת?
+2. **מה שינית:** אחרי שקראת את הקוד - מה שינית ידנית? למה?
+3. **Code Review:** מה ה-AI מצא כשסקרת קוד קיים?
+4. **גבול:** מה אתה לא תתן ל-AI לכתוב לבד ב-production ולמה?
+
+---
+
+## קריטריוני הערכה
+
+| קריטריון | מה מחפשים | משקל |
+|----------|-----------|-------|
+| Terraform / YAML | קוד אמיתי שנכתב עם AI, לא תיאורי | 40% |
+| Code Review עם AI | ממצאים ספציפיים, לא "AI בדק" | 35% |
+| מה לא לעשות | הבנה של סיכוני קוד AI-generated | 25% |
