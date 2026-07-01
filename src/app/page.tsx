@@ -40,7 +40,7 @@ export default function HomePage() {
           <p className="text-sm" style={{ color: "var(--text-muted)" }}>Cloud Managers</p>
           <div className="mt-5 text-xs font-semibold px-3 py-1.5 rounded-full inline-block"
             style={{ background: "var(--cream-dark)", color: "var(--mocha)" }}>
-            8 מודולים
+            44 מודולים
           </div>
         </Link>
 
@@ -59,7 +59,7 @@ export default function HomePage() {
           <p className="text-sm" style={{ color: "var(--text-muted)" }}>DevOps Engineers</p>
           <div className="mt-5 text-xs font-semibold px-3 py-1.5 rounded-full inline-block"
             style={{ background: "var(--cream-dark)", color: "var(--mocha)" }}>
-            8 מודולים
+            44 מודולים
           </div>
         </Link>
       </div>

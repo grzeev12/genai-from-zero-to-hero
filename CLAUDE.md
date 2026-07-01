@@ -81,5 +81,5 @@ rubric:
 ## Tracks Status
 | Track | Status | Modules |
 |-------|--------|---------|
-| managers | 🟢 Complete | 28 modules (L1: 8, L2: 8, L3: 7, L4: 5) |
+| managers | 🟢 Complete | 44 modules (L1: 8, L2: 10, L3: 12, L4: 14) |
 | devops | 🟢 Complete | 44 modules (L1: 8, L2: 10, L3: 12, L4: 14) |

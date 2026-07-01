@@ -1,0 +1,55 @@
+---
+id: "l3-m1-enterprise-ai-architecture"
+track: "managers"
+level: 3
+title: "ארכיטקטורת פלטפורמות AI בענן הארגוני"
+order: 301
+badge: "enterprise-ai-architect"
+estimatedTime: "6 שעות"
+questions:
+  - text: "מה שירותי ה-AI המנוהלים (Azure OpenAI, Bedrock, Vertex AI) שסקרת?"
+  - text: "מה ה-Data Pipeline והתשתית שתכננת: רשת, ML services, AI gateways?"
+  - text: "כיצד תכננת פריסת מודלים בסביבות מאובטחות (VPC/Private Endpoint)?"
+  - text: "מה ניהול העלויות הבסיסי (FinOps יסודי) שהגדרת לארכיטקטורה?"
+  - text: "מה דיאגרמת הארכיטקטורה ההנדסית שיצרת לפלטפורמת AI ארגונית?"
+  - text: "מה רכיבי הרשת והאבטחה שהגדרת כנחוצים?"
+  - text: "מה ההבדל בין שלושת ספקי ה-AI המנוהלים (Azure/AWS/Google) מבחינת הארגון שלך?"
+  - text: "מה הסיכון של Vendor Lock-in שזיהית בבחירת ספק?"
+  - text: "כיצד תכננת Failover אם שירות ה-AI הראשי לא זמין?"
+  - text: "מה ההבדל בין הפתרון ה'פרטני' שלמדת ב-L1-L2 לבין הפלטפורמה הארגונית שתכננת עכשיו?"
+---
+
+## המסגרת
+
+L3 הוא המעבר מ"אני משתמש בכלי AI" ל"אני מוביל ומתכנן פלטפורמת AI ברמה ארגונית".
+
+**שירותי AI מנוהלים:**
+- Azure OpenAI Service: אינטגרציה עם אקוסיסטם Microsoft
+- Amazon Bedrock: גישה למודלים מרובים (Claude, Llama) ב-AWS
+- Google Cloud Vertex AI: אינטגרציה עם Gemini וכלי Google
+
+**Data Pipeline והתשתית:** חיבור רכיבי רשת, ML services, ו-AI Gateways, שכבת ביניים שמנהלת קריאות ל-LLM providers שונים, מטפלת ב-rate limiting ו-fallback.
+
+**Cloud-native AI:** פריסת מודלים בסביבות מאובטחות (VPC/Private Endpoint) פותרת חלק מבעיות ה-data residency ומונעת חשיפת מידע רגיש לאינטרנט הפתוח.
+
+**FinOps יסודי:** כל קריאה ל-LLM עולה tokens. עם אלפי בקשות ביום, זה מצטבר. תכנן caching ו-quota מראש.
+
+**Vendor Lock-in:** בחירת ספק יחיד יוצרת תלות. ארגונים בשלים שוקלים ארכיטקטורת multi-provider עם abstraction layer.
+
+---
+
+## מה לגלות
+
+- [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/ai-services/openai-service)
+- [AWS Bedrock](https://aws.amazon.com/bedrock/)
+- חפש: `"enterprise AI platform architecture reference 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** שרטט דיאגרמת ארכיטקטורה הנדסית של פלטפורמת AI משולבת בענן הארגוני שלך.
+
+**שלב 2:** הגדר את רכיבי הרשת והאבטחה הנחוצים (VPC, Private Endpoint, gateway).
+
+**שלב 3:** תכנן FinOps יסודי: הערכת עלות ראשונית ותקציב.

@@ -1,0 +1,56 @@
+---
+id: "l3-m8-llm-evaluation"
+track: "managers"
+level: 3
+title: "בדיקות, הערכה ומדידת איכות מודלים (LLM Evaluation)"
+order: 308
+badge: "llm-evaluator"
+estimatedTime: "6 שעות"
+questions:
+  - text: "למה בדיקות תוכנה מסורתיות נכשלות מול פלט הסתברותי של AI?"
+  - text: "מה כלי ה-Evaluation שבחרת (Ragas/TruLens/Promptflow)? למה?"
+  - text: "מה מדדי האיכות שהגדרת: Answer Relevance, Faithfulness, וחוסר פגיעות?"
+  - text: "מה LLM-as-a-Judge? כיצד השתמשת במודל חזק כמערכת בדיקה אוטומטית?"
+  - text: "כיצד שילבת את ה-Evaluation כחלק מ-CI/CD Pipeline ארגוני?"
+  - text: "מה מערך הבדיקות (KPI Evaluation Framework) שבנית לפרויקט ה-AI החטיבתי?"
+  - text: "מה דוח האיכות שהפקת מסבב בדיקות אוטומטי ב-Staging?"
+  - text: "מה קרה כשה-Evaluation זיהה ירידה באיכות (Regression) בגרסה חדשה?"
+  - text: "מה ה-Threshold שהגדרת לפני שגרסה חדשה יכולה להיכנס ל-production?"
+  - text: "מה למדת על ההבדל בין בדיקת קוד רגילה לבדיקת מערכת מבוססת AI?"
+---
+
+## המסגרת
+
+בדיקת יחידה קלאסית בודקת "הפלט שווה בדיוק ל-X". פלט AI הוא טקסט חופשי, הסתברותי. צריך מתודולוגיה אחרת.
+
+**כלי Evaluation מובילים:**
+- Ragas: ממוקד הערכת RAG, מדדי Faithfulness ו-Answer Relevance
+- TruLens: ניטור ובדיקת LLM applications
+- Promptflow: כלי Microsoft להערכה ותכנון prompts
+
+**מדדי איכות מרכזיים:**
+- Answer Relevance: האם התשובה רלוונטית לשאלה?
+- Faithfulness: האם התשובה נאמנה למקור (לא ממציאה)?
+- Harmlessness: האם התשובה לא מזיקה או פוגענית?
+
+**LLM-as-a-Judge:** שימוש במודל חזק (למשל Claude Opus) כדי לדרג את הפלט של מערכת אחרת. זה מאפשר בדיקה אוטומטית בקנה מידה שאי אפשר לעשות ידנית.
+
+**שילוב ב-CI/CD:** כל גרסה חדשה של מערכת ה-AI עוברת דרך Evaluation Suite לפני שהיא נכנסת ל-production. אם הציון ירד מתחת ל-threshold, הפריסה נחסמת.
+
+---
+
+## מה לגלות
+
+- [Ragas Documentation](https://docs.ragas.io/)
+- [TruLens](https://www.trulens.org/)
+- חפש: `"LLM evaluation framework enterprise 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** בחר כלי Evaluation אחד ובנה מערך בדיקות בסיסי לפרויקט ה-AI שלך (RAG מ-L3-M2 או agent מ-L3-M4).
+
+**שלב 2:** הגדר מדדי איכות ו-threshold מינימלי.
+
+**שלב 3:** שלב את ה-Evaluation כשלב בפייפליין. בדוק: מה קורה כשגרסה "גרועה" מנסה להיכנס?

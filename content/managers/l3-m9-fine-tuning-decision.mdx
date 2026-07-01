@@ -1,0 +1,57 @@
+---
+id: "l3-m9-fine-tuning-decision"
+track: "managers"
+level: 3
+title: "התאמת מודלים וטיון: Fine-Tuning מול Prompting ו-RAG"
+order: 309
+badge: "fine-tuning-strategist"
+estimatedTime: "5 שעות"
+questions:
+  - text: "מתי באמת נכון לבצע Fine-Tuning לעומת מתי זה בזבוז משאבים?"
+  - text: "מה העלויות, המורכבות, וזמני האימון הנדרשים לטיונון מודל ארגוני?"
+  - text: "מה תהליך הכנת הדאטהסט לאימון (Feature Store, ניקוי נתונים, Active Learning) שהבנת?"
+  - text: "מה ההשוואה שביצעת: מודל אחרי Fine-Tuning מול מערכת מבוססת RAG ופרומפטים?"
+  - text: "מה שיקולי הארכיטקטורה ארוכי הטווח (Enterprise integration patterns) שזיהית?"
+  - text: "מה עץ ההחלטה הארגוני (Buy vs Build / Tune vs Prompt) שבנית לפרויקטים חדשים?"
+  - text: "מה המפרט הטכני ודרישות הדאטהסט שכתבת לפרויקט Fine-Tuning?"
+  - text: "מה ההחלטה שקיבלת עבור use case ספציפי: Fine-Tune, RAG, או Prompting בלבד?"
+  - text: "מה הסיכון של Fine-Tuning בלי Active Learning יעיל?"
+  - text: "מה למדת על עלות מול תועלת בהחלטת Fine-Tuning?"
+---
+
+## המסגרת
+
+Fine-Tuning (שינוי משקולות המודל) הוא לא תמיד הפתרון הנכון. ברוב המקרים, RAG או Prompting מתקדם מספיקים ועולים הרבה פחות.
+
+**מתי Fine-Tuning נכון:**
+- כשצריך שהמודל "ידבר" בסגנון מאוד ספציפי באופן עקבי
+- כשיש נפח עצום של דוגמאות איכותיות (אלפי דוגמאות)
+- כשלא ניתן להעביר את המידע הרלוונטי ב-context בכל שיחה
+
+**מתי זה בזבוז:**
+- כשהמידע משתנה תדיר (RAG טוב יותר לזה)
+- כשצריך רק להוסיף context ספציפי (Prompting מספיק)
+- כשאין דאטהסט איכותי מספיק (התוצאה תהיה גרועה מהמודל הבסיסי)
+
+**עלויות ומורכבות:** Fine-Tuning דורש תשתית ייעודית, זמן אימון (שעות עד ימים), ומומחיות טכנית. עלות ראשונית גבוהה משמעותית מ-RAG.
+
+**Active Learning:** במקום לתייג את כל הנתונים ידנית, בוחר את הדוגמאות הכי "מועילות" לתיוג, חוסך זמן ומשאבי תיוג יקרים.
+
+**עץ החלטה:** Buy (רכישת פתרון מוכן) vs Build (פיתוח פנימי), Tune (Fine-Tuning) vs Prompt (RAG+Prompting). ההחלטה תלויה בעלות, זמן, ותדירות שינוי המידע.
+
+---
+
+## מה לגלות
+
+- חפש: `"LLM fine-tuning vs RAG vs prompting decision 2026"`
+- חפש: `"enterprise fine-tuning cost benefit analysis 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** בנה עץ החלטה ארגוני (Buy vs Build, Tune vs Prompt) לפרויקטים חדשים בארגון שלך.
+
+**שלב 2:** קח use case ספציפי וקבע: Fine-Tuning, RAG, או Prompting מתקדם. נמק.
+
+**שלב 3:** אם Fine-Tuning נבחר, כתוב מפרט טכני ראשוני לדרישות הדאטהסט.
