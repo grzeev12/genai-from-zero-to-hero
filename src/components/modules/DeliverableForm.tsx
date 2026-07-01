@@ -79,6 +79,7 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
+          dir="auto"
           placeholder="השם שלך"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -91,7 +92,8 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
           required
         />
         <textarea
-          placeholder="כתוב את המטלה שלך כאן — בשפה שלך, ללא פורמט מחייב..."
+          dir="auto"
+          placeholder="כתוב את המטלה שלך כאן, בשפה שלך, ללא פורמט מחייב"
           value={text}
           onChange={(e) => setText(e.target.value)}
           onPaste={(e) => e.preventDefault()}

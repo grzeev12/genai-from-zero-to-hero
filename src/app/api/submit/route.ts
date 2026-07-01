@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
   await saveSubmission({ id, moduleId, track, name, deliverable: submissionText });
 
-  const mod = getModule(track as "managers" | "devops" | "cloud-pm", moduleId);
+  const mod = getModule(track as "managers" | "devops", moduleId);
 
   if (mod?.questions?.length && quizAnswers) {
     scoreQuiz(quizAnswers, mod.title)

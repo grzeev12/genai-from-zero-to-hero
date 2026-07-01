@@ -48,7 +48,7 @@ src/components/ui/ScoringTable.* ← admin score breakdown
 ## Content Convention (MDX frontmatter)
 ```yaml
 id: "module-N"
-track: "managers" | "devops" | "cloud-pm"
+track: "managers" | "devops"
 title: "כותרת בעברית"
 order: N
 badge: "badge-slug"
@@ -83,4 +83,3 @@ rubric:
 |-------|--------|---------|
 | managers | 🟢 Complete | 28 modules (L1: 8, L2: 8, L3: 7, L4: 5) |
 | devops | 🟢 Complete | 44 modules (L1: 8, L2: 10, L3: 12, L4: 14) |
-| cloud-pm | 🔴 Not started | 0 modules |

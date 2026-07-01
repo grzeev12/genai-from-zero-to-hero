@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-export type Track = "managers" | "devops" | "cloud-pm";
+export type Track = "managers" | "devops";
 export type Level = 1 | 2 | 3 | 4;
 
 export interface RubricItem {

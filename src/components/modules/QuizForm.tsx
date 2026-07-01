@@ -96,6 +96,7 @@ export default function QuizForm({ moduleId, track, moduleTitle, questions, next
       <form onSubmit={handleSubmit} className="space-y-5">
         <input
           type="text"
+          dir="auto"
           placeholder="השם שלך"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -130,6 +131,7 @@ export default function QuizForm({ moduleId, track, moduleTitle, questions, next
           </p>
           <textarea
             key={current}
+            dir="auto"
             value={answers[current]}
             onChange={(e) => setAnswer(current, e.target.value)}
             onPaste={(e) => e.preventDefault()}

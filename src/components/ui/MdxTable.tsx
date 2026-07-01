@@ -18,7 +18,7 @@ export function Thead({ children }: { children: ReactNode }) {
 export function Th({ children }: { children: ReactNode }) {
   return (
     <th className="px-5 py-3 font-bold text-right"
-      style={{ color: "var(--mocha-dark)", borderBottom: "2px solid var(--#c4b09a)" }}>
+      style={{ color: "var(--mocha-dark)", borderBottom: "2px solid #c4b09a" }}>
       {children}
     </th>
   );
