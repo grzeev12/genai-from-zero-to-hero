@@ -94,6 +94,9 @@ export default function DeliverableForm({ moduleId, track, nextSlug }: Props) {
           placeholder="כתוב את המטלה שלך כאן — בשפה שלך, ללא פורמט מחייב..."
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onPaste={(e) => e.preventDefault()}
+          onCopy={(e) => e.preventDefault()}
+          onCut={(e) => e.preventDefault()}
           rows={8}
           className="w-full rounded-2xl px-4 py-3 text-right resize-none transition-all outline-none"
           style={{
