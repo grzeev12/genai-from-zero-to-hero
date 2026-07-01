@@ -17,6 +17,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
+  if (session.user.role !== "admin" && session.user.track && session.user.track !== track) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
   await initDb();
 
   const id = crypto.randomUUID();
