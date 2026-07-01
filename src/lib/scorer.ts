@@ -1,5 +1,5 @@
 import { AzureOpenAI } from "openai";
-import type { RubricItem } from "./modules";
+import type { RubricItem, QuizQuestion } from "./modules";
 
 function getClient() {
   return new AzureOpenAI({
@@ -68,4 +68,52 @@ ${deliverable}
   );
 
   return { total, breakdown: parsed.breakdown, summary: parsed.summary };
+}
+
+export interface QuizScoreResult {
+  total: number;
+  answers: { question: string; score: number; feedback: string }[];
+  summary: string;
+}
+
+export async function scoreQuiz(
+  answers: { question: string; answer: string }[],
+  moduleTitle: string
+): Promise<QuizScoreResult> {
+  const answersText = answers
+    .map((a, i) => `שאלה ${i + 1}: ${a.question}\nתשובה: ${a.answer}`)
+    .join("\n\n");
+
+  const prompt = `אתה מעריך מבחן של מנהל ענן שסיים מודול לימוד בנושא "${moduleTitle}".
+
+הלומד ענה על 10 שאלות. הערך כל תשובה בנפרד בסולם 0-10:
+- 0-3: תשובה כללית שלא מוכיחה ניסיון אמיתי
+- 4-6: ניסיון ניכר אבל חסר עומק או ספציפיות
+- 7-9: תשובה מלאה שמוכיחה ניסוי ממשי ולמידה
+- 10: תשובה יוצאת דופן עם insight אמיתי
+
+${answersText}
+
+החזר JSON:
+{
+  "answers": [
+    { "question": "השאלה", "score": 0-10, "feedback": "משפט קצר בעברית" }
+  ],
+  "summary": "משפט מסכם אחד בעברית"
+}`;
+
+  const client = getClient();
+  const response = await client.chat.completions.create({
+    model: process.env.AZURE_OPENAI_DEPLOYMENT!,
+    messages: [{ role: "user", content: prompt }],
+    response_format: { type: "json_object" },
+    temperature: 0.2,
+  });
+
+  const parsed = JSON.parse(response.choices[0].message.content!);
+  const total = Math.round(
+    parsed.answers.reduce((sum: number, a: { score: number }) => sum + a.score, 0) * 10
+  );
+
+  return { total, answers: parsed.answers, summary: parsed.summary };
 }

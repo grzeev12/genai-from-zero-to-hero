@@ -1,0 +1,46 @@
+---
+id: "l2-m2-finops-ai"
+track: "managers"
+level: 2
+title: "FinOps עם AI - למצוא כסף שהולך לאיבוד"
+order: 21
+badge: "finops-analyst"
+estimatedTime: "50-70 דקות"
+questions:
+  - text: "מאיזה כלי הורדת את ה-Cost Report שניתחת? מה הטווח שבחרת?"
+  - text: "מה שלושת ה-anomalies הגדולות ביותר שה-AI זיהה בדוח? תאר כל אחת."
+  - text: "מה ה-AI הציע שניתן לחסוך? האם זה נראה ריאלי? למה?"
+  - text: "מה ה-AI לא הצליח לנתח ולמה? (דרש context שלא היה לו)"
+  - text: "הכן את ה-Prompt שהשתמשת בו לניתוח. מה היה חשוב לכלול?"
+  - text: "מה ה-insight שמצאת שלא ידעת עליו לפני הניתוח?"
+  - text: "כיצד תציג את הממצאים לצוות? מה תשמיט ומה תדגיש?"
+  - text: "מה ה-quick win שניתן לממש בשבועיים על בסיס הניתוח?"
+  - text: "מה הסיכון בלהסתמך על המלצת ה-AI לחיסכון בעלויות מבלי לאמת?"
+  - text: "כמה זמן לקח לך לנתח את ה-Cost Report עם AI לעומת ידנית? מה ההבדל?"
+---
+
+## למה שווה לך 50 דקות על זה
+
+ארגונים מבזבזים בממוצע **30-35% מתקציב הענן** על משאבים לא יעילים (FinOps Foundation, 2025). מנהל ענן שמנתח Cost Report ב-AWS/Azure ידנית מבלה 2-4 שעות. עם AI - 20 דקות. החיסכון שמוצאים? בדרך כלל 5-20% מהחשבון החודשי.
+
+---
+
+## מה לגלות
+
+- [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/) - ייצא CSV
+- [Azure Cost Management](https://azure.microsoft.com/en-us/products/cost-management/) - ייצא Excel
+- [FinOps Foundation - State of FinOps 2025](https://data.finops.org/) - benchmark מול התעשייה
+- [CAST AI Blog](https://cast.ai/blog/) - חפש "AI cost optimization 2025"
+- חפש: `"ChatGPT analyze AWS cost report prompt"` - ראה איך אחרים עושים את זה
+
+---
+
+## מה לעשות
+
+1. ייצא Cost Report מ-AWS/Azure של 3 חודשים אחרונים (CSV או Excel)
+2. פתח Claude או ChatGPT, העלה את הקובץ
+3. בקש ניתוח עם הפרומפט הזה כנקודת התחלה - ושפר אותו:
+
+> "אתה FinOps analyst. הנה דוח עלויות ענן שלנו ל-3 חודשים. אנחנו [תאר: סוג ארגון, ספק ענן]. זהה: (1) עלויות שגדלו באופן חריג ולמה, (2) שירותים שנראים לא יעילים, (3) 3 הזדמנויות החיסכון הגדולות ביותר עם הערכת גודל. הצג בשפה עסקית - לא טכנית."
+
+4. בקש המלצה שניתן להציג ל-steering committee

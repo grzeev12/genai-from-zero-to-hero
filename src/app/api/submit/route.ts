@@ -1,24 +1,40 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getModule } from "@/lib/modules";
-import { scoreSubmission } from "@/lib/scorer";
+import { scoreSubmission, scoreQuiz } from "@/lib/scorer";
 import { initDb, saveSubmission, updateScore } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { moduleId, track, name, deliverable } = body;
+  const { moduleId, track, name, deliverable, quizAnswers } = body;
 
-  if (!moduleId || !track || !name || !deliverable) {
+  if (!moduleId || !track || !name) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
   await initDb();
 
   const id = crypto.randomUUID();
-  await saveSubmission({ id, moduleId, track, name, deliverable });
+  const submissionText = quizAnswers
+    ? JSON.stringify(quizAnswers)
+    : deliverable ?? "";
 
-  // ציון אסינכרוני — הלומד מקבל badge מיד
+  await saveSubmission({ id, moduleId, track, name, deliverable: submissionText });
+
   const mod = getModule(track as "managers" | "devops" | "cloud-pm", moduleId);
-  if (mod?.rubric?.length) {
+
+  if (mod?.questions?.length && quizAnswers) {
+    scoreQuiz(quizAnswers, mod.title)
+      .then((result) => {
+        const breakdown = result.answers.map((a) => ({
+          criterion: a.question,
+          score: a.score * 10,
+          weight: 10,
+          feedback: a.feedback,
+        }));
+        return updateScore(id, result.total, breakdown, result.summary);
+      })
+      .catch(console.error);
+  } else if (mod?.rubric?.length && deliverable) {
     scoreSubmission(deliverable, mod.rubric)
       .then((result) => updateScore(id, result.total, result.breakdown, result.summary))
       .catch(console.error);

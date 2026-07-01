@@ -4,6 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { notFound } from "next/navigation";
 import DeliverableForm from "@/components/modules/DeliverableForm";
+import QuizForm from "@/components/modules/QuizForm";
 import { Table, Thead, Th, Tbody, Tr, Td } from "@/components/ui/MdxTable";
 
 export async function generateStaticParams() {
@@ -24,18 +25,17 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
     <main className="min-h-screen px-6 py-16" style={{ background: "var(--cream)" }}>
       <div className="max-w-2xl mx-auto space-y-10">
 
-        {/* Breadcrumb + header */}
         <div className="text-right">
           <Link href="/track/managers"
             className="text-sm transition-colors"
             style={{ color: "var(--text-muted)" }}>
-            מסלול מנהלים ←
+            מסלול מנהלים -&gt;
           </Link>
 
           <div className="flex items-center gap-3 mt-5 flex-row-reverse justify-end">
             <span className="text-xs font-semibold px-3 py-1.5 rounded-full"
               style={{ background: "var(--cream-dark)", color: "var(--mocha)" }}>
-              מודול {mod.order}
+              רמה {mod.level}
             </span>
             <span className="text-sm" style={{ color: "var(--text-muted)" }}>
               {mod.estimatedTime}
@@ -48,7 +48,6 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
           <div className="mt-5 h-px" style={{ background: "var(--border)" }} />
         </div>
 
-        {/* Content card */}
         <div className="rounded-3xl p-8"
           style={{
             background: "var(--surface)",
@@ -64,8 +63,17 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
           </article>
         </div>
 
-        {/* Deliverable form */}
-        <DeliverableForm moduleId={mod.id} track="managers" nextSlug={nextModule?.slug ?? null} />
+        {mod.questions?.length ? (
+          <QuizForm
+            moduleId={mod.id}
+            track="managers"
+            moduleTitle={mod.title}
+            questions={mod.questions}
+            nextSlug={nextModule?.slug ?? null}
+          />
+        ) : (
+          <DeliverableForm moduleId={mod.id} track="managers" nextSlug={nextModule?.slug ?? null} />
+        )}
       </div>
     </main>
   );

@@ -11,6 +11,10 @@ export interface RubricItem {
   weight: number;
 }
 
+export interface QuizQuestion {
+  text: string;
+}
+
 export interface ModuleMeta {
   id: string;
   track: Track;
@@ -19,7 +23,8 @@ export interface ModuleMeta {
   order: number;
   badge: string;
   estimatedTime: string;
-  rubric: RubricItem[];
+  rubric?: RubricItem[];
+  questions?: QuizQuestion[];
 }
 
 export interface Module extends ModuleMeta {
