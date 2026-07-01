@@ -29,13 +29,13 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
           <Link href="/track/devops"
             className="text-sm transition-colors"
             style={{ color: "var(--text-muted)" }}>
-            מסלול DevOps -&gt;
+            ‹ מסלול DevOps
           </Link>
 
           <div className="flex items-center gap-3 mt-5 flex-row-reverse justify-end">
             <span className="text-xs font-semibold px-3 py-1.5 rounded-full"
               style={{ background: "var(--cream-dark)", color: "var(--mocha)" }}>
-              מודול {mod.order}
+              רמה {mod.level}
             </span>
             <span className="text-sm" style={{ color: "var(--text-muted)" }}>
               {mod.estimatedTime}

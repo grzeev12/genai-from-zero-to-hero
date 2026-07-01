@@ -29,7 +29,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
           <Link href="/track/managers"
             className="text-sm transition-colors"
             style={{ color: "var(--text-muted)" }}>
-            מסלול מנהלים -&gt;
+            ‹ מסלול מנהלים
           </Link>
 
           <div className="flex items-center gap-3 mt-5 flex-row-reverse justify-end">

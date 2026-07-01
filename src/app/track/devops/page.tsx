@@ -18,7 +18,7 @@ export default function DevOpsTrackPage() {
         <div className="text-right">
           <Link href="/" className="text-sm transition-colors"
             style={{ color: "var(--text-muted)" }}>
-            חזרה לדף הבית -&gt;
+            ‹ חזרה לדף הבית
           </Link>
           <h1 className="text-4xl font-bold mt-5" style={{ color: "var(--mocha-dark)" }}>
             מסלול DevOps

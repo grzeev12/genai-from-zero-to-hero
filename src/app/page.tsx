@@ -17,7 +17,7 @@ export default function HomePage() {
         </h1>
         <p className="text-lg leading-relaxed"
           style={{ color: "var(--text-secondary)" }}>
-          לומדים איך ללמוד, לא רק תוכן — תוכנית AWARE לענן ו-AI
+          לומדים איך ללמוד, לא רק תוכן: תוכנית AWARE לענן ו-AI
         </p>
         <div className="mt-6 h-px w-24 mx-auto"
           style={{ background: "var(--border-dark)" }} />
