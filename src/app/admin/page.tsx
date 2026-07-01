@@ -40,7 +40,7 @@ export default async function AdminPage() {
       );
       return {
         module: mod,
-        items: mod.rubric.map((r) => ({
+        items: (mod.rubric ?? []).map((r) => ({
           criterion: r.criterion,
           weight: r.weight,
           minScore: savedMap[r.criterion] ?? 60,
