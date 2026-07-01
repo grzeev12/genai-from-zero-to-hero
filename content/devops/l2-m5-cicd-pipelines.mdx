@@ -1,0 +1,57 @@
+---
+id: "l2-m5-cicd-pipelines"
+track: "devops"
+level: 2
+title: "כתיבה וניהול של פייפליינים (CI/CD) עם AI"
+order: 205
+badge: "pipeline-builder"
+estimatedTime: "4 שעות"
+questions:
+  - text: "מה קובץ ה-YAML המלא שבנית לפייפליין (GitHub Actions/GitLab CI/Jenkins)?"
+  - text: "אילו כלי בדיקה (Sonarqube, Trivy) שילבת ב-Pipeline בעזרת AI?"
+  - text: "מה כשל ריצה מורכב שניתחת וקיבלת פתרון? מה הבעיה הייתה?"
+  - text: "מה אסטרטגיית ההפצה (Blue-Green/Canary) שהטמעת בעזרת AI?"
+  - text: "כיצד ניהלת Secrets בתוך ה-Pipeline באופן מאובטח, בהנחיית AI?"
+  - text: "מה הפייפליין ל-GitHub Actions שבנית לפריסה לענן? מה שלביו?"
+  - text: "מה תיקנת בפייפליין שבור מתוך קריאת קובץ הריצה הגולמי עם AI?"
+  - text: "מה ה-Trade-off בין Blue-Green ל-Canary deployment שה-AI הסביר?"
+  - text: "מה השגיאה הכי מבלבלת שנתקלת בה בפייפליין ואיך AI פענח אותה?"
+  - text: "מה למדת על ניהול Secrets מאובטח לעומת הדרך שעבדת בה קודם?"
+---
+
+## המסגרת
+
+פייפליינים מורכבים דורשים YAML נכון, שילוב כלי בדיקה, וטיפול נכון ב-Secrets. AI מאיץ משמעותית את הכתיבה והדיבוג.
+
+**בניית פייפליין:**
+> "אתה DevOps Engineer. כתוב פייפליין GitHub Actions ל-[תיאור]. כלול: build, test, security scan (Trivy), deploy ל-[סביבה], עם approval gate לפני production."
+
+**כלי בדיקה משולבים:**
+- Sonarqube: איכות קוד וסריקת bugs
+- Trivy: סריקת חולשות באימג'ים ובתלויות
+
+**ניתוח כשלי ריצה:** הדבק את ה-log המלא של הריצה שנכשלה (לא רק שורת השגיאה האחרונה), בקש מ-AI לזהות את השלב שנכשל ולמה.
+
+**אסטרטגיות פריסה:**
+- Blue-Green: שתי סביבות מלאות, מעבר מיידי
+- Canary: פריסה הדרגתית לאחוז קטן מהתעבורה
+
+**Secrets בפייפליין:** לעולם לא hardcode. השתמש ב-Secret managers (GitHub Secrets, Vault, AWS Secrets Manager). AI עוזר לתכנן את הזרימה אבל אל תיתן לו לראות את הערכים עצמם.
+
+---
+
+## מה לגלות
+
+- [GitHub Actions Docs](https://docs.github.com/en/actions)
+- [Trivy](https://trivy.dev/): סורק חולשות
+- חפש: `"CI/CD pipeline AI debugging 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** בנה קובץ YAML מלא לפייפליין GitHub Actions שמבצע build, test, security scan, ו-deploy לענן.
+
+**שלב 2:** אם יש לך פייפליין שבור, נתח אותו עם AI. אם לא, צור תרחיש שגיאה מדומה ותקן.
+
+**שלב 3:** תכנן אסטרטגיית Blue-Green או Canary לשירות אחד. תעד את ההחלטה.

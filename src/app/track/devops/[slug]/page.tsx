@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import rehypeBidiIsolate from "@/lib/rehype-bidi-isolate";
 import { notFound } from "next/navigation";
 import DeliverableForm from "@/components/modules/DeliverableForm";
+import QuizForm from "@/components/modules/QuizForm";
 import { Table, Thead, Th, Tbody, Tr, Td } from "@/components/ui/MdxTable";
 
 export async function generateStaticParams() {
@@ -63,7 +64,17 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
           </article>
         </div>
 
-        <DeliverableForm moduleId={mod.id} track="devops" nextSlug={nextModule?.slug ?? null} />
+        {mod.questions?.length ? (
+          <QuizForm
+            moduleId={mod.id}
+            track="devops"
+            moduleTitle={mod.title}
+            questions={mod.questions}
+            nextSlug={nextModule?.slug ?? null}
+          />
+        ) : (
+          <DeliverableForm moduleId={mod.id} track="devops" nextSlug={nextModule?.slug ?? null} />
+        )}
       </div>
     </main>
   );

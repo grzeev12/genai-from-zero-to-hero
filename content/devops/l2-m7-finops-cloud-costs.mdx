@@ -1,0 +1,53 @@
+---
+id: "l2-m7-finops-cloud-costs"
+track: "devops"
+level: 2
+title: "ניתוח ואופטימיזציית עלויות ענן (FinOps) עם AI"
+order: 207
+badge: "finops-engineer"
+estimatedTime: "4 שעות"
+questions:
+  - text: "מה משאבים מבוזבזים (Unused Resources) שזיהית בדוח עלויות עם AI?"
+  - text: "מה המלצת ה-Right-sizing שקיבלת? כמה חיסכון מוערך?"
+  - text: "מה תחזית העלויות (Forecasting) שבנית מבוססת מגמות צריכה?"
+  - text: "מה ההשוואה בין Spot Instances ל-Graviton שביצעת עם AI?"
+  - text: "מה הדוח לתיעוד המלצות חסכון שהכנת לחטיבה?"
+  - text: "מה הסקריפט האוטומטי למחיקת משאבים מיותרים שיצרת עם AI?"
+  - text: "מה נתוני FinOps 2026 (98% מנהלים AI spend, 72% חרגו מתקציב) אומרים על הארגון שלך?"
+  - text: "כיצד בדקת שההמלצה של AI לחיסכון עלויות לא תפגע ב-availability?"
+  - text: "מה ה-Quick Win שזיהית שניתן ליישם השבוע?"
+  - text: "מה למדת על ניתוח עלויות עם AI לעומת ניתוח ידני של Cost Explorer?"
+---
+
+## המסגרת
+
+מהנדס דבופס שמבין FinOps הוא נכס. עלויות ענן גדלות מהר, ו-AI מזרז את הזיהוי של בזבוז.
+
+**זיהוי בזבוז:**
+> "הנה דוח עלויות [AWS/Azure] של 3 חודשים. זהה: (1) משאבים idle או over-provisioned, (2) שינויים חריגים, (3) הזדמנויות right-sizing עם הערכת חיסכון."
+
+**מצב השטח 2026:** 98% מהארגונים מנהלים עלויות AI כיום (לעומת 31% לפני שנתיים), ו-72% חרגו מהתקציב השנתי. FinOps הוא כישור קריטי, לא נחמד-שיהיה.
+
+**Right-sizing:** AI מנתח patterns של שימוש ומציע גודל instance מתאים יותר, אבל תמיד לאמת מול peak load, לא רק ממוצע.
+
+**Spot Instances ו-Graviton:** ארכיטקטורות חסכוניות. Spot מתאים לעומסים שניתן להפריע להם, Graviton (ARM) מציע יחס מחיר-ביצועים טוב יותר לעומסים תואמים.
+
+**Reporting אוטומטי:** בקש מ-AI לבנות סקריפט שרץ תקופתית ומזהה משאבים לא בשימוש (unattached volumes, idle load balancers) ומדווח או מוחק בהתאם למדיניות.
+
+---
+
+## מה לגלות
+
+- [State of FinOps 2026 Report](https://data.finops.org/)
+- [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/)
+- חפש: `"cloud cost optimization AI right-sizing 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** ייצא Cost Report של 3 חודשים. בקש מ-AI ניתוח מלא: בזבוז, anomalies, המלצות.
+
+**שלב 2:** בנה סקריפט אוטומטי (עם dry-run) לזיהוי משאבים מיותרים, בעזרת AI.
+
+**שלב 3:** כתוב דוח קצר עם 3 המלצות חיסכון + הערכת סכום, מוכן להצגה.

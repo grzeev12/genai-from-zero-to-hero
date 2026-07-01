@@ -1,0 +1,55 @@
+---
+id: "l1-m3-ai-tools-landscape"
+track: "devops"
+level: 1
+title: "כלי AI מרכזיים והבדלי ממשקים לאנשי תשתית"
+order: 103
+badge: "tools-navigator"
+estimatedTime: "3 שעות"
+questions:
+  - text: "מה ההבדל בין ChatGPT, Claude ו-Microsoft Copilot בהקשר עבודת DevOps?"
+  - text: "מה זה Code Interpreter ב-ChatGPT ולמה זה שימושי לבדיקת סקריפט?"
+  - text: "מה החוזק של Claude בניתוח קבצי קונפיגורציה ארוכים? נסית זאת?"
+  - text: "מה בדקת בהשוואת 3 הכלים על אותו קובץ קונפיגורציה? מה ההבדלים בתשובות?"
+  - text: "מה הכלי שבחרת לתרחיש הספציפי שלך? מה הרציונל?"
+  - text: "אילו סוגי מידע לעולם לא תעלה לכלי AI ציבורי? (Secrets, API Keys, סיסמאות)"
+  - text: "מה ההבדל בין Free tier ל-Enterprise tier מבחינת מה קורה לנתונים שלך?"
+  - text: "מה קרה כשהזנת קובץ קונפיגורציה גדול לכלי אחד לעומת אחר? מה קרה כשחרג מה-context window?"
+  - text: "מה ה-Plugins/Projects הרלוונטיים לעבודת תשתיות שגילית?"
+  - text: "אם עמית שואל 'איזה כלי AI להוריד לעבודת DevOps?' - מה תגיד לו?"
+---
+
+## המסגרת
+
+לכל כלי AI יש חוזקות שונות. מהנדס דבופס שבוחר כלי אחד בלבד לכל המשימות מפספס.
+
+**ChatGPT**: ממשק עם GPTs מותאמים, Plugins, ו-Code Interpreter, שמריץ קוד בסביבה מבודדת. שימושי לבדיקת סקריפט לפני הרצה אמיתית.
+
+**Claude**: חזק בניתוח קבצי קונפיגורציה ארוכים (Terraform modules שלמים, Helm charts מרובי קבצים). Projects שומרים context קבוע. Artifacts מציגים קוד בפאנל נפרד לעריכה נוחה.
+
+**Microsoft Copilot**: אינטגרציה טבעית עם כלי Microsoft (Azure DevOps, VS Code, Teams). שימושי בארגונים שכבר על אקוסיסטם Microsoft.
+
+**מתי לבחור מה:**
+- ניתוח קובץ ענק (מעל 5,000 שורות): Claude
+- בדיקת קוד עם הרצה בפועל: ChatGPT + Code Interpreter
+- זרימת עבודה משולבת ב-Azure: Copilot
+
+**כלל הזהב לפרטיות:** Secrets, API Keys, סיסמאות, ומידע פנימי רגיש, לעולם לא לכלי AI ציבורי בגרסת Free. Enterprise tier של כל הכלים מבטיח (בדרך כלל) zero data retention, אבל תמיד לוודא בהגדרות.
+
+---
+
+## מה לגלות
+
+- [Anthropic Privacy Policy](https://www.anthropic.com/privacy): מה קורה לנתונים שלך
+- [GitHub Copilot Trust Center](https://resources.github.com/copilot-trust-center/): מדיניות עבור פיתוח
+- חפש: `"AI tool comparison DevOps SysAdmin 2026"`
+
+---
+
+## מה לעשות
+
+קח קובץ קונפיגורציה אמיתי מהעבודה שלך (Terraform, Kubernetes manifest, או Dockerfile מורכב).
+
+**תרגיל:** הזן אותו לשלושה כלים שונים ובקש ניתוח זהה: "מה הבעיות בקובץ הזה? מה חסר?"
+
+השווה את שלוש התשובות. איפה הן נבדלו? איזה כלי היה מדויק יותר? כתוב החלטה מנומקת: איזה כלי תשתמש בו לתרחיש הזה בעתיד.

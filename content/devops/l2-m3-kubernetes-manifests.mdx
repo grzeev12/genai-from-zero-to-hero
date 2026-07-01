@@ -1,0 +1,55 @@
+---
+id: "l2-m3-kubernetes-manifests"
+track: "devops"
+level: 2
+title: "ארכיטקטורת Kubernetes ומניפסטים מורכבים עם AI"
+order: 203
+badge: "k8s-architect"
+estimatedTime: "4 שעות"
+questions:
+  - text: "מה קובצי המניפסט (Deployment, Service, Ingress) שיצרת עם AI?"
+  - text: "מה ה-Helm Chart המורכב שבנית? מה התבנית הדינמית שיצרת?"
+  - text: "מה כשל הקלאסטר שניתחת (CrashLoopBackOff / ImagePullBackOff)? מה הפתרון?"
+  - text: "כיצד AI עזר לתכנן הקצאת משאבים (Requests & Limits) נכונה?"
+  - text: "מה האופטימיזציה שביצעת ל-Dockerfile (Multi-stage build)? כמה הקטין את משקל האימג'?"
+  - text: "מה פלט ה-kubectl שהדבקת ל-AI לניתוח כשל מורכב? מה מצא?"
+  - text: "מה ה-Helm values.yaml שיצרת לאפליקציה מבוזרת? מה כלל?"
+  - text: "כיצד בדקת שהקצאת המשאבים שה-AI הציע הגיונית לעומס האמיתי שלך?"
+  - text: "מה ה-Best Practice ב-Multi-stage Dockerfile שה-AI הציע שלא ידעת?"
+  - text: "מה למדת על ניתוח כשל בקלאסטר עם AI לעומת חקירה ידנית?"
+---
+
+## המסגרת
+
+Kubernetes מייצר שגיאות עם הודעות שלא תמיד ברורות. AI מקצר משמעותית את זמן הפענוח.
+
+**כתיבת מניפסטים:**
+> "אתה K8s Platform Engineer. כתוב Deployment + Service + Ingress ל-[תיאור אפליקציה]. כלול: liveness/readiness probes, resource requests/limits הגיוניים, ו-security context."
+
+**Helm Charts דינמיים:** AI מצוין ביצירת templates עם values.yaml גמיש, במיוחד כשצריך לתמוך בכמה סביבות (dev/staging/prod) מאותו chart.
+
+**ניתוח כשלים נפוצים:**
+- CrashLoopBackOff: הדבק את ה-`kubectl describe pod` המלא + logs, בקש ניתוח
+- ImagePullBackOff: לרוב בעיית הרשאות רישום או שם image שגוי
+
+**הקצאת משאבים:** AI עוזר להעריך requests/limits הגיוניים על בסיס תיאור העומס, אבל צריך לאמת מול נתוני ניטור אמיתיים לפני production.
+
+**Multi-stage Dockerfile:** טכניקה להקטנת משקל אימג' - build stage נפרד מ-runtime stage. AI טוב בזיהוי הזדמנויות לצמצום שכבות.
+
+---
+
+## מה לגלות
+
+- [Kubernetes Documentation](https://kubernetes.io/docs/): הבסיס הרשמי
+- [Helm Best Practices](https://helm.sh/docs/chart_best_practices/)
+- חפש: `"Kubernetes troubleshooting AI 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** בנה Helm Chart מלא לאפליקציה מבוזרת (frontend + backend + DB) בעזרת AI.
+
+**שלב 2:** קח פלט kubectl אמיתי מכשל (או תרחיש מדומה) ונתח עם AI. מה הפתרון?
+
+**שלב 3:** אופטימז Dockerfile קיים ל-Multi-stage build. מדוד את ההקטנה במשקל האימג'.

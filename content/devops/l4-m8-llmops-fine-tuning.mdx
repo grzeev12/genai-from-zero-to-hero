@@ -1,0 +1,51 @@
+---
+id: "l4-m8-llmops-fine-tuning"
+track: "devops"
+level: 4
+title: "מודלי אימון, טיונון (Fine-Tuning) וניהול פלטפורמות MLOps/LLMOps"
+order: 408
+badge: "llmops-engineer"
+estimatedTime: "8 שעות"
+questions:
+  - text: "מה תהליך ה-Custom Model Training שניהלת למשימה ארגונית ספציפית?"
+  - text: "מה פרויקט ה-Fine-tuning שהגדרת למודל שפה על קוד IaC של החברה?"
+  - text: "כיצד הטמעת Active Learning לתיוג נתונים יעיל?"
+  - text: "מה מערכי ההערכה והניטור שבנית למודלים מותאמים אישית בפרודקשן?"
+  - text: "מה תשתית ה-MLOps/LLMOps שבנית לניהול מחזור החיים של המודל?"
+  - text: "מה מנגנוני ה-Model Drift Detection שהטמעת?"
+  - text: "מה קרה כשזיהית Model Drift? כיצד טיפלת?"
+  - text: "מה ה-Specification שכתבת לפרויקט Fine-tuning ארגוני?"
+  - text: "מה ה-Dashboard לניטור ובקרת ביצועים (LLMOps Operations Dashboard) שבנית?"
+  - text: "מה למדת על ההבדל בין שימוש במודל off-the-shelf לבין מודל מתוייג לארגון?"
+---
+
+## המסגרת
+
+לפעמים מודל כללי (Claude, GPT) לא מספיק. Fine-tuning מתאים מודל לתחום ידע ספציפי, כמו קוד IaC הייחודי של הארגון.
+
+**Custom Model Training:** אימון (או Fine-tuning) מודל למשימות ארגוניות ספציפיות: ניתוח לוגים ארגוניים בפורמט הייחודי שלכם, חיזוי תקלות ענן על בסיס דפוסי הכשל ההיסטוריים שלכם.
+
+**Fine-tuning לתחומי ידע:** מודל שפה שעבר Fine-tuning על קוד IaC הארגוני מבין את ה-conventions, ה-naming standards, וה-patterns שלכם טוב יותר ממודל כללי.
+
+**Active Learning:** במקום לתייג את כל הנתונים ידנית, Active Learning בוחר את הדוגמאות הכי "מועילות" לתיוג, חוסך זמן ומשאבי תיוג יקרים.
+
+**Model Monitoring ו-Drift Detection:** מודל מותאם אישית יכול "להידרדר" עם הזמן ככל שהסביבה משתנה (שירותים חדשים, patterns חדשים). ניטור מתמיד מזהה Drift לפני שהוא פוגע באיכות.
+
+**LLM Lifecycle Management:** תשתית MLOps/LLMOps מלאה מנהלת: אימון, הערכה, פריסה, ניטור, ועדכון מתמיד, לא רק "פעם אחת ונגמר".
+
+---
+
+## מה לגלות
+
+- חפש: `"LLM fine-tuning enterprise infrastructure code 2026"`
+- חפש: `"model drift detection MLOps 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** כתוב Specification לפרויקט Fine-tuning עבור מודל שיבין את קוד ה-IaC/סיטואציות הספציפיות של הארגון שלך.
+
+**שלב 2:** תכנן מנגנון Active Learning לתיוג נתונים יעיל.
+
+**שלב 3:** בנה Dashboard לניטור ביצועי המודל בפרודקשן, כולל Drift Detection.

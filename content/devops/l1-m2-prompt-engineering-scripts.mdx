@@ -1,0 +1,59 @@
+---
+id: "l1-m2-prompt-engineering-scripts"
+track: "devops"
+level: 1
+title: "Prompt Engineering לבניית סקריפטים ואוטומציות"
+order: 102
+badge: "prompt-scripter"
+estimatedTime: "4 שעות"
+questions:
+  - text: "מה אנטומיית ה-Prompt הטוב? הסבר: Context, Role, Task, Format, Examples."
+  - text: "מה ההבדל בין Zero-shot, Few-shot ו-Chain-of-Thought? מתי כל אחד עוזר?"
+  - text: "כתוב Prompt שכתבת להסבת קוד מ-Python ל-Go. מה כללת שגרם לתוצאה טובה?"
+  - text: "מה 5 ה-Prompts שכתבת לאוטומציית משימות סיסטם? הדגם אחד."
+  - text: "מה שינית ב-Prompt קיים אחרי שקיבלת פידבק מה-AI על תוצאה לא מספקת?"
+  - text: "מה ההגדרות שהוספת ל-Prompt כדי למנוע הרס סביבות (למשל rm -rf שגוי)?"
+  - text: "מה שגיאת Prompting נפוצה שגילית בעצמך ותיקנת?"
+  - text: "כיצד הגדרת משתנים וטיפול בשגיאות בתוך ה-Prompt עצמו?"
+  - text: "מה ה-Prompt הכי טוב שכתבת השבוע? מה הפך אותו לטוב?"
+  - text: "מה ההבדל בין לבקש 'תכתוב סקריפט' לבין Prompt מובנה מלא?"
+---
+
+## המסגרת
+
+Prompt טוב לתשתיות הוא לא בקשה כללית. הוא מפרט: מה התפקיד של ה-AI, מה ההקשר הטכני, מה בדיוק המשימה, איך הפלט צריך להיראות, ואם אפשר, דוגמה.
+
+**אנטומיית Prompt מלא:**
+- **Context**: מה הסביבה? (Ubuntu 24.04, Bash 5.x, AWS us-east-1)
+- **Role**: "אתה SRE בכיר עם ניסיון בסקריפטים production-grade"
+- **Task**: פועל ברור: "כתוב סקריפט ש..."
+- **Format**: מה הפלט הרצוי? קוד בלבד? עם הסברים? עם error handling?
+- **Examples**: דוגמת קלט-פלט אם רלוונטי (Few-shot)
+
+**Zero-shot vs Few-shot vs Chain-of-Thought:**
+- Zero-shot: שאלה ישירה בלי דוגמאות. טוב למשימות פשוטות.
+- Few-shot: נתינת 1-2 דוגמאות קלט-פלט. טוב לפורמט ספציפי.
+- Chain-of-Thought: "חשוב שלב אחר שלב". טוב לניפוי שגיאות ולוגיקה מורכבת.
+
+**מניעת הרס סביבות: כלל חובה בכל Prompt:**
+> "הסקריפט חייב לכלול: (1) dry-run mode כברירת מחדל, (2) בדיקת קיום קובץ/משאב לפני מחיקה, (3) לוג של כל פעולה הרסנית לפני ביצוע."
+
+**שגיאות נפוצות:** בקשה עמומה ("תשפר את זה"), חוסר context על הסביבה, שכחת error handling, אי-הגדרת מה קורה במקרה קצה.
+
+---
+
+## מה לגלות
+
+- [Anthropic: Prompt Engineering Guide](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview): הבסיס הרשמי
+- חפש: `"prompt engineering for bash scripts 2026"`
+- חפש: `"chain of thought prompting DevOps examples"`
+
+---
+
+## מה לעשות
+
+**תרגיל 1:** כתוב 5 Prompts תקניים (Context+Role+Task+Format) לאוטומציית 5 משימות סיסטם שונות (cronjob, ניקוי דיסק, גיבוי, בדיקת health, rotation של לוגים).
+
+**תרגיל 2:** קח Prompt חלש שכתבת בעבר (או כתוב אחד עכשיו). שפר אותו איטרטיבית: הרץ, קבל תוצאה, שאל את ה-AI "מה חסר כאן?", שפר שוב.
+
+תעד את 5 ה-Prompts הסופיים בקובץ טקסט. זו תהיה ספריית ה-Prompts הראשונה שלך.

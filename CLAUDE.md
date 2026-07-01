@@ -82,5 +82,5 @@ rubric:
 | Track | Status | Modules |
 |-------|--------|---------|
 | managers | 🟢 Complete | 28 modules (L1: 8, L2: 8, L3: 7, L4: 5) |
-| devops | 🔴 Not started | — |
-| cloud-pm | 🔴 Not started | — |
+| devops | 🟢 Complete | 44 modules (L1: 8, L2: 10, L3: 12, L4: 14) |
+| cloud-pm | 🔴 Not started | 0 modules |

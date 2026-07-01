@@ -1,0 +1,55 @@
+---
+id: "l2-m1-advanced-prompting-iac"
+track: "devops"
+level: 2
+title: "Prompt Engineering מתקדם לתשתיות וקוד IaC"
+order: 201
+badge: "iac-prompt-master"
+estimatedTime: "5 שעות"
+questions:
+  - text: "מה ההבדל בין Chain-of-Thought ל-Tree-of-Thought? מתי כל אחד מתאים ל-IaC?"
+  - text: "מה Role Prompting עבור ארכיטקט ענן? כתוב דוגמה שהשתמשת בה."
+  - text: "מה ה-Iterative Prompting שביצעת לבניית מודול Terraform מורכב? כמה סיבובים?"
+  - text: "מה ספריית ה-10+ Prompt Templates שבנית? הצג 3 מהם."
+  - text: "מה ה-Custom GPT / Claude Project שבנית לצוות? מה ה-System Prompt שלו?"
+  - text: "כיצד System Prompt קבוע חסך זמן בהשוואה להתחלה מאפס בכל שיחה?"
+  - text: "מה Meta-Prompting? נתת דוגמה שבה ביקשת מ-AI לשפר את ה-Prompt שלך עצמו?"
+  - text: "מה ה-Persona שבנית ל-Prompt ספציפי לתפקיד DevOps (למשל SRE, Platform Engineer)?"
+  - text: "מה הטעות שגילית ב-Prompt Template שהיה עובד 'כמעט תמיד' אבל נכשל במקרה קצה?"
+  - text: "כיצד ה-Project/GPT שבנית משתפר עם הזמן ככל שאתה מוסיף context?"
+---
+
+## המסגרת
+
+L2 מתחיל בהעמקת מיומנויות ה-Prompting מ-L1. עכשיו המטרה: קוד תשתית מורכב, לא סקריפט בודד.
+
+**Chain-of-Thought (CoT) vs Tree-of-Thought (ToT):**
+- CoT: "חשוב שלב אחר שלב" - טוב לניתוח לוגי סדרתי
+- ToT: בקש מה-AI לשקול כמה גישות שונות במקביל ולהשוות: "הצע 3 ארכיטקטורות אפשריות למודול הזה, השווה ביניהן, המלץ על אחת"
+
+**Role & Persona Prompting לתשתיות:**
+> "אתה Senior Platform Engineer עם 10 שנות ניסיון ב-multi-cloud Terraform architecture. אתה מקפיד על idempotency, state management נכון, ו-least privilege."
+
+**Iterative Prompting:** אל תצפה למודול מושלם בסיבוב אחד. בנה בהדרגה: תחילה מבנה בסיסי, ואז הוסף שכבות (variables, outputs, security groups, tagging strategy).
+
+**System Prompts ל-Custom GPT/Claude Project:** בנה Project קבוע לצוות שכולל: מבנה הענן שלכם, conventions, ו-naming standards. כל שיחה חדשה יורשת את זה.
+
+**Meta-Prompting:** לפעמים ה-Prompt הכי טוב הוא לבקש מה-AI לשפר את ה-Prompt שלך: "האם ה-Prompt הזה ברור מספיק? מה חסר?"
+
+---
+
+## מה לגלות
+
+- [Anthropic: Advanced Prompting](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-of-thought): CoT מעמיק
+- חפש: `"tree of thought prompting infrastructure as code 2026"`
+- חפש: `"Claude Projects DevOps team setup 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** בנה ספרייה של 10+ Prompt Templates לכתיבה ובדיקה של קוד תשתית (Terraform module, security review, cost estimation וכו').
+
+**שלב 2:** בנה Claude Project או Custom GPT ייעודי לצוות שלך לפענוח שגיאות פייפליין, עם System Prompt שכולל את הסביבה הטכנית שלכם.
+
+**שלב 3:** בדוק את שני התוצרים על משימה אמיתית. מה השתפר?

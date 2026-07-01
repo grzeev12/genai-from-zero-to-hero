@@ -1,0 +1,55 @@
+---
+id: "l3-m9-impact-analysis"
+track: "devops"
+level: 3
+title: "ניתוח השפעות קוד וקיצור זמני ריצה (Pipeline Impact Analysis)"
+order: 309
+badge: "impact-analysis-engineer"
+estimatedTime: "5 שעות"
+questions:
+  - text: "מה זה Test/Build Impact Analysis? למה זה חוסך עד 90% מזמני ריצת פייפליין?"
+  - text: "מה מנגנון הניתוח האוטומטי של Git Commits שבנית לבחירת שלבי ריצה רלוונטיים?"
+  - text: "כיצד שילבת את מנגנון ה-Impact Analysis בתוך כלי ה-Git ו-CI/CD?"
+  - text: "מה החיסכון במחשוב וזמן Time-to-Market שמדדת?"
+  - text: "מה מודל ה-Pipeline רב-שכבתי החכם שבנית עם אופטימיזציה דינמית?"
+  - text: "מה הסיכון של Impact Analysis שגוי: לדלג על בדיקה שהייתה צריכה לרוץ?"
+  - text: "כיצד וידאת שה-AI מזהה נכון אילו טסטים רלוונטיים לשינוי ספציפי?"
+  - text: "מה החיסכון בפועל שמדדת (יעד: 90% בזמני ריצות מיותרות)?"
+  - text: "מה ה-Edge Case שגילית שבו Impact Analysis כמעט דילג על בדיקה קריטית?"
+  - text: "מה למדת על האיזון בין מהירות פייפליין לביטחון בכיסוי הבדיקות?"
+---
+
+## המסגרת
+
+פייפליין שמריץ את כל הטסטים בכל commit הוא בזבזני. Impact Analysis מזהה מה בדיוק השתנה ומריץ רק את מה שרלוונטי.
+
+**העיקרון:** ניתוח Git diff מזהה אילו קבצים/מודולים השתנו, ומיפוי dependencies מזהה אילו טסטים/build steps תלויים בהם. השאר, לא צריך להריץ.
+
+**חיסכון פוטנציאלי:** עד 90% מזמני ריצה מיותרים נחסכים כשהפייפליין לא רץ על כל ה-suite בכל פעם.
+
+**מנגנון בסיסי:**
+1. ניתוח ה-diff של ה-commit
+2. מיפוי מודולים/קבצים שהושפעו
+3. Cross-reference עם test coverage map
+4. הרצת רק הטסטים הרלוונטיים
+
+**הסיכון המרכזי:** אם מיפוי ה-dependencies לא מדויק, Impact Analysis עלול לדלג על טסט קריטי שהיה אמור לרוץ. תמיד יש להריץ full suite תקופתית (למשל לילי) כ-safety net.
+
+**מדידת TTM (Time-to-Market):** כמה זמן עובר מ-commit ועד deployment. Impact Analysis משפר את המדד הזה משמעותית.
+
+---
+
+## מה לגלות
+
+- חפש: `"test impact analysis CI/CD optimization 2026"`
+- חפש: `"git diff based test selection pipeline"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** בנה מנגנון Impact Analysis בסיסי שמנתח Git commits ובוחר שלבי ריצה רלוונטיים בלבד.
+
+**שלב 2:** שלב אותו בפייפליין הקיים שלך (מ-L2-M5).
+
+**שלב 3:** מדוד חיסכון בפועל: זמן ריצה לפני ואחרי. תעד גם safety net (full suite תקופתי).

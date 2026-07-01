@@ -1,0 +1,53 @@
+---
+id: "l2-m2-iac-development"
+track: "devops"
+level: 2
+title: "כתיבת קוד תשתית (IaC) מתקדם עם AI"
+order: 202
+badge: "iac-builder"
+estimatedTime: "5 שעות"
+questions:
+  - text: "מה מודול ה-Terraform/OpenTofu המורכב שיצרת עם AI? מה המבנה שלו?"
+  - text: "מה קרה כשביקשת מ-AI להסב קוד תשתית מ-AWS ל-Azure? מה הצליח ומה דרש תיקון ידני?"
+  - text: "מה ה-Deletion Risk שה-AI זיהה בקוד IaC שלך? כיצד תיקנת?"
+  - text: "כיצד בדקת את הקוד מול AWS Well-Architected Framework בעזרת AI?"
+  - text: "מה כלי ה-Linting/Security Scanning שהטמעת (tflint, checkov, tfsec)? מה AI עזר לתקן?"
+  - text: "מה החור אבטחה שאיתרת בקוד IaC קיים בעזרת AI?"
+  - text: "מה ה-ארכיטקטורת ענן שיצרת ב-Terraform ללא תיקון ידני? כמה זמן לקח?"
+  - text: "כיצד ה-AI עזר להבין trade-off בין שירותים דומים (למשל RDS vs Aurora)?"
+  - text: "מה הבדיקת התקינות האוטומטית שהוספת ל-pipeline לקוד IaC?"
+  - text: "מה למדת על ההבדל בין קוד IaC שה-AI כתב לבד לבין אחרי code review שלך?"
+---
+
+## המסגרת
+
+כתיבת IaC עם AI חוסכת שעות, אבל דורשת בדיקה קפדנית, כי טעות בקוד תשתית עלולה למחוק משאב production.
+
+**יצירת מודולים מורכבים:**
+> "אתה Platform Engineer. כתוב מודול Terraform ל-[תיאור התשתית]. כלול: variables עם defaults הגיוניים, outputs שימושיים, tagging strategy עקבי, ו-least-privilege IAM."
+
+**הסבת קוד בין ספקי ענן:** AI עוזר לתרגם מבנה לוגי (VPC, subnets, load balancer) בין AWS ל-Azure/GCP, אבל שמות השירותים, ה-pricing model, וה-limits שונים. תמיד בדוק את הפרטים הספציפיים.
+
+**Risk-Based Thinking:** בקש מפורשות: "זהה כל משאב בקוד הזה שמחיקה בטעות שלו תגרום נזק בלתי הפיך. הצע lifecycle rules או prevent_destroy."
+
+**בדיקה מול Best Practices:** שלב כלי linting אוטומטיים (tflint, checkov, tfsec) בפייפליין, ובקש מ-AI להסביר כל אזהרה ולהציע תיקון.
+
+---
+
+## מה לגלות
+
+- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
+- [Checkov](https://www.checkov.io/): כלי סריקת אבטחה ל-IaC
+- חפש: `"Terraform AI code generation best practices 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** בנה ארכיטקטורת ענן מלאה ומודולרית ב-Terraform בעזרת AI (VPC, compute, storage, networking).
+
+**שלב 2:** הרץ checkov/tfsec על הקוד. בקש מ-AI להסביר ולתקן כל ממצא.
+
+**שלב 3:** בדוק את הקוד מול Well-Architected Framework. מה חסר?
+
+תעד: כמה זמן לקח מ-prompt ראשון ועד קוד שעבר את כל הבדיקות?

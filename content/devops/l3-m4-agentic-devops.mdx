@@ -1,0 +1,59 @@
+---
+id: "l3-m4-agentic-devops"
+track: "devops"
+level: 3
+title: "סוכני תשתית אוטונומיים (Agentic DevOps)"
+order: 304
+badge: "agentic-devops-engineer"
+estimatedTime: "6 שעות"
+questions:
+  - text: "מה ההבדל בין AI Agent ל-LLM רגיל? הסבר: מטרה, תכנון, פעולה, בדיקה."
+  - text: "מה מנגנון ה-Tool Calling שבנית לחיבור AI ל-CLI של AWS/K8s/Terraform?"
+  - text: "מה A2A (Agent2Agent Protocol) שגוגל הציגה ב-Cloud Next 2026? למה זה רלוונטי?"
+  - text: "אילו סיכוני Privilege Escalation זיהית באינטגרציה של agent לסביבת ענן חיה?"
+  - text: "מה Guardrails שבנית למניעת לולאה אינסופית של סוכן?"
+  - text: "מה ה-Authority Boundary שהגדרת: מה הסוכן עושה לבד, ומה דורש אישור?"
+  - text: "מה נתון ה-74% rollback rate שנמצא ב-2026 מלמד על סיכוני agents לא מבוקרים?"
+  - text: "מה ארכיטקטורת הסוכן שעיצבת שמבצע פקודות CLI בענן בצורה מבוקרת?"
+  - text: "מה דוח ניתוח הסיכונים שכתבת לפעילות סוכני DevOps בארגון?"
+  - text: "מה למדת על מדידת יעילות סוכן תשתית במשימה מורכבת?"
+---
+
+## המסגרת
+
+Agentic DevOps הוא השינוי הגדול ביותר בתחום כרגע. Agent לא רק עונה, הוא מתכנן, מפעיל כלים, ובודק תוצאה.
+
+**Tool Calling:** מודל שפה שמקבל גישה לכלים חיצוניים (AWS CLI, kubectl, Terraform) ומחליט בעצמו מתי ואיך להפעיל אותם, על בסיס מטרה שהוגדרה לו.
+
+**Protocols רלוונטיים:**
+- **MCP (Model Context Protocol)**: מאפשר ל-AI לתקשר עם כלים ארגוניים
+- **A2A (Agent2Agent Protocol)**: הסטנדרט שגוגל הרחיבה ב-Google Cloud Next 2026, לתקשורת בין agents שונים
+
+**המספר שאסור להתעלם ממנו:** 74% מפריסות ה-Agent בארגונים נסוגות (rolled back) בגלל בעיות ממשל וסיכונים, לפי ניתוח GSPANN 2026. Agentic DevOps בלי guardrails הוא מתכון לאסון.
+
+**סיכוני Privilege Escalation:** Agent שמקבל גישה רחבה מדי ל-CLI עלול לבצע פעולות שלא התכוונת אליהן. תמיד least privilege: מה בדיוק ה-agent יכול לעשות, לא יותר.
+
+**Guardrails נגד לולאות אינסופיות:** הגדר max iterations, timeout, ו-circuit breaker שעוצר את הסוכן אם הוא "תקוע" בניסיון חוזר.
+
+**Authority Boundary (מ-MCM Framework):**
+- אוטונומי לגמרי: קריאה בלבד, ניתוח, דוחות
+- מודיע אחרי פעולה: פתיחת ticket, סיכום
+- מציע וממתין לאישור: כל דבר שמשנה production
+
+---
+
+## מה לגלות
+
+- [Anthropic: Agent Guidelines](https://docs.anthropic.com/en/docs/build-with-claude/agentic-and-tool-use/best-practices-for-agentic-and-tool-use)
+- [Google Cloud Next 2026: A2A protocol](https://thenextweb.com/news/google-cloud-next-ai-agents-agentic-era)
+- חפש: `"agentic DevOps guardrails privilege escalation 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** עצב ארכיטקטורה של סוכן אוטונומי שמבצע פקודות CLI בענן (התחל בקריאה בלבד, לא בכתיבה).
+
+**שלב 2:** הגדר Guardrails: max iterations, Authority Boundary, ו-audit log.
+
+**שלב 3:** כתוב דוח ניתוח סיכונים לפעילות הסוכן, כולל תרחיש כשל.

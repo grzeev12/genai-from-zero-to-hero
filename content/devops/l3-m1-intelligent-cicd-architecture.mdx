@@ -1,0 +1,55 @@
+---
+id: "l3-m1-intelligent-cicd-architecture"
+track: "devops"
+level: 3
+title: "ארכיטקטורת AI בתוך ה-DevOps Pipeline (Intelligent CI/CD)"
+order: 301
+badge: "intelligent-pipeline-architect"
+estimatedTime: "6 שעות"
+questions:
+  - text: "מה דיאגרמת הארכיטקטורה שיצרת ל-Intelligent CI/CD Pipeline? אילו שלבים כוללים AI?"
+  - text: "מה רכיבי ה-AI Gateway וניהול ספקי מודלים שהגדרת בתשתית הארגונית?"
+  - text: "כיצד שירותי AI מנוהלים של AWS/Azure/GCP משתלבים בפייפליין שתכננת?"
+  - text: "מה ניהול העלויות (FinOps) שהגדרת להרצת כלי AI בתוך ה-Pipeline?"
+  - text: "מה ה-3 שלבים בפייפליין (Plan/Build/Test/Deploy/Monitor) שבהם AI תורם הכי הרבה?"
+  - text: "מה הסיכון של Vendor Lock-in בבחירת ספק מודל AI לפייפליין הארגוני?"
+  - text: "כיצד תכננת Failover אם שירות ה-AI הראשי לא זמין?"
+  - text: "מה ה-Rate Limiting וניהול Quota שתכננת לשימוש ב-AI ב-Pipeline בקנה מידה?"
+  - text: "מה ה-Security Boundary שהגדרת סביב קריאות ל-AI Gateway?"
+  - text: "מה ההבדל בין הפייפליין 'הרגיל' שבנית ב-L2 לבין ה-Intelligent Pipeline שתכננת עכשיו?"
+---
+
+## המסגרת
+
+L3 הוא המעבר מ"אני משתמש בכלי AI" ל"אני בונה מערכת שמשלבת AI כרכיב ארכיטקטוני קבוע."
+
+**איפה AI נכנס לפייפליין:**
+- **Plan**: ניתוח PR ואפיון סיכון לפני build
+- **Build**: אופטימיזציית build, זיהוי כשלים חוזרים
+- **Test**: יצירת טסטים, Impact Analysis (מה לבדוק בהתאם לשינוי)
+- **Deploy**: החלטות deployment strategy אוטומטיות
+- **Monitor**: RCA אוטומטי על תקלות
+
+**רכיבי תשתית ל-AI Gateway:** שכבת ביניים שמנהלת קריאות ל-LLM providers שונים, מטפלת ב-rate limiting, caching, ו-fallback בין ספקים (Claude/GPT/Gemini) אם אחד לא זמין.
+
+**Cloud-Native AI Services:** AWS Bedrock, Azure OpenAI, ו-Google Vertex AI מציעים גישה מנוהלת למודלים בתוך ה-VPC/tenant שלך, פותרים חלק מבעיות ה-data residency.
+
+**FinOps ל-AI ב-Pipeline:** כל קריאה ל-LLM בתוך פייפליין עולה tokens. עם אלפי ריצות ביום, זה מצטבר. תכנן caching ו-quota מראש.
+
+---
+
+## מה לגלות
+
+- [AWS Bedrock](https://aws.amazon.com/bedrock/): מודלים מנוהלים ב-AWS
+- [Google Cloud Next 2026: AI agents, A2A protocol](https://thenextweb.com/news/google-cloud-next-ai-agents-agentic-era)
+- חפש: `"intelligent CI/CD pipeline architecture AI 2026"`
+
+---
+
+## מה לעשות
+
+**שלב 1:** שרטט דיאגרמת ארכיטקטורה של Intelligent CI/CD Pipeline: איפה AI נכנס בכל שלב, ואיך מנוהל ה-AI Gateway.
+
+**שלב 2:** הגדר את דרישות האבטחה והעלות (FinOps) של הרכיב הזה.
+
+**שלב 3:** תכנן Fallback: מה קורה אם ה-AI provider הראשי לא זמין?
