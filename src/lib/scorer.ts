@@ -1,12 +1,14 @@
 import { AzureOpenAI } from "openai";
 import type { RubricItem } from "./modules";
 
-const client = new AzureOpenAI({
-  apiKey: process.env.AZURE_OPENAI_KEY!,
-  endpoint: process.env.AZURE_OPENAI_ENDPOINT!,
-  apiVersion: "2024-08-01-preview",
-  deployment: process.env.AZURE_OPENAI_DEPLOYMENT!,
-});
+function getClient() {
+  return new AzureOpenAI({
+    apiKey: process.env.AZURE_OPENAI_KEY!,
+    endpoint: process.env.AZURE_OPENAI_ENDPOINT!,
+    apiVersion: "2024-08-01-preview",
+    deployment: process.env.AZURE_OPENAI_DEPLOYMENT!,
+  });
+}
 
 export interface ScoreResult {
   total: number;
@@ -47,6 +49,7 @@ ${deliverable}
 
 הציון הכולל יחושב אוטומטית. היה ביקורתי אבל הוגן.`;
 
+  const client = getClient();
   const response = await client.chat.completions.create({
     model: process.env.AZURE_OPENAI_DEPLOYMENT!,
     messages: [{ role: "user", content: prompt }],

@@ -1,6 +1,7 @@
-import fs from "fs";
-import path from "path";
+export const dynamic = "force-dynamic";
+
 import ScoringTable from "@/components/ui/ScoringTable";
+import { initDb, getAllSubmissions } from "@/lib/db";
 
 interface BreakdownItem {
   criterion: string;
@@ -11,24 +12,21 @@ interface BreakdownItem {
 
 interface Submission {
   id: string;
-  moduleId: string;
+  module_id: string;
   track: string;
   name: string;
   deliverable: string;
-  submittedAt: string;
+  submitted_at: string;
   score: number | null;
-  scoreBreakdown: BreakdownItem[] | null;
-  scoreSummary: string | null;
+  score_breakdown: BreakdownItem[] | null;
+  score_summary: string | null;
 }
 
-function getSubmissions(): Submission[] {
-  const file = path.join(process.cwd(), "data", "submissions.json");
-  if (!fs.existsSync(file)) return [];
-  return JSON.parse(fs.readFileSync(file, "utf-8"));
-}
+export default async function AdminPage() {
+  await initDb();
+  const rows = await getAllSubmissions();
+  const submissions = rows as unknown as Submission[];
 
-export default function AdminPage() {
-  const submissions = getSubmissions();
   const byPerson = submissions.reduce<Record<string, Submission[]>>((acc, s) => {
     if (!acc[s.name]) acc[s.name] = [];
     acc[s.name].push(s);
@@ -84,7 +82,7 @@ export default function AdminPage() {
                     className="text-xs px-3 py-1 rounded-full font-medium"
                     style={{ background: "var(--cream-dark)", color: "var(--mocha-light)" }}
                     dir="ltr">
-                    🏅 {s.moduleId}
+                    🏅 {s.module_id}
                   </span>
                 ))}
               </div>
@@ -96,9 +94,9 @@ export default function AdminPage() {
                     <summary className="cursor-pointer text-sm list-none flex items-center gap-3 flex-row-reverse py-2 transition-colors"
                       style={{ color: "var(--text-secondary)" }}>
                       <span className="transition-transform group-open:rotate-90">◀</span>
-                      <span dir="ltr" className="font-medium" style={{ color: "var(--mocha)" }}>{s.moduleId}</span>
+                      <span dir="ltr" className="font-medium" style={{ color: "var(--mocha)" }}>{s.module_id}</span>
                       <span style={{ color: "var(--border-dark)" }}>·</span>
-                      <span>{new Date(s.submittedAt).toLocaleDateString("he-IL")}</span>
+                      <span>{new Date(s.submitted_at).toLocaleDateString("he-IL")}</span>
                       {s.score !== null && (
                         <span className="mr-auto font-bold" style={{ color: "#4a8f4a" }}>{s.score}/100</span>
                       )}
@@ -112,11 +110,11 @@ export default function AdminPage() {
                         }}>
                         {s.deliverable}
                       </div>
-                      {s.scoreBreakdown && s.score !== null && s.scoreSummary && (
+                      {s.score_breakdown && s.score !== null && s.score_summary && (
                         <ScoringTable
-                          breakdown={s.scoreBreakdown}
+                          breakdown={s.score_breakdown}
                           total={s.score}
-                          summary={s.scoreSummary}
+                          summary={s.score_summary}
                         />
                       )}
                       {s.score === null && (
