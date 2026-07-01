@@ -1,11 +1,11 @@
-# GenAI: From Zero to Hero — CLAUDE.md
+# GenAI: From Zero to Hero: CLAUDE.md
 
 ## Project Stack
 - **Framework:** Next.js 16 (App Router), React 19, TypeScript
 - **Styling:** Tailwind CSS 4 + CSS custom properties (mocha/cream palette)
 - **Content:** MDX files in `content/<track>/` with gray-matter frontmatter
 - **DB:** Neon Postgres via `@neondatabase/serverless`
-- **Scoring:** Azure OpenAI gpt-4o (lazy client init — never at module level)
+- **Scoring:** Azure OpenAI gpt-4o (lazy client init, never at module level)
 - **Secrets:** Doppler project `genai-zero-to-hero` config `prd`
 - **Hosting:** Vercel (auto-deploy on git push)
 
@@ -23,15 +23,15 @@ src/components/ui/ScoringTable.* ← admin score breakdown
 ```
 
 ## Token & Cache Rules
-- **Never rewrite this file mid-session** — invalidates cache prefix
-- **Never re-read unchanged files** — rely on cached context
+- **Never rewrite this file mid-session:** invalidates cache prefix
+- **Never re-read unchanged files:** rely on cached context
 - **Never echo, summarize, or repeat the user's prompt**
-- **Terminal output:** pipe through `grep`/`head -n 20` — never >30 lines raw
+- **Terminal output:** pipe through `grep`/`head -n 20`, never >30 lines raw
 - **Search scope:** target specific subdirectory, never recursive global grep
 - **Ignore always:** `.git`, `node_modules`, `.next`, `bun.lock`
 
 ## Agent Behavior Rules
-- No preamble/postamble — skip greetings and "sure, here is the code"
+- No preamble/postamble: skip greetings and "sure, here is the code"
 - Code changes: minimal diff, never full file rewrite unless necessary
 - No unsolicited refactoring, comments, or logging
 - Auto-fix loop cap: if a fix fails twice, halt and report
@@ -39,11 +39,11 @@ src/components/ui/ScoringTable.* ← admin score breakdown
 - Ambiguity: ask one short question before writing code
 
 ## Critical Patterns
-- **Lazy init:** `neon()` and `AzureOpenAI()` must be inside functions — never at module level (breaks Vercel build)
+- **Lazy init:** `neon()` and `AzureOpenAI()` must be inside functions, never at module level (breaks Vercel build)
 - **MDX tables:** require `remarkGfm` plugin in `MDXRemote options.mdxOptions.remarkPlugins`
 - **RTL:** `dir="rtl" lang="he"` on `<html>`, `unicode-bidi: plaintext` on text elements, code/pre stay `dir="ltr"`
 - **Admin page:** must have `export const dynamic = "force-dynamic"`
-- **Scoring:** async fire-and-forget — learner gets badge immediately, score arrives in background
+- **Scoring:** async fire-and-forget: learner gets badge immediately, score arrives in background
 
 ## Content Convention (MDX frontmatter)
 ```yaml
