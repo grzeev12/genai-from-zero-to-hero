@@ -42,7 +42,7 @@ p, li, td, th, label, input, textarea, button {
 
 code, pre, .ltr {
   direction: ltr;
-  unicode-bidi: embed;
+  unicode-bidi: isolate;
   display: inline-block;
   font-family: "Fira Code", "Courier New", monospace;
 }
@@ -80,6 +80,14 @@ pre {
   color: var(--text-secondary);
   text-align: right;
   line-height: 1.75;
+  unicode-bidi: plaintext;
+}
+
+/* English fragments inside Hebrew prose stay isolated */
+.prose li > a,
+.prose li > strong,
+.prose li > em {
+  unicode-bidi: isolate;
 }
 
 .prose a {
@@ -128,6 +136,9 @@ pre {
   padding: 0.15rem 0.4rem;
   border-radius: 0.3rem;
   font-size: 0.875em;
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
 }
 
 .prose table {
