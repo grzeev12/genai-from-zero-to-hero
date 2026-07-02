@@ -102,13 +102,13 @@ export default function QuizForm({ moduleId, track, moduleTitle, questions, next
             <button key={i} type="button" onClick={() => setCurrent(i)}
               className="w-8 h-8 rounded-full text-xs font-bold transition-all flex items-center justify-center"
               style={{
-                background: answers[i]?.trim()
+                background: current === i
+                  ? "var(--mocha-dark)"
+                  : answers[i]?.trim()
                   ? "var(--mocha)"
-                  : current === i
-                  ? "var(--cream-dark)"
                   : "var(--cream)",
-                color: answers[i]?.trim() ? "white" : "var(--mocha)",
-                border: current === i ? "2px solid var(--mocha)" : "1.5px solid var(--border)",
+                color: current === i || answers[i]?.trim() ? "white" : "var(--mocha)",
+                border: current === i ? "2px solid var(--mocha-dark)" : "1.5px solid var(--border)",
               }}>
               {i + 1}
             </button>
