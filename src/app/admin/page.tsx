@@ -30,6 +30,7 @@ interface Submission {
   module_id: string;
   track: string;
   name: string;
+  user_id: string | null;
   deliverable: string;
   submitted_at: string;
   score: number | null;
@@ -64,11 +65,24 @@ export default async function AdminPage() {
     return thresholdsByTrack[track]?.[moduleId] ?? DEFAULT_PASSING_SCORE;
   }
 
-  const byPerson = submissions.reduce<Record<string, Submission[]>>((acc, s) => {
-    if (!acc[s.name]) acc[s.name] = [];
-    acc[s.name].push(s);
+  // Group by real account (user_id), never by the free-text name snapshot alone,
+  // so two people who happen to share a display name are never merged together.
+  const usersById = new Map(users.map((u) => [u.id, u]));
+  const byPersonKey = submissions.reduce<Record<string, Submission[]>>((acc, s) => {
+    const key = s.user_id ?? `legacy:${s.name}`;
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(s);
     return acc;
   }, {});
+  const byPerson = Object.entries(byPersonKey).map(([key, subs]) => {
+    const account = subs[0].user_id ? usersById.get(subs[0].user_id) : undefined;
+    return {
+      key,
+      displayName: account?.name ?? subs[0].name,
+      email: account?.email,
+      subs,
+    };
+  });
 
   function byTrack(subs: Submission[]): Record<string, Submission[]> {
     return subs.reduce<Record<string, Submission[]>>((acc, s) => {
@@ -104,7 +118,7 @@ export default async function AdminPage() {
               {submissions.length} הגשות סה״כ
             </span>
             <span className="text-sm" style={{ color: "var(--text-muted)" }}>
-              {Object.keys(byPerson).length} לומדים פעילים
+              {byPerson.length} לומדים פעילים
             </span>
           </div>
           <div className="mt-5 h-px" style={{ background: "var(--border)" }} />
@@ -141,8 +155,8 @@ export default async function AdminPage() {
 
         {/* Learners */}
         <div className="space-y-5">
-          {Object.entries(byPerson).map(([name, subs]) => (
-            <div key={name} className="rounded-3xl p-6 space-y-4 text-right"
+          {byPerson.map(({ key, displayName, email, subs }) => (
+            <div key={key} className="rounded-3xl p-6 space-y-4 text-right"
               style={{
                 background: "var(--surface)",
                 border: "1.5px solid var(--border)",
@@ -150,7 +164,10 @@ export default async function AdminPage() {
               }}>
               {/* Person header */}
               <div className="flex items-center justify-between flex-row-reverse">
-                <h2 className="font-bold text-lg" style={{ color: "var(--mocha-dark)" }}>{name}</h2>
+                <div>
+                  <h2 className="font-bold text-lg" style={{ color: "var(--mocha-dark)" }}>{displayName}</h2>
+                  {email && <p className="text-xs" style={{ color: "var(--text-muted)" }} dir="ltr">{email}</p>}
+                </div>
                 <span className="text-xs px-3 py-1.5 rounded-full font-medium"
                   style={{ background: "var(--cream-dark)", color: "var(--mocha)" }}>
                   {subs.length} הגשות סה״כ
