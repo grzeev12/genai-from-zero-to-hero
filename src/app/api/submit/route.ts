@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { auth } from "@/auth";
 import { getModule } from "@/lib/modules";
 import { scoreSubmission, scoreQuiz } from "@/lib/scorer";
@@ -40,21 +40,26 @@ export async function POST(req: NextRequest) {
   const mod = getModule(track as "managers" | "devops", moduleId);
 
   if (mod?.questions?.length && quizAnswers) {
-    scoreQuiz(quizAnswers, mod.title)
-      .then((result) => {
-        const breakdown = result.answers.map((a) => ({
-          criterion: a.question,
-          score: a.score * 10,
-          weight: 10,
-          feedback: a.feedback,
-        }));
-        return updateScore(id, result.total, breakdown, result.summary);
-      })
-      .catch(console.error);
+    after(() =>
+      scoreQuiz(quizAnswers, mod.title)
+        .then((result) => {
+          const breakdown = result.answers.map((a) => ({
+            criterion: a.question,
+            score: a.score * 10,
+            weight: 10,
+            feedback: a.feedback,
+          }));
+          return updateScore(id, result.total, breakdown, result.summary);
+        })
+        .catch(console.error)
+    );
   } else if (mod?.rubric?.length && deliverable) {
-    scoreSubmission(deliverable, mod.rubric)
-      .then((result) => updateScore(id, result.total, result.breakdown, result.summary))
-      .catch(console.error);
+    const rubric = mod.rubric;
+    after(() =>
+      scoreSubmission(deliverable, rubric)
+        .then((result) => updateScore(id, result.total, result.breakdown, result.summary))
+        .catch(console.error)
+    );
   }
 
   return NextResponse.json({ ok: true });

@@ -10,11 +10,14 @@ interface Props {
   moduleTitle: string;
   questions: QuizQuestion[];
   nextSlug: string | null;
+  initialAnswers?: string[];
 }
 
-export default function QuizForm({ moduleId, track, moduleTitle, questions, nextSlug }: Props) {
+export default function QuizForm({ moduleId, track, moduleTitle, questions, nextSlug, initialAnswers }: Props) {
   const router = useRouter();
-  const [answers, setAnswers] = useState<string[]>(Array(questions.length).fill(""));
+  const [answers, setAnswers] = useState<string[]>(
+    initialAnswers ?? Array(questions.length).fill("")
+  );
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [current, setCurrent] = useState(0);

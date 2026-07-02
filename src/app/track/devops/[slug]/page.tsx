@@ -90,6 +90,8 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
           <ReadOnlyQuestions questions={mod.questions ?? []} />
         ) : ownSubmission && mod.questions?.length ? (
           <AnsweredQuizView
+            moduleId={mod.id}
+            moduleTitle={mod.title}
             questions={mod.questions}
             deliverable={ownSubmission.deliverable}
             score={ownSubmission.score}
