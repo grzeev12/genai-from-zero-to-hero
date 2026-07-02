@@ -10,6 +10,7 @@ import { getCompletedModuleIds } from "@/lib/db";
 import { firstIncompleteIndex } from "@/lib/track-progress";
 import DeliverableForm from "@/components/modules/DeliverableForm";
 import QuizForm from "@/components/modules/QuizForm";
+import ReadOnlyQuestions from "@/components/modules/ReadOnlyQuestions";
 import { Table, Thead, Th, Tbody, Tr, Td } from "@/components/ui/MdxTable";
 
 export async function generateStaticParams() {
@@ -80,10 +81,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
         </div>
 
         {isLocked ? (
-          <div className="rounded-3xl p-6 text-right text-sm"
-            style={{ background: "var(--cream)", border: "1.5px dashed var(--border)", color: "var(--text-muted)" }}>
-            צפייה בלבד: מודול זה עדיין נעול עבור לומד רגיל, מוצג לך כמנהל בלי אפשרות להגיש תשובות.
-          </div>
+          <ReadOnlyQuestions questions={mod.questions ?? []} />
         ) : mod.questions?.length ? (
           <QuizForm
             moduleId={mod.id}
