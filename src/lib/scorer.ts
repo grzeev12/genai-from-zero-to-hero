@@ -112,7 +112,7 @@ ${answersText}
 
   const parsed = JSON.parse(response.choices[0].message.content!);
   const total = Math.round(
-    parsed.answers.reduce((sum: number, a: { score: number }) => sum + a.score, 0) * 10
+    parsed.answers.reduce((sum: number, a: { score: number }) => sum + a.score, 0)
   );
 
   return { total, answers: parsed.answers, summary: parsed.summary };
