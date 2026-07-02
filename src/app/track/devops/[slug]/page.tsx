@@ -6,11 +6,12 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { notFound, redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { getCompletedModuleIds } from "@/lib/db";
+import { getCompletedModuleIds, getLatestSubmission } from "@/lib/db";
 import { firstIncompleteIndex } from "@/lib/track-progress";
 import DeliverableForm from "@/components/modules/DeliverableForm";
 import QuizForm from "@/components/modules/QuizForm";
 import ReadOnlyQuestions from "@/components/modules/ReadOnlyQuestions";
+import AnsweredQuizView from "@/components/modules/AnsweredQuizView";
 import { Table, Thead, Th, Tbody, Tr, Td } from "@/components/ui/MdxTable";
 
 export async function generateStaticParams() {
@@ -37,6 +38,11 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
   if (isLocked && !isAdmin) {
     redirect(`/track/devops/${allModules[unlockedIndex]?.slug ?? ""}`);
   }
+
+  const alreadyAnswered = completedIds.has(mod.id);
+  const ownSubmission = alreadyAnswered && mod.questions?.length
+    ? await getLatestSubmission(session.user.id, mod.id, "devops")
+    : null;
 
   return (
     <main className="min-h-screen px-6 py-16" style={{ background: "var(--cream)" }}>
@@ -82,6 +88,16 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
 
         {isLocked ? (
           <ReadOnlyQuestions questions={mod.questions ?? []} />
+        ) : ownSubmission && mod.questions?.length ? (
+          <AnsweredQuizView
+            questions={mod.questions}
+            deliverable={ownSubmission.deliverable}
+            score={ownSubmission.score}
+            scoreBreakdown={ownSubmission.score_breakdown}
+            scoreSummary={ownSubmission.score_summary}
+            track="devops"
+            nextSlug={nextModule?.slug ?? null}
+          />
         ) : mod.questions?.length ? (
           <QuizForm
             moduleId={mod.id}

@@ -54,6 +54,30 @@ export async function getAllSubmissions() {
   return sql`SELECT * FROM submissions ORDER BY submitted_at DESC`;
 }
 
+export interface OwnSubmission {
+  deliverable: string;
+  submitted_at: string;
+  score: number | null;
+  score_breakdown: { criterion: string; score: number; weight: number; feedback: string }[] | null;
+  score_summary: string | null;
+}
+
+export async function getLatestSubmission(
+  userId: string,
+  moduleId: string,
+  track: string
+): Promise<OwnSubmission | null> {
+  const sql = getDb();
+  const rows = await sql`
+    SELECT deliverable, submitted_at, score, score_breakdown, score_summary
+    FROM submissions
+    WHERE user_id = ${userId} AND module_id = ${moduleId} AND track = ${track}
+    ORDER BY submitted_at DESC
+    LIMIT 1
+  `;
+  return (rows[0] as OwnSubmission) ?? null;
+}
+
 export async function getCompletedModuleIds(userId: string, track: string): Promise<Set<string>> {
   const sql = getDb();
   const rows = await sql`
