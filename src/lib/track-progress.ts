@@ -1,7 +1,10 @@
 import { getModules, type Track, type Level, type Module } from "@/lib/modules";
-import { initDb, getCompletedModuleIds } from "@/lib/db";
+import { initDb, getModuleScores, getModuleThresholds } from "@/lib/db";
 
 export type LevelStatus = "locked" | "in-progress" | "earned";
+export type ModuleStatus = "passed" | "failed" | "pending" | "not-attempted";
+
+export const DEFAULT_PASSING_SCORE = 70;
 
 export const LEVEL_NAMES: Record<Level, string> = {
   1: "AI Aware",
@@ -21,7 +24,9 @@ export interface LevelProgress {
 export interface TrackProgress {
   track: Track;
   modules: Module[];
+  /** ids of modules the learner has passed (score >= that module's threshold) */
   completedIds: Set<string>;
+  moduleStatus: Record<string, ModuleStatus>;
   totalModules: number;
   completedCount: number;
   percent: number;
@@ -34,10 +39,26 @@ export interface TrackProgress {
 export async function getTrackProgress(userId: string, track: Track): Promise<TrackProgress> {
   await initDb();
   const modules = getModules(track);
-  const completedIds = await getCompletedModuleIds(userId, track);
+  const [scores, thresholds] = await Promise.all([
+    getModuleScores(userId, track),
+    getModuleThresholds(track),
+  ]);
+
+  function statusOf(moduleId: string): ModuleStatus {
+    if (!(moduleId in scores)) return "not-attempted";
+    const score = scores[moduleId];
+    if (score === null) return "pending";
+    const passingScore = thresholds[moduleId] ?? DEFAULT_PASSING_SCORE;
+    return score >= passingScore ? "passed" : "failed";
+  }
+
+  const moduleStatus: Record<string, ModuleStatus> = {};
+  for (const m of modules) moduleStatus[m.id] = statusOf(m.id);
+
+  const completedIds = new Set(modules.filter((m) => moduleStatus[m.id] === "passed").map((m) => m.id));
 
   const totalModules = modules.length;
-  const completedCount = modules.filter((m) => completedIds.has(m.id)).length;
+  const completedCount = completedIds.size;
   const percent = totalModules > 0 ? Math.round((completedCount / totalModules) * 100) : 0;
 
   const nextIndex = modules.findIndex((m) => !completedIds.has(m.id));
@@ -70,6 +91,7 @@ export async function getTrackProgress(userId: string, track: Track): Promise<Tr
     track,
     modules,
     completedIds,
+    moduleStatus,
     totalModules,
     completedCount,
     percent,
@@ -79,7 +101,7 @@ export async function getTrackProgress(userId: string, track: Track): Promise<Tr
   };
 }
 
-/** Index of the first module the learner hasn't completed yet, in track order. */
+/** Index of the first module the learner hasn't passed yet, in track order. */
 export function firstIncompleteIndex(modules: Module[], completedIds: Set<string>): number {
   const idx = modules.findIndex((m) => !completedIds.has(m.id));
   return idx === -1 ? modules.length : idx;

@@ -46,6 +46,7 @@ export default async function ManagersTrackPage() {
           track="managers"
           modules={p.modules}
           completedIds={p.completedIds}
+          moduleStatus={p.moduleStatus}
           byLevel={p.byLevel}
           levelLabels={LEVEL_LABELS}
           percent={p.percent}

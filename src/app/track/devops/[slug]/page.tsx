@@ -6,8 +6,8 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { notFound, redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { getCompletedModuleIds, getLatestSubmission } from "@/lib/db";
-import { firstIncompleteIndex } from "@/lib/track-progress";
+import { getLatestSubmission } from "@/lib/db";
+import { getTrackProgress, firstIncompleteIndex } from "@/lib/track-progress";
 import DeliverableForm from "@/components/modules/DeliverableForm";
 import QuizForm from "@/components/modules/QuizForm";
 import ReadOnlyQuestions from "@/components/modules/ReadOnlyQuestions";
@@ -32,15 +32,15 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
   const nextModule = allModules[currentIndex + 1] ?? null;
 
   const isAdmin = session.user.role === "admin";
-  const completedIds = await getCompletedModuleIds(session.user.id, "devops");
-  const unlockedIndex = firstIncompleteIndex(allModules, completedIds);
+  const progress = await getTrackProgress(session.user.id, "devops");
+  const unlockedIndex = firstIncompleteIndex(allModules, progress.completedIds);
   const isLocked = currentIndex > unlockedIndex;
   if (isLocked && !isAdmin) {
     redirect(`/track/devops/${allModules[unlockedIndex]?.slug ?? ""}`);
   }
 
-  const alreadyAnswered = completedIds.has(mod.id);
-  const ownSubmission = alreadyAnswered && mod.questions?.length
+  const moduleStatus = progress.moduleStatus[mod.id];
+  const ownSubmission = moduleStatus !== "not-attempted" && mod.questions?.length
     ? await getLatestSubmission(session.user.id, mod.id, "devops")
     : null;
 
@@ -97,6 +97,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
             score={ownSubmission.score}
             scoreBreakdown={ownSubmission.score_breakdown}
             scoreSummary={ownSubmission.score_summary}
+            status={moduleStatus === "passed" || moduleStatus === "failed" || moduleStatus === "pending" ? moduleStatus : "pending"}
             track="devops"
             nextSlug={nextModule?.slug ?? null}
           />

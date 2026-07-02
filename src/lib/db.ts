@@ -54,6 +54,22 @@ export async function getAllSubmissions() {
   return sql`SELECT * FROM submissions ORDER BY submitted_at DESC`;
 }
 
+/**
+ * Latest score per module the user has ever submitted for, in this track.
+ * A module present with value `null` means "submitted, score still pending"
+ * (distinct from a module absent from the map, meaning never attempted).
+ */
+export async function getModuleScores(userId: string, track: string): Promise<Record<string, number | null>> {
+  const sql = getDb();
+  const rows = await sql`
+    SELECT DISTINCT ON (module_id) module_id, score
+    FROM submissions
+    WHERE user_id = ${userId} AND track = ${track}
+    ORDER BY module_id, submitted_at DESC
+  `;
+  return Object.fromEntries((rows as { module_id: string; score: number | null }[]).map((r) => [r.module_id, r.score]));
+}
+
 export interface OwnSubmission {
   deliverable: string;
   submitted_at: string;
@@ -78,13 +94,6 @@ export async function getLatestSubmission(
   return (rows[0] as OwnSubmission) ?? null;
 }
 
-export async function getCompletedModuleIds(userId: string, track: string): Promise<Set<string>> {
-  const sql = getDb();
-  const rows = await sql`
-    SELECT DISTINCT module_id FROM submissions WHERE user_id = ${userId} AND track = ${track}
-  `;
-  return new Set((rows as { module_id: string }[]).map((r) => r.module_id));
-}
 
 // ── Module passing score (quiz model: one score 0-100 per module, default 70) ─
 

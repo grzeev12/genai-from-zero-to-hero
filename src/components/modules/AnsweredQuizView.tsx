@@ -10,6 +10,8 @@ interface Answer {
   answer: string;
 }
 
+type Status = "passed" | "failed" | "pending";
+
 interface Props {
   moduleId: string;
   moduleTitle: string;
@@ -18,9 +20,16 @@ interface Props {
   score: number | null;
   scoreBreakdown: { criterion: string; score: number; weight: number; feedback: string }[] | null;
   scoreSummary: string | null;
+  status: Status;
   track: string;
   nextSlug: string | null;
 }
+
+const HEADER: Record<Status, { icon: string; color: string; title: string; subtitle: string }> = {
+  passed: { icon: "✓", color: "#2d6a2d", title: "עברת את המודול הזה", subtitle: "אפשר להמשיך למודול הבא" },
+  failed: { icon: "✗", color: "#8b3a3a", title: "לא עברת את סף המעבר", subtitle: "ערוך את התשובות ונסה שוב כדי להמשיך" },
+  pending: { icon: "⏳", color: "var(--text-muted)", title: "כבר ענית על המודול הזה", subtitle: "הציון עדיין מחושב ברקע" },
+};
 
 export default function AnsweredQuizView({
   moduleId,
@@ -30,6 +39,7 @@ export default function AnsweredQuizView({
   score,
   scoreBreakdown,
   scoreSummary,
+  status,
   track,
   nextSlug,
 }: Props) {
@@ -55,6 +65,8 @@ export default function AnsweredQuizView({
     );
   }
 
+  const header = HEADER[status];
+
   return (
     <div className="rounded-3xl p-8 text-right"
       style={{ background: "var(--surface)", border: "1.5px solid var(--border)", boxShadow: "0 4px 24px rgba(124,92,62,0.07)" }}>
@@ -62,12 +74,13 @@ export default function AnsweredQuizView({
       <div className="flex items-center justify-between flex-row-reverse mb-5">
         <div className="flex items-center gap-4 flex-row-reverse justify-end">
           <div>
-            <h3 className="font-bold text-lg" style={{ color: "#2d6a2d" }}>כבר ענית על המודול הזה</h3>
-            <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
-              {score !== null ? "הציון מחושב ומוצג למטה" : "הציון עדיין מחושב ברקע"}
-            </p>
+            <h3 className="font-bold text-lg" style={{ color: header.color }}>{header.title}</h3>
+            <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>{header.subtitle}</p>
           </div>
-          <span className="text-4xl">🏅</span>
+          <span className="text-3xl font-bold w-10 h-10 flex items-center justify-center rounded-full shrink-0"
+            style={{ color: "white", background: header.color }}>
+            {header.icon}
+          </span>
         </div>
         <button
           onClick={() => setEditing(true)}
@@ -95,12 +108,21 @@ export default function AnsweredQuizView({
         <ScoringTable breakdown={scoreBreakdown} total={score} summary={scoreSummary} />
       )}
 
-      {nextSlug && (
+      {status === "passed" && nextSlug && (
         <a href={`/track/${track}/${nextSlug}`}
           className="inline-block mt-6 px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5"
           style={{ background: "var(--mocha)", color: "white" }}>
           המודול הבא
         </a>
+      )}
+
+      {status === "failed" && (
+        <button
+          onClick={() => setEditing(true)}
+          className="inline-block mt-6 px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5"
+          style={{ background: "var(--mocha)", color: "white" }}>
+          ערוך תשובות ונסה שוב
+        </button>
       )}
     </div>
   );

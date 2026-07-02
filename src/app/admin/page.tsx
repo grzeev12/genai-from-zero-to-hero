@@ -15,8 +15,7 @@ import {
   listUsers,
 } from "@/lib/db";
 import { getModules } from "@/lib/modules";
-
-const DEFAULT_PASSING_SCORE = 70;
+import { DEFAULT_PASSING_SCORE } from "@/lib/track-progress";
 
 interface BreakdownItem {
   criterion: string;

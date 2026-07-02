@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Module, Level, Track } from "@/lib/modules";
 import LevelBadge from "@/components/badges/LevelBadge";
-import { LEVEL_NAMES, type LevelProgress } from "@/lib/track-progress";
+import { LEVEL_NAMES, type LevelProgress, type ModuleStatus } from "@/lib/track-progress";
 
 interface LevelLabel {
   desc: string;
@@ -12,6 +12,7 @@ interface Props {
   track: Track;
   modules: Module[];
   completedIds: Set<string>;
+  moduleStatus: Record<string, ModuleStatus>;
   byLevel: LevelProgress[];
   levelLabels: Record<Level, LevelLabel>;
   percent: number;
@@ -26,6 +27,7 @@ export default function TrackLevelList({
   track,
   modules,
   completedIds,
+  moduleStatus,
   byLevel,
   levelLabels,
   percent,
@@ -88,6 +90,15 @@ export default function TrackLevelList({
                   const isDone = completedIds.has(mod.id);
                   const isLocked = !isDone && globalIndex > nextIndex;
                   const levelIndex = modules.filter((m) => m.level === mod.level).indexOf(mod);
+                  const status = moduleStatus[mod.id] ?? "not-attempted";
+                  const isFailed = status === "failed";
+                  const isPending = status === "pending";
+
+                  const badgeBg = isDone ? "#5ea15e" : isFailed ? "#c0574a" : isPending ? "var(--mocha-light)" : "var(--cream-dark)";
+                  const badgeIcon = isDone ? "✓" : isFailed ? "✗" : isPending ? "⏳" : String(levelIndex + 1);
+                  const rowBg = isDone ? "#f0f7f0" : isFailed ? "#fdf0ee" : "var(--surface)";
+                  const rowBorder = isDone ? "#b8dab8" : isFailed ? "#eec9c2" : "var(--border)";
+                  const titleColor = isDone ? "#3c7a3c" : isFailed ? "#8b3a3a" : isLocked ? "var(--text-muted)" : "var(--mocha-dark)";
 
                   const content = (
                     <>
@@ -95,7 +106,7 @@ export default function TrackLevelList({
                         {isLocked ? "🔒" : "‹"}
                       </div>
                       <div className="flex-1 text-right">
-                        <h2 className="font-semibold text-sm" style={{ color: isDone ? "#3c7a3c" : isLocked ? "var(--text-muted)" : "var(--mocha-dark)" }}>
+                        <h2 className="font-semibold text-sm" style={{ color: titleColor }}>
                           {mod.title}
                         </h2>
                         <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>
@@ -104,10 +115,10 @@ export default function TrackLevelList({
                       </div>
                       <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
                         style={{
-                          background: isDone ? "#5ea15e" : "var(--cream-dark)",
-                          color: isDone ? "white" : "var(--mocha)",
+                          background: badgeBg,
+                          color: isDone || isFailed ? "white" : isPending ? "white" : "var(--mocha)",
                         }}>
-                        {isDone ? "✓" : levelIndex + 1}
+                        {badgeIcon}
                       </div>
                     </>
                   );
@@ -128,8 +139,8 @@ export default function TrackLevelList({
                       href={`/track/${track}/${mod.slug}`}
                       className="group flex items-center gap-4 p-4 rounded-2xl transition-all duration-200 hover:-translate-y-0.5"
                       style={{
-                        background: isDone ? "#f0f7f0" : "var(--surface)",
-                        border: isDone ? "1.5px solid #b8dab8" : "1.5px solid var(--border)",
+                        background: rowBg,
+                        border: `1.5px solid ${rowBorder}`,
                         boxShadow: "0 1px 6px rgba(124,92,62,0.05)"
                       }}
                     >
