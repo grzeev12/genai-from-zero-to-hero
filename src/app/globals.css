@@ -208,3 +208,39 @@ pre {
   color: var(--mocha);
   font-style: italic;
 }
+
+/* ── Accessibility (negishut / IS 5568 / WCAG 2.0 AA) ──────────────────── */
+:focus-visible {
+  outline: 3px solid #4f46e5 !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+.brain-skip {
+  position: fixed;
+  top: -60px;
+  right: 12px;
+  z-index: 100000;
+  background: #1e1b4b;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  text-decoration: none;
+  transition: top 0.15s;
+}
+.brain-skip:focus { top: 12px; }
+
+html.a11y-fs1 body { zoom: 1.12; }
+html.a11y-fs2 body { zoom: 1.25; }
+html.a11y-contrast { filter: contrast(1.25); }
+html.a11y-links a { text-decoration: underline !important; font-weight: 700 !important; }
+html.a11y-nomotion *,
+html.a11y-nomotion *::before,
+html.a11y-nomotion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+html.a11y-font body,
+html.a11y-font body * { font-family: Arial, Helvetica, sans-serif !important; }

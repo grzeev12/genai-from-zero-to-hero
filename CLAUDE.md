@@ -42,6 +42,7 @@ src/app/api/users/              ← admin-only user management API
 - Auto-fix loop cap: if a fix fails twice, halt and report
 - Single task focus: address only what was asked
 - Ambiguity: ask one short question before writing code
+- Always verify current state before answering "what's the status": check `git status`/`git log` and Vercel deployment status directly, never rely only on memory or a prior conversation summary
 
 ## Critical Patterns
 - **Lazy init:** `neon()` and `AzureOpenAI()` must be inside functions, never at module level (breaks Vercel build)
@@ -58,6 +59,7 @@ src/app/api/users/              ← admin-only user management API
 - **Progress/locking is DB-only, never client-trusted:** `src/lib/track-progress.ts` (`getTrackProgress()`) computes per-user completion from `submissions.user_id`, never from localStorage or client state. `src/app/track/<track>/[slug]/page.tsx` redirects to the first incomplete module if `currentIndex > firstIncompleteIndex(...)`, enforced server-side on every request, so a learner cannot open a later module by URL. All `/track/*` pages are `force-dynamic` for this reason (SSG removed on purpose).
 - **Admin browse-without-lock:** `role === "admin"` is exempt from the sequential-lock redirect on `[slug]` pages (`isLocked && !isAdmin` gates the redirect) and from the locked/greyed rendering in `TrackLevelList` (`isAdmin` prop forces `nextIndex = modules.length`). An admin can open any module by URL or from the track list, but a module still ahead of their own actual progress renders a view-only notice instead of `QuizForm`/`DeliverableForm`, so they can review content without being able to submit answers for it.
 - **Level/track badges:** `src/components/badges/LevelBadge.tsx` (per-level, status locked/in-progress/earned) and `TrackCompletionBadge.tsx` (large badge at 100% track completion), driven entirely by `TrackProgress.byLevel`/`isComplete` from `track-progress.ts`, no separate "badge earned" DB rows.
+- **Accessibility (IS 5568 / WCAG 2.0 AA):** `src/components/a11y/AccessibilityWidget.tsx` mounted once in `src/app/layout.tsx`, on every page. Floating button (bottom-left) opens a menu with text size, contrast, link-underline, reduced-motion, and readable-font toggles, each applying an `a11y-*` class on `<html>` (CSS in `globals.css`) and persisted to `localStorage`; a keyboard-only skip-link jumps to the page's `<main>`/`<h1>`. `/accessibility` (`src/app/accessibility/page.tsx`) is the legally required accessibility statement page, linked from the widget menu. Zero visual impact until a visitor opens the menu.
 
 ## Content Convention (MDX frontmatter, current quiz-based model)
 ```yaml
